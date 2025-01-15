@@ -34,11 +34,26 @@ with open(gitignore_file, 'w') as f:
 # path to the "data" folder for Audio MNIST
 audio_mnist_data_path = os.path.join(audio_mnist_path, "data")
 
-# move datasets into our datasets folder
-try:
-    shutil.move(audio_mnist_data_path, datasets_folder)
-    print(f"Folder '{audio_mnist_data_path}' has been moved to '{datasets_folder}'.")
-    shutil.move(audio_noise_path, datasets_folder)
-    print(f"Folder '{audio_noise_path}' has been moved to '{datasets_folder}'.")
-except Exception as e:
-  print(f"An error occured: {e}")
+# copy Audio MNIST into our datasets folder
+digits_path = os.path.join(datasets_folder, "digits")
+if not(os.path.isdir(digits_path)):
+  os.makedirs(digits_path)
+  try:
+      shutil.copytree(audio_mnist_data_path, digits_path, dirs_exist_ok = True)
+      print(f"Folder '{audio_mnist_data_path}' has been moved to '{digits_path}'.")
+  except Exception as e:
+    print(f"An error occured: {e}")
+else:
+  print("Digits dataset already inside of \'datasets\'!")
+
+# copy Background Noise into our datasets folder
+noise_path = os.path.join(datasets_folder, "noise")
+if not(os.path.isdir(os.path.join(datasets_folder, "noise"))):
+  os.makedirs(noise_path)
+  try:
+      shutil.copytree(audio_noise_path, noise_path, dirs_exist_ok = True)
+      print(f"Folder '{audio_noise_path}' has been moved to '{datasets_folder}'.")
+  except Exception as e:
+    print(f"An error occured: {e}")
+else:
+  print("Noise dataset already inside of \'datasets\'!")
