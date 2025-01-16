@@ -22,7 +22,7 @@ print("Successfully downloaded Background Noise dataset to:", audio_noise_path)
 
 # create datasets folder if it does not exist, throw in gitignore
 current_directory = os.path.dirname(os.path.realpath(__file__))
-datasets_folder = os.path.join(current_directory, "datasets")
+datasets_folder = os.path.join(current_directory, "..", "datasets")
 os.makedirs(datasets_folder, exist_ok=True)
 gitignore_file = os.path.join(datasets_folder, ".gitignore")
 
