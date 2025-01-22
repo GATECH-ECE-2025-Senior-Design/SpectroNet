@@ -33,13 +33,13 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
   return audio_data
 
 # just calls scipy spectrogram for now
-def spectrogram_choice(sample_rate, audio_data, spec_type="simple", dft_bins=128, hop_length=128):
+def spectrogram_choice(sample_rate, audio_data, spec_type="simple", dft_bins=128, hop_length=32):
   if spec_type == "simple":
     overlap_length = dft_bins - hop_length
     frequency, time, power = spectrogram(audio_data, fs=sample_rate, nperseg=dft_bins, noverlap=overlap_length)
     return frequency, time, power
   elif spec_type == "cqt":
-    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=128, bins_per_octave=20, hop_length=47))
+    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=128, bins_per_octave=20, hop_length=hop_length))
     # let's just call the bins "frequency"
     frequency = np.linspace(0, power.shape[0], power.shape[0])
     # and pre-calculate time
