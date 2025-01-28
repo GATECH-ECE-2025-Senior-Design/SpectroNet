@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import librosa
-import math
 from scipy.io import wavfile
 from scipy.signal import spectrogram
 from scipy.signal import resample_poly
@@ -71,8 +70,12 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
   elif spec_type == "cqt":
     # male voices go down to 100 Hz, so giving some slack
     fmin = 80
-    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=num_bins, bins_per_octave=20, hop_length=hop_length, fmin=fmin))
-    bins = np.linspace(0, power.shape[0], power.shape[0])
+    bins_per_octave = 20
+    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=num_bins, bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin))
+    # calculate frequency bins
+    octave_ratio = 2 ** (1 / bins_per_octave)
+    bins = [fmin * (octave_ratio ** i) for i in range(num_bins)]
+    print(bins)
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
   else:
@@ -100,8 +103,9 @@ audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01"
 spec_type = "cqt"
 bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32)
 plt.pcolormesh(time, bins, 10 * np.log10(power), shading='auto')
+plt.yscale('log')
 plt.title(f'Spectrogram: {spec_type}')
 plt.xlabel('Time [s]')
-plt.ylabel('Bin Label')
+plt.ylabel('Frequency [Hz]')
 plt.colorbar(label='Power [dB]')
 plt.show()
