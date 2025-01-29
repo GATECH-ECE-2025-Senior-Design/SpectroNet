@@ -2,10 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import librosa
-import math
 from scipy.io import wavfile
 from scipy.signal import spectrogram
 from scipy.signal import resample_poly
+import warnings
+
+# temp fix for librosa throwing warnings for CQT
+warnings.filterwarnings("ignore", category=UserWarning)
 
 def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
   """
@@ -27,7 +30,7 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
 
   # resample to target sample rate if sample rates are different
   if target_sample_rate != sample_rate:
-      audio_data = resample_poly(audio_data, target_sample_rate, sample_rate)
+    audio_data = resample_poly(audio_data, target_sample_rate, sample_rate)
 
   # convert to target quantization
   if target_dtype != audio_data.dtype:
@@ -85,10 +88,10 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 # TEST #
 ########
 
-sample_rate = 8000
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# sample_rate = 8000
+# current_dir = os.path.dirname(os.path.abspath(__file__))
 
-audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.float32)
+# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.float32)
 # plt.figure(figsize=(10, 4))
 # plt.plot(audio_data)
 # plt.title(f"Audio Waveform - {sample_rate} Hz")
@@ -97,11 +100,11 @@ audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01"
 # plt.grid(True)
 # plt.show()
 
-spec_type = "cqt"
-bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32)
-plt.pcolormesh(time, bins, 10 * np.log10(power), shading='auto')
-plt.title(f'Spectrogram: {spec_type}')
-plt.xlabel('Time [s]')
-plt.ylabel('Bin Label')
-plt.colorbar(label='Power [dB]')
-plt.show()
+# spec_type = "cqt"
+# bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32)
+# plt.pcolormesh(time, bins, 10 * np.log10(power), shading='auto')
+# plt.title(f'Spectrogram: {spec_type}')
+# plt.xlabel('Time [s]')
+# plt.ylabel('Bin Label')
+# plt.colorbar(label='Power [dB]')
+# plt.show()
