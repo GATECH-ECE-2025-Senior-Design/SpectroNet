@@ -5,6 +5,10 @@ import librosa
 from scipy.io import wavfile
 from scipy.signal import spectrogram
 from scipy.signal import resample_poly
+import warnings
+
+# block out librosa warning for CQT
+warnings.filterwarnings("ignore", category=UserWarning, module="librosa")
 
 def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
   """
@@ -34,7 +38,7 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
 
   return audio_data
 
-def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bins=128, hop_length=32):
+def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bins=128, hop_length=32, target_dtype=np.int16):
   """
   Generates a square aspect-ratio spectrogram of the input waveform as defined by the function parameters.
 
@@ -71,16 +75,21 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
     # male voices go down to 100 Hz, so giving some slack
     fmin = 80
     bins_per_octave = 20
+    # librosa only accepts floats, so recast
+    audio_data = audio_data.astype(np.float32)
     power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=num_bins, bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin))
     # calculate frequency bins
     octave_ratio = 2 ** (1 / bins_per_octave)
     bins = [fmin * (octave_ratio ** i) for i in range(num_bins)]
-    print(bins)
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
   else:
     print("Error: Invalid value for spectrogram_choice argument \'spec_type\'!")
     exit()
+  
+  # cast to desired type
+  if target_dtype != power.dtype:
+    power = power.astype(target_dtype)
 
   return bins, time, power
 
@@ -88,10 +97,10 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 # TEST #
 ########
 
-# sample_rate = 8000
+# sample_rate = 6000
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.float32)
+# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.int16)
 # plt.figure(figsize=(10, 4))
 # plt.plot(audio_data)
 # plt.title(f"Audio Waveform - {sample_rate} Hz")
@@ -101,8 +110,8 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 # plt.show()
 
 # spec_type = "cqt"
-# bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32)
-# plt.pcolormesh(time, bins, 10 * np.log10(power), shading='auto')
+# bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32, target_dtype=np.int16)
+# plt.pcolormesh(time, bins, 10 * power, shading='auto')
 # plt.yscale('log')
 # plt.title(f'Spectrogram: {spec_type}')
 # plt.xlabel('Time [s]')
