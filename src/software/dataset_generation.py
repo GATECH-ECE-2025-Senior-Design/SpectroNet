@@ -21,9 +21,9 @@ for subdir, dirs, files in os.walk(digits_folder):
       # ignore the txt file
       if file_extension == ".wav":
          # read wav
-         audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=6000, target_dtype=np.float32)
+         audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=6000, target_dtype=np.int16)
          # generate spectrogram
-         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32)
+         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32, target_dtype=np.int16)
          # save np array file
          np.save(os.path.join(images_folder, (file_name + ".npy")), power)
          
