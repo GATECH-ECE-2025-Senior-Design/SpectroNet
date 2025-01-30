@@ -24,20 +24,24 @@ def add_noise(digit: AudioSegment) -> AudioSegment:
     
     # Overlay a random segment of the noise at original speed onto the digit, 
     # with the noise having a gain 12dB lower than the digit
-    noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))],
+    if ((first_noise_sample.dBFS + 12) > digit.dBFS):
+        noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))],
                                 gain_during_overlay = (first_noise_sample.dBFS - digit.dBFS + 12))
+    else:
+        noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))])
     
     # If the choice succeeds, overlay a second random noise sample
-    if (random.choice([True, False])):
+    # actually dont do this for now
+    # if (random.choice([True, False])):
         # choose a second random noise sample 
-        second_noise_sample_num = random.randint(1,10)
-        second_noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{second_noise_sample_num}.webm'), 
-                                                     format="webm")
-        noisy_digit = noisy_digit.overlay(second_noise_sample[:random.randint(0, len(second_noise_sample) - len(digit))],
-                                gain_during_overlay = (second_noise_sample.dBFS - digit.dBFS + 12))
-        return noisy_digit
-    else:
-        return noisy_digit
+        # second_noise_sample_num = random.randint(1,10)
+        # second_noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{second_noise_sample_num}.webm'), 
+        #                                              format="webm")
+        # noisy_digit = noisy_digit.overlay(second_noise_sample[:random.randint(0, len(second_noise_sample) - len(digit))],
+        #                         gain_during_overlay = (second_noise_sample.dBFS - digit.dBFS + 12))
+        # return noisy_digit
+    # else:
+    return noisy_digit
 
 # Add noise to all the files in a digits folder
 # Output the noisy files to datasets/noisy_digits/{num}
