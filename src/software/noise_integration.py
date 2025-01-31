@@ -2,6 +2,10 @@ import random
 import pydub
 import os
 from pydub import AudioSegment
+import threading
+
+# Edit to change SNR dB
+SNR = 12.0
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -24,9 +28,9 @@ def add_noise(digit: AudioSegment) -> AudioSegment:
     
     # Overlay a random segment of the noise at original speed onto the digit, 
     # with the noise having a gain 12dB lower than the digit
-    if ((first_noise_sample.dBFS + 12) > digit.dBFS):
+    if ((first_noise_sample.dBFS + SNR) > digit.dBFS):
         noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))],
-                                gain_during_overlay = (first_noise_sample.dBFS - digit.dBFS + 12))
+                                gain_during_overlay = (first_noise_sample.dBFS - digit.dBFS + SNR))
     else:
         noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))])
     
@@ -55,7 +59,18 @@ def make_noisy_folder(path: str):
           noisy_digit_path = os.path.join(noisy_digits_subfolder, os.path.basename(file))
           noisy_digit.export(noisy_digit_path, format="wav")
 
+threads = []
+i = 0
 # Loop through all the folders and create a noisy dataset
 for subdir in os.listdir(digits_folder):
-    make_noisy_folder(os.path.join(digits_folder, subdir))
-          
+    folder = os.path.join(digits_folder, subdir)
+    threads.append(threading.Thread(target=make_noisy_folder, args=(folder,)))
+    threads[i].start()
+    i += 1
+
+
+i = 0
+for thread in threads:
+    threads[i].join()
+    i += 1
+
