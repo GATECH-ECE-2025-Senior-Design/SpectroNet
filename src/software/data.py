@@ -4,6 +4,7 @@ import shutil
 import argparse
 import librosa
 import numpy
+import soundfile
 
 # parse command line arguments
 parser = argparse.ArgumentParser(description="A parser to check if the user needs to log into kaggle.")
@@ -62,3 +63,6 @@ else:
 
 def wav_to_numpy(path: str):
   return librosa.load(path, dtype=numpy.float16)
+
+def numpy_to_wav(array, path: str, samplerate):
+  soundfile.write(path, array, samplerate, subtype='PCM_24')
