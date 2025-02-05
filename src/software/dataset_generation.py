@@ -17,7 +17,7 @@ os.makedirs(images_folder, exist_ok=True)
 # parse command line arguments
 parser = argparse.ArgumentParser(description="A parser to check if the user wants background noise mixed in.")
 parser.add_argument('--noise', action='store_true', default=False, help="Set to True to log in.")
-parser.add_argument('--snr', type=int, default=None, help="Signal to noise ratio if background noise is enabled.")
+parser.add_argument('--snr', type=int, default=12, help="Signal to noise ratio if background noise is enabled.")
 parser.add_argument('--windowing', type=str, default="end", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
 args = parser.parse_args()
 
@@ -41,3 +41,9 @@ for subdir, dirs, files in os.walk(digits_folder):
         power = windowing.window(power, audio_data, args.windowing)
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power)
+
+
+# Noise stuff
+if (args.noise == True):
+  print("Adding noise to dataset...")
+  noise_integration.integrate_noise(args.snr)
