@@ -7,9 +7,6 @@ import threading
 # Run this file to integrate noise into the dataset - it currently is set to output a bunch of 
 # noisy WAV files into datasets/noisy_digits with the SNR set below
 
-# Edit to change SNR dB
-SNR = 12.0
-
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
 datasets_folder = os.path.join(current_directory, "..", "datasets")
@@ -24,7 +21,7 @@ if (os.path.exists(noisy_digits_folder) == False):
 # Because the noise samples are considerably longer than the number samples
 # I will clip a random portion of the noise sample and overlay the digit on it.
 # I may also overlay a second noise sample, decided by random choice
-def add_noise(digit_untrimmed: AudioSegment) -> AudioSegment:
+def add_noise(digit_untrimmed: AudioSegment, SNR: int) -> AudioSegment:
     """Adds (a) random sample(s) of background noise to a single audio file and removes silent padding from initial digit sample"""
     # Code to trim the silence from the beginning and end of the digit
     # Reference used: https://stackoverflow.com/a/69331596
