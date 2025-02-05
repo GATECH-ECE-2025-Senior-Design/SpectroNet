@@ -3,6 +3,7 @@ import spectrogram as spec
 import numpy as np
 import argparse
 import noise_integration
+import windowing
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -17,6 +18,7 @@ os.makedirs(images_folder, exist_ok=True)
 parser = argparse.ArgumentParser(description="A parser to check if the user wants background noise mixed in.")
 parser.add_argument('--noise', action='store_true', default=False, help="Set to True to log in.")
 parser.add_argument('--snr', type=int, default=None, help="Signal to noise ratio if background noise is enabled.")
+parser.add_argument('--windowing', type=str, default="end", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
 args = parser.parse_args()
 
 # TODO: Add runtime arguments for bins, hop size, quantization, etc. -- currently hard-coded
@@ -35,5 +37,7 @@ for subdir, dirs, files in os.walk(digits_folder):
           audio_data = noise_integration.add_noise(audio_data, args.snr)
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32, target_dtype=np.int16)
+        # apply windowing (for square image)
+        power = windowing.window(power, audio_data, args.windowing)
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power)
