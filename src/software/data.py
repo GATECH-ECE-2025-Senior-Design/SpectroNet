@@ -60,5 +60,5 @@ if not(os.path.isdir(os.path.join(datasets_folder, "noise"))):
 else:
   print("Noise dataset already inside of \'datasets\'!")
 
-def numpy_to_wav(path: str):
+def wav_to_numpy(path: str):
   return librosa.load(path, dtype=numpy.float16)
