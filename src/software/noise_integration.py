@@ -56,18 +56,18 @@ def add_noise(digit_untrimmed: AudioSegment, SNR: int) -> AudioSegment:
 
 # Add noise to all the files in a digits folder
 # Output the noisy files to datasets/noisy_digits/{num}
-def make_noisy_folder(path: str):
+def make_noisy_folder(path: str, SNR: int):
       noisy_digits_subfolder = os.path.join(noisy_digits_folder, os.path.basename(os.path.normpath(path)))
       if (os.path.exists(noisy_digits_subfolder) == False):
           os.mkdir(noisy_digits_subfolder)
       for file in os.listdir(path):
           digit = AudioSegment.from_file(os.path.normpath(os.path.join(path,file)))
-          noisy_digit = add_noise(digit)
+          noisy_digit = add_noise(digit, SNR)
           noisy_digit_path = os.path.join(noisy_digits_subfolder, os.path.basename(file))
           noisy_digit.export(noisy_digit_path, format="wav")
 
 
-def integrate_noise():
+def integrate_noise(SNR: int):
     """Creates a new dataset by integrating (a) randomly chosen
     sample(s) of noise into the existing digit dataset
 
@@ -79,7 +79,7 @@ def integrate_noise():
     # Loop through all the folders and create a noisy dataset
     for subdir in os.listdir(digits_folder):
         folder = os.path.join(digits_folder, subdir)
-        threads.append(threading.Thread(target=make_noisy_folder, args=(folder,)))
+        threads.append(threading.Thread(target=make_noisy_folder, args=(folder, SNR)))
         threads[i].start()
         i += 1
 
