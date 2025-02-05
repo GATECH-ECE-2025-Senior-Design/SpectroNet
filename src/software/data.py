@@ -2,6 +2,8 @@ import kagglehub
 import os
 import shutil
 import argparse
+import librosa
+import numpy
 
 # parse command line arguments
 parser = argparse.ArgumentParser(description="A parser to check if the user needs to log into kaggle.")
@@ -57,3 +59,6 @@ if not(os.path.isdir(os.path.join(datasets_folder, "noise"))):
     print(f"An error occured: {e}")
 else:
   print("Noise dataset already inside of \'datasets\'!")
+
+def numpy_to_wav(path: str):
+  return librosa.load(path, dtype=numpy.float16)
