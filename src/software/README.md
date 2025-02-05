@@ -35,3 +35,5 @@ The dataset_generation.py script processes the spoken digits dataset by mixing i
 ```python
 python dataset_generation.py --noise --snr 15 --windowing mid
 ```
+
+## NOTE: Noise integration is not currently supported. Will be fixed in the future by Jahan.
