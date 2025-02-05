@@ -36,7 +36,7 @@ for subdir, dirs, files in os.walk(digits_folder):
         if (args.noise):
           audio_data = noise_integration.add_noise(audio_data, args.snr)
         # generate spectrogram
-        bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32, target_dtype=np.int16)
+        bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=96, hop_length=32, target_dtype=np.int16)
         # apply windowing (for square image)
         power = windowing.window(power, audio_data, args.windowing)
         # save np array file
