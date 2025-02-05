@@ -67,7 +67,6 @@ def make_noisy_folder(path: str):
           noisy_digit.export(noisy_digit_path, format="wav")
 
 
-#
 def integrate_noise():
     """Creates a new dataset by integrating (a) randomly chosen
     sample(s) of noise into the existing digit dataset
@@ -84,7 +83,7 @@ def integrate_noise():
         threads[i].start()
         i += 1
 
-
+    # The actually multithreaded part
     i = 0
     for thread in threads:
         threads[i].join()
