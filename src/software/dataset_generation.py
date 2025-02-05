@@ -1,6 +1,7 @@
 import os
 import spectrogram as spec
 import numpy as np
+import noise_integration
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -26,4 +27,3 @@ for subdir, dirs, files in os.walk(digits_folder):
          bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32, target_dtype=np.int16)
          # save np array file
          np.save(os.path.join(images_folder, (file_name + ".npy")), power)
-         
