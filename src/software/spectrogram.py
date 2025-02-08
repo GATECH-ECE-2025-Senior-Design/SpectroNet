@@ -75,6 +75,31 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
     bins = np.linspace(0, power.shape[0], power.shape[0])
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
+  elif spec_type == "mel":
+    sr = 8192
+    fmin = 80
+    fmax = 4000
+    n_mels = 94
+    hop_length = 64
+    n_fft = 512
+    
+    
+    
+    S = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate, n_mels=n_mels, fmin=fmin, fmax=fmax, hop_length=hop_length, n_fft=n_fft)
+
+    power = S
+    bins = np.linspace(0, power.shape[0], power.shape[0])
+    # calculate time indices (linear)
+    time = np.linspace(0, len(audio_data), power.shape[1])
+
+
+    # fig, ax = plt.subplots()
+    # img = librosa.display.specshow(S_dB, x_axis='time',
+    #                      y_axis='mel', sr=sr,
+    #                      fmax=fmax, ax=ax, hop_length=hop_length, n_fft=n_fft)
+    # fig.colorbar(img, ax=ax, format='%+2.0f dB')
+    # ax.set(title='Mel-frequency spectrogram')
+    # plt.show()
   else:
     print("Error: Invalid value for spectrogram_choice argument \'spec_type\'!")
     exit()
@@ -84,7 +109,7 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 ########
 # TEST #
 ########
-
+spec_type = "mel"
 sample_rate = 8000
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -96,10 +121,14 @@ audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01"
 # plt.ylabel('Amplitude')
 # plt.grid(True)
 # plt.show()
-
-spec_type = "cqt"
 bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, num_bins=100, hop_length=32)
-plt.pcolormesh(time, bins, 10 * np.log10(power), shading='auto')
+print(len(time))
+# if (spec_type == 'mel'):
+#   plt.pcolormesh(time, bins, (power), shading='auto')
+# else:
+power_dB = librosa.power_to_db(power, ref=np.max)
+
+plt.pcolormesh(time, bins, power_dB, shading='auto')
 plt.title(f'Spectrogram: {spec_type}')
 plt.xlabel('Time [s]')
 plt.ylabel('Bin Label')
