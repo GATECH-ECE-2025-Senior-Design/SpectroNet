@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 import matplotlib.pyplot as plt
+import librosa 
+import os
+from scipy.io import wavfile
 
 import torch
 import torch.nn as nn 
@@ -11,7 +14,52 @@ from torchvision import transforms
 from torch.utils.data import DataLoader, Subset, DataLoader, Dataset, TensorDataset
 
 
-
+def read_all_wav_files(folder_path):
+    """
+    Recursively read all .wav files in 'folder_path' (and subfolders).
+    For each WAV file named XX_YY_ZZ.wav, extract 'XX' as the label.
+    
+    Returns:
+        data_array  (ndarray): An array (dtype=object) of shape (N,) where each entry
+                               is a 1D NumPy array of audio samples for one WAV file.
+        label_array (ndarray): A string array of shape (N,) where each element is
+                               the 'XX' label corresponding to the row in data_array.
+                               
+        If all WAV files have the same length, remove 'dtype=object' and you'll get a
+        2D float/integer array instead.
+    """
+    
+    data_list = []
+    label_list = []
+    
+    # Walk through all subdirectories of folder_path
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.lower().endswith(".wav"):
+                # Attempt to parse the label from the filename "XX_YY_ZZ.wav"
+                # by taking the part before the first underscore.
+                file_parts = file.split("_")
+                if len(file_parts) > 1:
+                    label = file_parts[0]
+                else:
+                    # If filename doesn't follow XX_YY_ZZ.wav,
+                    # we could just take the stem as the label or skip
+                    label = os.path.splitext(file)[0]
+                
+                # Read the WAV file
+                full_path = os.path.join(root, file)
+                sr, audio_data = wavfile.read(full_path)
+                
+                # Append data and label to the lists
+                data_list.append(audio_data)
+                label_list.append(label)
+    
+    # Convert lists to NumPy arrays
+    # Use dtype=object to allow rows of different lengths
+    data_array = np.array(data_list, dtype=object)
+    label_array = np.array(label_list, dtype=str)
+    
+    return data_array, label_array
 
 def split_data(df, test_size=0.2):
     X = df.iloc[:, 1:].values

@@ -77,8 +77,8 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
     time = np.linspace(0, len(audio_data), power.shape[1])
   elif spec_type == "mel":
     sr = 8192
-    fmin = 80
-    fmax = 4000
+    fmin = 40
+    fmax = 3000
     n_mels = 94
     hop_length = 64
     n_fft = 512
