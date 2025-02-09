@@ -127,7 +127,7 @@ sample_rate = 8000
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.int16)
+audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), target_sample_rate=sample_rate, target_dtype=np.int16)
 # plt.figure(figsize=(10, 4))
 # plt.plot(audio_data)
 # plt.title(f"Audio Waveform - {sample_rate} Hz")
