@@ -26,9 +26,14 @@ The dataset_generation.py script processes the spoken digits dataset by mixing i
 
 ### Console Arguments:
 
-- --noise: (default False) Whether or not to mix background noise into spoken digits.
-- --snr: (default None) If background noise is toggled, the signal-to-noise ratio between spoken digits and background noise.
-- --windowing: (default "end") The windowing algorithm applied to the spectrograms to crop into square images.
+- --noise [no value]: (default False) Whether or not to mix background noise into spoken digits.
+- --snr: (default None) If background noise is toggled, the signal-to-noise ratio between spoken digits and background noise (12 --> spoken digits are 12dB louder than background noise).
+- --windowing: (default "end") The windowing algorithm applied to the spectrograms to crop into square images. Choices: {"end", "mid"}
+- --sr: (default 6000) The sample rate in which the audio files are resampled to.
+- --spec_type: (default "mel") The type of spectrogram used in generating the dataset. Choices: {"simple", "cqt", "mel"}
+- --resolution: (default 96) The resolution of the generated spectrogram. Note that all spectrograms fed into the CNN are square images, with the vertical resolution being the number of bins and the horizontal resolution being the number of DFT/CQT taken. Hop length may have to be adjusted for the final square image to cover the correct amount of time (~0.5 seconds).
+- --dtype: (default int16) The datatype for the audio signal and all subsequent processing. Choices: {"int8", "int16", "int32", "fp8", "fp16", "fp32"}
+- --hop: (default 32) The hop size for each DFT/CQT taken in generating the spectrograms. Tip: increasing the hop size decreases the horizontal resolution, decreasing the hop size increases the horizontal resolution.
 
 ### Usage
 
