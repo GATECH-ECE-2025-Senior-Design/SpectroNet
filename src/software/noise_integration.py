@@ -17,42 +17,39 @@ noisy_digits_folder = os.path.join(datasets_folder, "noisy_digits")
 if (os.path.exists(noisy_digits_folder) == False):
     os.mkdir(noisy_digits_folder)
 
-# 
+
 # Because the noise samples are considerably longer than the number samples
 # I will clip a random portion of the noise sample and overlay the digit on it.
 # I may also overlay a second noise sample, decided by random choice
-def add_noise(digit_untrimmed: AudioSegment, SNR: int) -> AudioSegment:
+def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int) -> AudioSegment:
     """Adds (a) random sample(s) of background noise to a single audio file and removes silent padding from initial digit sample"""
+    # Check argument first - throw an exception if it's something impossible
+    if (num_noise_samples < 1):
+        raise ValueError("Cannot add a non-positive amount of noise to the digit - num_noise_samples must be greater than 0")
     # Code to trim the silence from the beginning and end of the digit
     # Reference used: https://stackoverflow.com/a/69331596
     trim_leading_silence = lambda x: x[detect_leading_silence(x) :]
     trim_trailing_silence = lambda x: trim_leading_silence(x.reverse()).reverse()
     strip_silence = lambda x: trim_trailing_silence(trim_leading_silence(x))
     digit : AudioSegment = strip_silence(digit_untrimmed)
-    # choose a random noise sample
-    first_noise_sample_num = random.randint(1,10)
-    first_noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{first_noise_sample_num}.webm'), format="webm")
+    noise: AudioSegment
+
+    # Create the noise sample - overlay multiple noise samples on top of each other
+    for i in range(num_noise_samples):
+        noise_sample_num = random.randint(1,10)
+        # choose a random noise sample
+        noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{noise_sample_num}.webm'), format="webm")
+        # Overlay it onto the existing noise, making sure that it follows the defined SNR
+        if ((noise_sample.dBFS + SNR) > digit.dBFS):
+            noise = noise.overlay(first_noise_sample[:random.randint(0, len(noise_sample) - len(digit))],
+                                    gain_during_overlay = (noise_sample.dBFS - digit.dBFS + SNR))
+        else:
+            noise = noise.overlay(first_noise_sample[:random.randint(0, len(noise_sample) - len(digit))])
     
-    # Overlay a random segment of the noise at original speed onto the digit, 
-    # with the noise having a gain 12dB lower than the digit
-    if ((first_noise_sample.dBFS + SNR) > digit.dBFS):
-        noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))],
-                                gain_during_overlay = (first_noise_sample.dBFS - digit.dBFS + SNR))
-    else:
-        noisy_digit = digit.overlay(first_noise_sample[:random.randint(0, len(first_noise_sample) - len(digit))])
+    return digit.overlay(noise)
+        
+
     
-    # If the choice succeeds, overlay a second random noise sample
-    # actually dont do this for now
-    # if (random.choice([True, False])):
-        # choose a second random noise sample 
-        # second_noise_sample_num = random.randint(1,10)
-        # second_noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{second_noise_sample_num}.webm'), 
-        #                                              format="webm")
-        # noisy_digit = noisy_digit.overlay(second_noise_sample[:random.randint(0, len(second_noise_sample) - len(digit))],
-        #                         gain_during_overlay = (second_noise_sample.dBFS - digit.dBFS + 12))
-        # return noisy_digit
-    # else:
-    return noisy_digit
 
 # Add noise to all the files in a digits folder
 # Output the noisy files to datasets/noisy_digits/{num}
