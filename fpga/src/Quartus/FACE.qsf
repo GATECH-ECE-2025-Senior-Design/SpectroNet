@@ -72,6 +72,13 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to I2C_SCL
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to I2C_SDA
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_ADCDAT
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_ADCLRCK
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE ../verilog/hex_disp.sv
+set_global_assignment -name VHDL_FILE i2c_oneshot_ctrl.vhd
+set_global_assignment -name VHDL_FILE i2c_master.vhd
+set_global_assignment -name BDF_FILE oneshot_i2c.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE ../verilog/adc_interface.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../verilog/face_top_pkg.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../verilog/face_top.sv
@@ -80,7 +87,4 @@ set_global_assignment -name SIP_FILE pll_main.sip
 set_global_assignment -name BDF_FILE FACE.bdf
 set_global_assignment -name QIP_FILE adc_shiftreg.qip
 set_global_assignment -name QIP_FILE adc_fifo.qip
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
