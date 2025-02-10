@@ -21,7 +21,7 @@ if (os.path.exists(noisy_digits_folder) == False):
 # Because the noise samples are considerably longer than the number samples
 # I will clip a random portion of the noise sample and overlay the digit on it.
 # I may also overlay a second noise sample, decided by random choice
-def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int) -> AudioSegment:
+def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int, verbose: bool, file: str) -> AudioSegment:
     """Adds (a) random sample(s) of background noise to a single audio file and removes silent padding from initial digit sample"""
     # Check argument first - throw an exception if it's something impossible
     if (num_noise_samples < 1):
@@ -39,12 +39,13 @@ def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int) -
         noise_sample_num = random.randint(1,10)
         # choose a random noise sample
         noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{noise_sample_num}.webm'), format="webm")
+        print("Adding noise sample " + noise_sample_num + "to " + file + ", SNR: " + SNR + "dB")
         # Overlay it onto the existing noise, making sure that it follows the defined SNR
         if ((noise_sample.dBFS + SNR) > digit.dBFS):
-            noise = noise.overlay(first_noise_sample[:random.randint(0, len(noise_sample) - len(digit))],
+            noise = noise.overlay(noise_sample[:random.randint(0, len(noise_sample) - len(digit))],
                                     gain_during_overlay = (noise_sample.dBFS - digit.dBFS + SNR))
         else:
-            noise = noise.overlay(first_noise_sample[:random.randint(0, len(noise_sample) - len(digit))])
+            noise = noise.overlay(noise_sample[:random.randint(0, len(noise_sample) - len(digit))])
     
     return digit.overlay(noise)
         
@@ -53,18 +54,18 @@ def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int) -
 
 # Add noise to all the files in a digits folder
 # Output the noisy files to datasets/noisy_digits/{num}
-def make_noisy_folder(path: str, SNR: int):
+def make_noisy_folder(path: str, SNR: int, num_noise_samples: int, verbose):
       noisy_digits_subfolder = os.path.join(noisy_digits_folder, os.path.basename(os.path.normpath(path)))
       if (os.path.exists(noisy_digits_subfolder) == False):
           os.mkdir(noisy_digits_subfolder)
       for file in os.listdir(path):
           digit = AudioSegment.from_file(os.path.normpath(os.path.join(path,file)))
-          noisy_digit = add_noise(digit, SNR)
+          noisy_digit = add_noise(digit, SNR, num_noise_samples, verbose, file)
           noisy_digit_path = os.path.join(noisy_digits_subfolder, os.path.basename(file))
           noisy_digit.export(noisy_digit_path, format="wav")
 
 
-def integrate_noise(SNR: int):
+def integrate_noise(SNR: int, num_noise_samples: int, verbose: bool):
     """Creates a new dataset by integrating (a) randomly chosen
     sample(s) of noise into the existing digit dataset
 
@@ -76,7 +77,7 @@ def integrate_noise(SNR: int):
     # Loop through all the folders and create a noisy dataset
     for subdir in os.listdir(digits_folder):
         folder = os.path.join(digits_folder, subdir)
-        threads.append(threading.Thread(target=make_noisy_folder, args=(folder, SNR)))
+        threads.append(threading.Thread(target=make_noisy_folder, args=(folder, SNR, num_noise_samples, verbose)))
         threads[i].start()
         i += 1
 
