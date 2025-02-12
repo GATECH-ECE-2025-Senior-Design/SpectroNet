@@ -4,6 +4,7 @@ import numpy as np
 import argparse
 import noise_integration
 import windowing
+import math
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -23,11 +24,27 @@ parser.add_argument('--sr', type=int, default=6000, help="Define sample rate of 
 parser.add_argument('--spec_type', type=str, default="mel", help="Define which spectrogram type is generated.")
 parser.add_argument('--resolution', type=int, default=96, help="Define resolution (square) of the spectrogram.")
 parser.add_argument('--dtype', type=str, default="int16", help="Define datatype of the audio/spectrogram.")
-parser.add_argument('--hop', type=int, default=32, help="Define hop length for taking DFT/CQT.")
+parser.add_argument('--time', type=float, default=0.5, help="Define the time period that is included in a spectrogram.")
 args = parser.parse_args()
 
 #TODO:  Maybe parameterize the number of speakers to generate spectrograms for? 
 #       Spec generation currently takes a long time.
+
+num_samples_per_square = args.time * args.sr # total number of samples contained by square spectrogram
+hop_length = 0 # calculate below
+# Determine hop length based on time parameter
+if args.spec_type == "simple":
+  dft_bins = 2 ** (args.resolution.bit_length()) # same code as in spectrogram.py
+  samples_per_dft = dft_bins * 2 # same code as in spectrogram.py
+  num_hop_samples_per_square = num_samples_per_square - samples_per_dft # total number of samples minus the first dft
+  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1))
+elif args.spec_type == "cqt":
+  print("Not yet implemented.")
+  exit()
+elif args.spec_type == "mel":
+  n_fft = 1024 # same code as in spectrogram.py
+  num_hop_samples_per_square = num_samples_per_square - n_fft # total number of samples minus the first dft
+  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1))
 
 # Choose datatype (hard-coded, sorry)
 dtype = None
@@ -54,13 +71,14 @@ for subdir, dirs, files in os.walk(digits_folder):
       # ignore the txt file
       if file_extension == ".wav":
         # read wav
-        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)
+        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, \
+                                   target_dtype=dtype, time_min=args.time)
         # optionally mix noise
         if (args.noise):
           audio_data = noise_integration.add_noise(audio_data, args.snr)
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
-                                                    num_bins=args.resolution, hop_length=args.hop, target_dtype=dtype)
+                                                    num_bins=args.resolution, hop_length=hop_length, target_dtype=dtype)
         # apply windowing (for square image)
         power = windowing.window(power, audio_data, args.windowing)
         # save np array file

@@ -10,7 +10,7 @@ import warnings
 # block out librosa warning for CQT
 warnings.filterwarnings("ignore", category=UserWarning, module="librosa")
 
-def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
+def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min=0.5):
   """
   Reads .wav file specified by path, decimates to specified sample rate and quantizes to specified precision.
   Returns the audio as an array.
@@ -31,6 +31,11 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16):
   # resample to target sample rate if sample rates are different
   if target_sample_rate != sample_rate:
       audio_data = resample_poly(audio_data, target_sample_rate, sample_rate)
+
+  samples_min = round(time_min * target_sample_rate) # minimum number of samples given minimum time
+  if len(audio_data) < samples_min:
+    zero_pad = np.zeros(samples_min - len(audio_data)) # create min number of extra samples
+    audio_data = np.concatenate((zero_pad, audio_data)) # zero pad before the audio sample
 
   # convert to target quantization
   if target_dtype != audio_data.dtype:
@@ -93,7 +98,7 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
     fmax = 3000
     n_mels = num_bins
     hop_length = hop_length
-    n_fft = 512
+    n_fft = 1024 # samples per fft -> output bins = n_fft/2 + 1
     # librosa only accepts floats, so recast
     audio_data = audio_data.astype(np.float32)
     power = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate, n_mels=n_mels, \
@@ -102,6 +107,7 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
     bins = np.linspace(0, power.shape[0], power.shape[0])
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
+    # print(power.shape)
   else:
     print("Error: Invalid value for spectrogram_choice argument \'spec_type\'!")
     exit()
@@ -120,9 +126,9 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 # sample_rate = 8000
 # dtype = np.int32
 # current_dir = os.path.dirname(os.path.abspath(__file__))
-
 # audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), \
 #                       target_sample_rate=sample_rate, target_dtype=dtype)
+
 # plt.figure(figsize=(10, 4))
 # plt.plot(audio_data)
 # plt.title(f"Audio Waveform - {sample_rate} Hz")
@@ -137,7 +143,7 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
 # if (spec_type == 'mel'):
 #   plt.pcolormesh(time, bins, (power), shading='auto')
 # else:
-# power_dB = librosa.power_to_db(power, ref=np.max)
+#   power_dB = librosa.power_to_db(power, ref=np.max)
 
 # plt.pcolormesh(time, bins, power_dB, shading='auto')
 # plt.title(f'Spectrogram: {spec_type}')
