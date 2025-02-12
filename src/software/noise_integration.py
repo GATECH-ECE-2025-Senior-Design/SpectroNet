@@ -1,7 +1,7 @@
 import random
 import os
 from pydub import AudioSegment
-from pydub.silence import detect_leading_silence
+from pydub.silence import detect_nonsilent
 import threading
 
 # Run this file to integrate noise into the dataset - it currently is set to output a bunch of 
@@ -18,6 +18,21 @@ if (os.path.exists(noisy_digits_folder) == False):
     os.mkdir(noisy_digits_folder)
 
 
+def remove_sil(sound_param: AudioSegment) -> AudioSegment:
+    sound : AudioSegment = sound_param
+    non_sil_times = detect_nonsilent(sound, min_silence_len=50, silence_thresh=sound.dBFS * 1.5)
+    if len(non_sil_times) > 0:
+        non_sil_times_concat = [non_sil_times[0]]
+        if len(non_sil_times) > 1:
+            for t in non_sil_times[1:]:
+                if t[0] - non_sil_times_concat[-1][-1] < 200:
+                    non_sil_times_concat[-1][-1] = t[1]
+                else:
+                    non_sil_times_concat.append(t)
+        non_sil_times = [t for t in non_sil_times_concat if t[1] - t[0] > 350]
+        return sound[non_sil_times[0][0]: non_sil_times[-1][1]]
+
+
 # Because the noise samples are considerably longer than the number samples
 # I will clip a random portion of the noise sample and overlay the digit on it.
 # I may also overlay a second noise sample, decided by random choice
@@ -27,25 +42,25 @@ def add_noise(digit_untrimmed: AudioSegment, SNR: int, num_noise_samples: int, v
     if (num_noise_samples < 1):
         raise ValueError("Cannot add a non-positive amount of noise to the digit - num_noise_samples must be greater than 0")
     # Code to trim the silence from the beginning and end of the digit
-    # Reference used: https://stackoverflow.com/a/69331596
-    trim_leading_silence = lambda x: x[detect_leading_silence(x) :]
-    trim_trailing_silence = lambda x: trim_leading_silence(x.reverse()).reverse()
-    strip_silence = lambda x: trim_trailing_silence(trim_leading_silence(x))
-    digit : AudioSegment = strip_silence(digit_untrimmed)
-    noise: AudioSegment
+    digit : AudioSegment = digit_untrimmed
+    noise: AudioSegment = digit_untrimmed
 
     # Create the noise sample - overlay multiple noise samples on top of each other
     for i in range(num_noise_samples):
         noise_sample_num = random.randint(1,10)
         # choose a random noise sample
         noise_sample = AudioSegment.from_file(os.path.join(noise_folder, f'sample-{noise_sample_num}.webm'), format="webm")
-        print("Adding noise sample " + noise_sample_num + "to " + file + ", SNR: " + SNR + "dB")
+        noise_sample_segment = noise_sample[:random.randint(0, len(noise_sample) - len(digit))]
+        print("Adding noise sample " + str(noise_sample_num) + "to " + file + ", SNR: " + str(SNR) + "dB")
         # Overlay it onto the existing noise, making sure that it follows the defined SNR
-        if ((noise_sample.dBFS + SNR) > digit.dBFS):
-            noise = noise.overlay(noise_sample[:random.randint(0, len(noise_sample) - len(digit))],
-                                    gain_during_overlay = (noise_sample.dBFS - digit.dBFS + SNR))
+        if (i == 0):
+            noise = noise_sample_segment
         else:
-            noise = noise.overlay(noise_sample[:random.randint(0, len(noise_sample) - len(digit))])
+            if ((noise_sample_segment.dBFS + SNR) > digit.dBFS):
+                noise = noise.overlay(noise_sample_segment,
+                                        gain_during_overlay = (noise_sample.dBFS - digit.dBFS + SNR))
+            else:
+                noise = noise.overlay(noise_sample_segment)
     
     return digit.overlay(noise)
         

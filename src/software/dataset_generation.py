@@ -17,7 +17,7 @@ os.makedirs(images_folder, exist_ok=True)
 
 # parse command line arguments
 parser = argparse.ArgumentParser(description="A parser to check if the user wants background noise mixed in.")
-parser.add_argument('--noise', action='store_true', default=False, help="To enable mixing background noise.")
+parser.add_argument('--enable_noise', action='store_true', default=False, help="To enable mixing background noise.")
 parser.add_argument('--snr', type=int, default=12, help="Signal to noise ratio if background noise is enabled.")
 parser.add_argument('--windowing', type=str, default="end", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
 parser.add_argument('--sr', type=int, default=6000, help="Define sample rate of the audio signal.")
@@ -25,6 +25,8 @@ parser.add_argument('--spec_type', type=str, default="mel", help="Define which s
 parser.add_argument('--resolution', type=int, default=96, help="Define resolution (square) of the spectrogram.")
 parser.add_argument('--dtype', type=str, default="int16", help="Define datatype of the audio/spectrogram.")
 parser.add_argument('--time', type=float, default=0.5, help="Define the time period that is included in a spectrogram.")
+parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
+parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
 args = parser.parse_args()
 
 #TODO:  Maybe parameterize the number of speakers to generate spectrograms for? 
@@ -64,6 +66,13 @@ else:
   print("Invalid argument \'dtype\'!")
   exit()
 
+# Run the noise integration separately from the rest of the dataset
+# Notes: noise gen preserves sample rate of digit, resamples noise
+# should it have a different sample rate from the digit
+if (args.enable_noise):
+  noise_integration.integrate_noise(args.snr, args.noise_samples, args.verbose)
+  digits_folder = os.path.join(datasets_folder, "noisy_digits")
+
 # walk the Audio MNIST dataset
 for subdir, dirs, files in os.walk(digits_folder):
     for file in files:
@@ -71,11 +80,7 @@ for subdir, dirs, files in os.walk(digits_folder):
       # ignore the txt file
       if file_extension == ".wav":
         # read wav
-        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, \
-                                   target_dtype=dtype, time_min=args.time)
-        # optionally mix noise
-        if (args.noise):
-          audio_data = noise_integration.add_noise(audio_data, args.snr)
+        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)       
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
                                                     num_bins=args.resolution, hop_length=hop_length, target_dtype=dtype)
@@ -83,9 +88,3 @@ for subdir, dirs, files in os.walk(digits_folder):
         power = windowing.window(power, audio_data, args.windowing)
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power)
-
-
-# Noise stuff
-if (args.noise == True):
-  print("Adding noise to dataset...")
-  noise_integration.integrate_noise(args.snr)
