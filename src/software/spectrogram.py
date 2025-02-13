@@ -43,8 +43,8 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
 
   return audio_data
 
-def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bins=128, \
-                       hop_length=32, target_dtype=np.int16):
+def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolution=128, \
+                       hop_length=32, target_dtype=np.int16, samples_per_dft=256):
   """
   Generates a square aspect-ratio spectrogram of the input waveform as defined by the function parameters.
 
@@ -65,38 +65,37 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", num_bin
   TODO: parameterize min-max bin frequencies for cqt & mel spectrograms.
   """
 
+  if resolution > (samples_per_dft / 2 + 1):
+    print(f"A spectrogram with N samples per DFT yields a DFT with N/2 + 1 bins. The resolution={resolution} is too high for samples_per_dft={samples_per_dft}.")
+
   bins = None 
   time = None
   power = None
   if spec_type == "simple":
-    dft_bins = num_bins
-    # compensate for non power-of-two number of bins
-    if (num_bins & (num_bins - 1)) != 0:
-      dft_bins = 2 ** (num_bins.bit_length())
-    samples_per_dft = dft_bins * 2
     overlap_length = samples_per_dft - hop_length
     bins, time, power = spectrogram(audio_data, fs=sample_rate, nperseg=samples_per_dft, \
                                     noverlap=overlap_length)
-    # delete lowest (0 Hz) bin, delete higher bins for non power-of-two number of bins
-    bins = bins[1:1+num_bins]
-    power = power[1:1+num_bins]
+    # delete lowest (0 Hz) bin, delete higher bins if resolution != number of output bins for DFT
+    if (resolution != power.shape[0]):
+      bins = bins[1:1+resolution]
+      power = power[1:1+resolution]
   elif spec_type == "cqt":
     # male voices go down to 100 Hz, so giving some slack
     fmin = 80
     bins_per_octave = 20
     # librosa only accepts floats, so recast
     audio_data = audio_data.astype(np.float32)
-    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=num_bins, \
+    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=resolution, \
                                bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin))
     # calculate frequency bins
     octave_ratio = 2 ** (1 / bins_per_octave)
-    bins = [fmin * (octave_ratio ** i) for i in range(num_bins)]
+    bins = [fmin * (octave_ratio ** i) for i in range(resolution)]
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
   elif spec_type == "mel":
     fmin = 40
     fmax = 3000
-    n_mels = num_bins
+    n_mels = resolution
     hop_length = hop_length
     n_fft = 1024 # samples per fft -> output bins = n_fft/2 + 1
     # librosa only accepts floats, so recast

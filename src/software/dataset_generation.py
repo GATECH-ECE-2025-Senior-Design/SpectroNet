@@ -20,13 +20,14 @@ parser = argparse.ArgumentParser(description="A parser to check if the user want
 parser.add_argument('--enable_noise', action='store_true', default=False, help="To enable mixing background noise.")
 parser.add_argument('--snr', type=int, default=12, help="Signal to noise ratio if background noise is enabled.")
 parser.add_argument('--windowing', type=str, default="end", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
-parser.add_argument('--sr', type=int, default=6000, help="Define sample rate of the audio signal.")
+parser.add_argument('--sr', type=int, default=8000, help="Define sample rate of the audio signal.")
 parser.add_argument('--spec_type', type=str, default="mel", help="Define which spectrogram type is generated.")
 parser.add_argument('--resolution', type=int, default=96, help="Define resolution (square) of the spectrogram.")
 parser.add_argument('--dtype', type=str, default="int16", help="Define datatype of the audio/spectrogram.")
 parser.add_argument('--time', type=float, default=0.5, help="Define the time period that is included in a spectrogram.")
 parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
 parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
+parser.add_argument('--samples_per_dft', type=int, default=256, help="Number of samples used for each DFT.")
 args = parser.parse_args()
 
 #TODO:  Maybe parameterize the number of speakers to generate spectrograms for? 
@@ -36,17 +37,14 @@ num_samples_per_square = args.time * args.sr # total number of samples contained
 hop_length = 0 # calculate below
 # Determine hop length based on time parameter
 if args.spec_type == "simple":
-  dft_bins = 2 ** (args.resolution.bit_length()) # same code as in spectrogram.py
-  samples_per_dft = dft_bins * 2 # same code as in spectrogram.py
-  num_hop_samples_per_square = num_samples_per_square - samples_per_dft # total number of samples minus the first dft
-  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1))
+  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
+  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
 elif args.spec_type == "cqt":
   print("Not yet implemented.")
   exit()
 elif args.spec_type == "mel":
-  n_fft = 1024 # same code as in spectrogram.py
-  num_hop_samples_per_square = num_samples_per_square - n_fft # total number of samples minus the first dft
-  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1))
+  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
+  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
 
 # Choose datatype (hard-coded, sorry)
 dtype = None
@@ -83,8 +81,10 @@ for subdir, dirs, files in os.walk(digits_folder):
         audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)       
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
-                                                    num_bins=args.resolution, hop_length=hop_length, target_dtype=dtype)
+                                                    resolution=args.resolution, hop_length=hop_length, \
+                                                    target_dtype=dtype, samples_per_dft=args.samples_per_dft)
         # apply windowing (for square image)
         power = windowing.window(power, audio_data, args.windowing)
+        print(power)
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power)
