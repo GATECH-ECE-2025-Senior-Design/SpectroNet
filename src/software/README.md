@@ -26,9 +26,16 @@ The dataset_generation.py script processes the spoken digits dataset by mixing i
 
 ### Console Arguments:
 
-- --noise: (default False) Whether or not to mix background noise into spoken digits.
-- --snr: (default None) If background noise is toggled, the signal-to-noise ratio between spoken digits and background noise.
-- --windowing: (default "end") The windowing algorithm applied to the spectrograms to crop into square images.
+- --enable_noise [no value]: (default False) Whether or not to mix background noise into spoken digits.
+- --snr: (default None) If background noise is toggled, the signal-to-noise ratio between spoken digits and background noise (12 --> spoken digits are 12dB louder than background noise).
+- --crop [no value]: (default False) Whether to crop audio files and equally pad left and right with silence for the length of the clip to be equal to specified time period. Note that enabling cropping disables windowing, as all audio files become "square"
+- --windowing: (default "end") The windowing algorithm applied to the spectrograms to crop into square images. Choices: {"end", "mid"}
+- --sr: (default 8000) The sample rate in which the audio files are resampled to.
+- --spec_type: (default "simple") The type of spectrogram used in generating the dataset. Choices: {"simple", "cqt", "mel"}
+- --resolution: (default 96) The resolution of the generated spectrogram. Note that all spectrograms fed into the CNN are square images, with the vertical resolution being the number of bins and the horizontal resolution being the number of DFT/CQT taken. Hop length may have to be adjusted for the final square image to cover the correct amount of time (~0.5 seconds).
+- --dtype: (default int16) The datatype for the audio signal and all subsequent processing. Choices: {"int8", "int16", "int32", "float8", "float16", "float32"}
+- --time: (default 0.5) The amount of time that is FULLY included within a square spectrogram. This means that all samples within this period are both the leftmost and rightmost sample of a DFT sample within the square spectrogram.
+- --samples_per_dft: (default 256) The number of samples within any given DFT taken while generating the dataset.
 
 ### Usage
 
