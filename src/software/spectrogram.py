@@ -37,6 +37,11 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
     zero_pad = np.zeros(samples_min - len(audio_data)) # create min number of extra samples
     audio_data = np.concatenate((zero_pad, audio_data)) # zero pad before the audio sample
 
+  # normalize to peak at -1024 or 1024
+  amp_max_abs = max(abs(np.min(audio_data)), np.max(audio_data))
+  normalize_coeff = 1024 / amp_max_abs
+  audio_data *= normalize_coeff
+    
   # convert to target quantization
   if target_dtype != audio_data.dtype:
     audio_data = audio_data.astype(target_dtype)
@@ -79,6 +84,9 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
     if (resolution != power.shape[0]):
       bins = bins[1:1+resolution]
       power = power[1:1+resolution]
+      # power_dB = librosa.power_to_db(power, ref=np.max)
+      # plt.pcolormesh(time, bins, power_dB, shading='auto')
+      plt.show()
   elif spec_type == "cqt":
     # male voices go down to 100 Hz, so giving some slack
     fmin = 80
@@ -125,8 +133,11 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
 # sample_rate = 8000
 # dtype = np.int32
 # current_dir = os.path.dirname(os.path.abspath(__file__))
-# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "01", "0_01_0.wav"), \
+# audio_data = read_wav(os.path.join(current_dir, "..", "datasets", "digits", "38", "4_38_4.wav"), \
 #                       target_sample_rate=sample_rate, target_dtype=dtype)
+
+# audio_data = audio_data ** 2
+# audio_data = np.convolve(audio_data, np.ones(100), 'valid') / 100
 
 # plt.figure(figsize=(10, 4))
 # plt.plot(audio_data)

@@ -5,6 +5,8 @@ import argparse
 import noise_integration
 import windowing
 import math
+import matplotlib.pyplot as plt
+import librosa
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -19,12 +21,13 @@ os.makedirs(images_folder, exist_ok=True)
 parser = argparse.ArgumentParser(description="A parser to check if the user wants background noise mixed in.")
 parser.add_argument('--enable_noise', action='store_true', default=False, help="To enable mixing background noise.")
 parser.add_argument('--snr', type=int, default=12, help="Signal to noise ratio if background noise is enabled.")
-parser.add_argument('--windowing', type=str, default="end", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
+parser.add_argument('--crop', action='store_true', default=False, help="Crops audio, then pads left & right to desired time. Use with windowing=mid")
+parser.add_argument('--windowing', type=str, default="mid", help="The algorithm used to trigger the CNN, i.e. pass a square spectrogram in.")
 parser.add_argument('--sr', type=int, default=8000, help="Define sample rate of the audio signal.")
-parser.add_argument('--spec_type', type=str, default="mel", help="Define which spectrogram type is generated.")
+parser.add_argument('--spec_type', type=str, default="simple", help="Define which spectrogram type is generated.")
 parser.add_argument('--resolution', type=int, default=96, help="Define resolution (square) of the spectrogram.")
 parser.add_argument('--dtype', type=str, default="int16", help="Define datatype of the audio/spectrogram.")
-parser.add_argument('--time', type=float, default=0.5, help="Define the time period that is included in a spectrogram.")
+parser.add_argument('--time', type=float, default=1, help="Define the time period that is included in a spectrogram.")
 parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
 parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
 parser.add_argument('--samples_per_dft', type=int, default=256, help="Number of samples used for each DFT.")
@@ -35,34 +38,24 @@ args = parser.parse_args()
 
 num_samples_per_square = args.time * args.sr # total number of samples contained by square spectrogram
 hop_length = 0 # calculate below
+
 # Determine hop length based on time parameter
 if args.spec_type == "simple":
   num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
-  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
+  # num_hop_samples_per_square -= 2 * (args.samples_per_dft - 1)  # Also subtract two (DFT - 1) from left & right, 
+                                                                # for left & right samples to be fully included in spectrogram
+  hop_length = math.floor(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
 elif args.spec_type == "cqt":
   print("Not yet implemented.")
   exit()
 elif args.spec_type == "mel":
   num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
+  num_hop_samples_per_square -= 2 * (args.samples_per_dft - 1)  # Also subtract two (DFT - 1) from left & right, 
+                                                                # for left & right samples to be fully included in spectrogram
   hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
 
 # Choose datatype (hard-coded, sorry)
-dtype = None
-if args.dtype == "int8":
-  dtype = np.int8
-elif args.dtype == "int16":
-  dtype = np.int16
-elif args.dtype == "int32":
-  dtype = np.int32
-elif args.dtype == "fp8":
-  dtype = np.float8
-elif args.dtype == "fp16":
-  dtype = np.float16
-elif args.dtype == "fp32":
-  dtype = np.float32
-else:
-  print("Invalid argument \'dtype\'!")
-  exit()
+dtype = np.dtype(args.dtype).type
 
 # Run the noise integration separately from the rest of the dataset
 # Notes: noise gen preserves sample rate of digit, resamples noise
@@ -78,13 +71,24 @@ for subdir, dirs, files in os.walk(digits_folder):
       # ignore the txt file
       if file_extension == ".wav":
         # read wav
-        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)       
+        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)    
+        # plt.plot(audio_data)
+        # plt.show()
+        # print(audio_data.size)
+        if args.crop:
+          audio_data = windowing.crop(audio_data, args.time, args.sr)
+        # print(audio_data.size)
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
                                                     resolution=args.resolution, hop_length=hop_length, \
                                                     target_dtype=dtype, samples_per_dft=args.samples_per_dft)
+        # print(power.shape)
+        # plt.imshow(power, cmap='hot', interpolation='none')
+        # plt.show()
         # apply windowing (for square image)
-        power = windowing.window(power, audio_data, args.windowing)
-        print(power)
+        if not args.crop:
+          power = windowing.window(power, audio_data, args.windowing)
+        # save as dB power instead of absolute power
+        power_dB = librosa.power_to_db(power, ref=np.max)
         # save np array file
-        np.save(os.path.join(images_folder, (file_name + ".npy")), power)
+        np.save(os.path.join(images_folder, (file_name + ".npy")), power_dB)
