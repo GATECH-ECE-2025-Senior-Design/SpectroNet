@@ -1,0 +1,26 @@
+import os
+import spectrogram as spec
+import numpy as np
+
+# get folder paths
+current_directory = os.path.dirname(os.path.realpath(__file__))
+datasets_folder = images_folder = os.path.join(current_directory, "..", "datasets")
+digits_folder = os.path.join(datasets_folder, "digits")
+
+# make images folder
+images_folder = os.path.join(datasets_folder, "images")
+os.makedirs(images_folder, exist_ok=True)
+
+# TODO: Add runtime arguments for bins, hop size, quantization, etc. -- currently hard-coded
+# Also parameterize the number of speakers/samples to process, currently takes a very long time to process all samples
+
+# walk the Audio MNIST dataset, no background noise for now
+for subdir, dirs, files in os.walk(digits_folder):
+    for file in files:
+      file_name, file_extension = os.path.splitext(file)
+      # ignore the txt file
+      if file_extension == ".wav":
+         audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=6000, target_dtype=np.float32)
+         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=6000, spec_type="cqt", num_bins=100, hop_length=32)
+         np.save(os.path.join(images_folder, (file_name + ".npy")), power)
+         
