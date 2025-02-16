@@ -30,7 +30,7 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
 
   # resample to target sample rate if sample rates are different
   if target_sample_rate != sample_rate:
-      audio_data = resample_poly(audio_data, target_sample_rate, sample_rate)
+    audio_data = resample_poly(audio_data, target_sample_rate, sample_rate)
 
   samples_min = round(time_min * target_sample_rate) # minimum number of samples given minimum time
   if len(audio_data) < samples_min:
