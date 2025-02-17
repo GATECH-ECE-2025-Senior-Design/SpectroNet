@@ -18,12 +18,16 @@ def window(power: np.ndarray, amplitude: np.ndarray, algorithm: str) -> np.ndarr
         Maybe a rolling average for power in some bin, or amplitude reaching some value, etc.
         Make sure it works, test it!
   """
-  if algorithm == "end": # keep the rightmost pixels of the image ** this is temporary
-    return power[:, -power.shape[0]:]
-  elif algorithm == "mid": # keep the middle pixels of the image ** this is temporary
+  if algorithm == "start": # keep the leftmost pixels of the image ** this is not a "real" algorithm
+    return power[:, :power.shape[0]]
+  elif algorithm == "mid": # keep the middle pixels of the image ** this is not a "real" algorithm
     height, width = power.shape
-    start_col = (width - height) // 2
+    start_col = math.floor((width - height) / 2)
     return power[:, start_col:start_col+height]
+  elif algorithm == "end": # keep the rightmost pixels of the image ** this is not a "real" algorithm
+        return power[:, -power.shape[0]:]
+  elif algorithm == "roll_power": # window based on a rolling average of power at fundamental frequency bins
+    return power
   else:
     print("Invalid argument for windowing!")
     exit()
