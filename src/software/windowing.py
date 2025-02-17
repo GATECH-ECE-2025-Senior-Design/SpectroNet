@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import sys
 
 def window(power: np.ndarray, amplitude: np.ndarray, algorithm: str) -> np.ndarray:
   """
@@ -46,41 +45,49 @@ def crop(audio_data: np.ndarray, time: float, sr: int) -> np.ndarray:
   """
   audio_data_sq = audio_data ** 2 # square audio data to make all positive (also bias towards higher amplitudes)
   audio_data_sq_roll = np.convolve(audio_data_sq, np.ones(100), 'valid') / 100 # 100 sample sliding window
-  crop_cond = np.max(audio_data_sq_roll) / 10
+  crop_cond = np.max(audio_data_sq_roll) / 10 # crop once 1/10th of max amplitude is reached
+
+  # crop indices, note that each sample of the rolling avg is indexed 50 behind the respective index in the audio data
   left_crop_idx = 0
   right_crop_idx = audio_data_sq_roll.size - 1
 
+  # find left side cutoff
   while True:
-    if audio_data_sq_roll[left_crop_idx] > crop_cond: # arbitrary cutoff
+    if audio_data_sq_roll[left_crop_idx] > crop_cond:
       break
     left_crop_idx += 1
     if left_crop_idx >= audio_data_sq_roll.size:
-      np.set_printoptions(threshold=sys.maxsize)
-      print(audio_data_sq_roll)
       print("uh oh")
       exit()
 
+  # find right side cutoff
   while True:
-    if audio_data_sq_roll[right_crop_idx] > crop_cond: # arbitrary cutoff
+    if audio_data_sq_roll[right_crop_idx] > crop_cond:
       break
     right_crop_idx -= 1
     if right_crop_idx < 0:
       print("oh no")
       exit()
 
+  # amount of time to still include before/after the crop condition
   slack_time = 0.1
   slack_samples = round(slack_time * sr)
-  left_crop = left_crop_idx + 50 - slack_samples # slack_samples to the left of the (middle of) left crop window
+
+  # slack_samples to the left of the (middle of) left crop window
+  left_crop = left_crop_idx + 50 - slack_samples
   if left_crop < 0:
     left_crop = 0
-  right_crop = right_crop_idx + 50 + slack_samples # slack_samples to the right of the (middle of) right crop window
+
+  # slack_samples to the right of the (middle of) right crop window
+  right_crop = right_crop_idx + 50 + slack_samples
   if right_crop >= audio_data.size:
     right_crop = audio_data.size - 1
 
-  audio_data = audio_data[left_crop : right_crop] # 100 samples left, 100 samples right of trigger
-  # print((left_crop_idx, right_crop_idx))
-  samples_required = time*sr
+  # 100 samples left, 100 samples right of trigger
+  audio_data = audio_data[left_crop : right_crop]
+  samples_required = time * sr
+
+  # zero pad left & right uniformly
   zero_pad_left = np.zeros(math.ceil((samples_required - audio_data.size) / 2))
   zero_pad_right = np.zeros(math.floor((samples_required - audio_data.size) / 2))
-
   return np.concatenate((zero_pad_left, audio_data, zero_pad_right))

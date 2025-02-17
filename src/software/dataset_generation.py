@@ -1,12 +1,11 @@
-import os
 import spectrogram as spec
 import numpy as np
-import argparse
 import noise_integration
 import windowing
-import math
-import matplotlib.pyplot as plt
+import argparse
 import librosa
+import math
+import os
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -33,28 +32,36 @@ parser.add_argument('--noise_samples', type=int, default=1, help="Define number 
 parser.add_argument('--samples_per_dft', type=int, default=256, help="Number of samples used for each DFT.")
 args = parser.parse_args()
 
-#TODO:  Maybe parameterize the number of speakers to generate spectrograms for? 
+# TODO: Maybe parameterize the number of speakers to generate spectrograms for? 
 #       Spec generation currently takes a long time.
 
 num_samples_per_square = args.time * args.sr # total number of samples contained by a square spectrogram
 hop_length = 0 # calculate below
 
-# Determine hop length based on time parameter
+# determine hop length based on time parameter
 if args.spec_type == "simple":
-  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
-  # num_hop_samples_per_square -= 2 * (args.samples_per_dft - 1)  # Also subtract two (DFT - 1) from left & right, 
-                                                                # for left & right samples to be fully included in spectrogram
-  hop_length = math.floor(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
+
+  # total number of samples minus the first dft
+  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft
+
+  # calculate hop length to cover remaining samples with remaining DFTs
+  # floor rounding could cause a slightly wider than square image, if so just chop off first/last couple DFTs.
+  hop_length = math.floor(num_hop_samples_per_square / (args.resolution - 1))
+
 elif args.spec_type == "cqt":
   print("Not yet implemented.")
   exit()
+
 elif args.spec_type == "mel":
-  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft # total number of samples minus the first dft
-  num_hop_samples_per_square -= 2 * (args.samples_per_dft - 1)  # Also subtract two (DFT - 1) from left & right, 
-                                                                # for left & right samples to be fully included in spectrogram
-  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
   
-# Choose datatype (hard-coded, sorry)
+  # total number of samples minus the first dft
+  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft
+
+  # calculate hop length to cover remaining samples with remaining DFTs
+  # somehow ceil rounding doesn't overshoot the hop length??
+  hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1))
+
+# get datatype argument in usable form
 dtype = np.dtype(args.dtype).type
 
 # Run the noise integration separately from the rest of the dataset
@@ -72,23 +79,24 @@ for subdir, dirs, files in os.walk(digits_folder):
       if file_extension == ".wav":
         # read wav
         audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)    
-        # plt.plot(audio_data)
-        # plt.show()
-        # print(audio_data.size)
+        # apply cropping if specified
         if args.crop:
           audio_data = windowing.crop(audio_data, args.time, args.sr)
-        # print(audio_data.size)
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
                                                     resolution=args.resolution, hop_length=hop_length, \
                                                     target_dtype=dtype, samples_per_dft=args.samples_per_dft)
-        # print(power.shape)
-        # plt.imshow(power, cmap='hot', interpolation='none')
-        # plt.show()
-        # apply windowing (for square image)
+        
+        # apply windowing (for a square image)
         if not args.crop:
           power = windowing.window(power, audio_data, args.windowing)
+        else:
+          # cropping might produce slightly wide images, just crop the sides off
+          print(power.shape)
+          power = windowing.window(power, audio_data, "mid")
+
         # save as dB power instead of absolute power
         power_dB = librosa.power_to_db(power, ref=np.max)
+
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power_dB)
