@@ -40,7 +40,6 @@ ax[0].grid(True)
 bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, 
                                        hop_length=hop_length, target_dtype=target_dtype, samples_per_dft=samples_per_dft)
 
-print(f"Spectrogram resolution: {power.shape}")
 power_dB = librosa.power_to_db(power, ref=np.max)
 
 # Plot the spectrogram on the second subplot
