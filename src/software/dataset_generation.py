@@ -36,7 +36,7 @@ args = parser.parse_args()
 #TODO:  Maybe parameterize the number of speakers to generate spectrograms for? 
 #       Spec generation currently takes a long time.
 
-num_samples_per_square = args.time * args.sr # total number of samples contained by square spectrogram
+num_samples_per_square = args.time * args.sr # total number of samples contained by a square spectrogram
 hop_length = 0 # calculate below
 
 # Determine hop length based on time parameter
@@ -53,7 +53,7 @@ elif args.spec_type == "mel":
   num_hop_samples_per_square -= 2 * (args.samples_per_dft - 1)  # Also subtract two (DFT - 1) from left & right, 
                                                                 # for left & right samples to be fully included in spectrogram
   hop_length = math.ceil(num_hop_samples_per_square / (args.resolution - 1)) # calculate hop length to cover specified time
-
+  
 # Choose datatype (hard-coded, sorry)
 dtype = np.dtype(args.dtype).type
 

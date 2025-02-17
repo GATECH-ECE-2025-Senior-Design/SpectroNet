@@ -84,7 +84,3 @@ def crop(audio_data: np.ndarray, time: float, sr: int) -> np.ndarray:
   zero_pad_right = np.zeros(math.floor((samples_required - audio_data.size) / 2))
 
   return np.concatenate((zero_pad_left, audio_data, zero_pad_right))
-
-########
-# TEST #
-########
