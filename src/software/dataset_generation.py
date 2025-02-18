@@ -6,6 +6,8 @@ import argparse
 import librosa
 import math
 import os
+# debug
+# import matplotlib.pyplot as plt
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -25,7 +27,7 @@ parser.add_argument('--windowing', type=str, default="mid", help="The algorithm 
 parser.add_argument('--sr', type=int, default=8000, help="Define sample rate of the audio signal.")
 parser.add_argument('--spec_type', type=str, default="simple", help="Define which spectrogram type is generated.")
 parser.add_argument('--resolution', type=int, default=96, help="Define resolution (square) of the spectrogram.")
-parser.add_argument('--dtype', type=str, default="int16", help="Define datatype of the audio/spectrogram.")
+parser.add_argument('--dtype', type=str, default="float32", help="Define datatype of the audio/spectrogram.")
 parser.add_argument('--time', type=float, default=1, help="Define the time period that is included in a spectrogram.")
 parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
 parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
@@ -49,8 +51,13 @@ if args.spec_type == "simple":
   hop_length = math.floor(num_hop_samples_per_square / (args.resolution - 1))
 
 elif args.spec_type == "cqt":
-  print("Not yet implemented.")
-  exit()
+  
+  # total number of samples minus the first dft
+  num_hop_samples_per_square = num_samples_per_square - args.samples_per_dft
+
+  # calculate hop length to cover remaining samples with remaining DFTs
+  # floor rounding could cause a slightly wider than square image, if so just chop off first/last couple DFTs.
+  hop_length = math.floor(num_hop_samples_per_square / (args.resolution - 1))
 
 elif args.spec_type == "mel":
   
@@ -92,11 +99,14 @@ for subdir, dirs, files in os.walk(digits_folder):
           power = windowing.window(power, audio_data, args.windowing)
         else:
           # cropping might produce slightly wide images, just crop the sides off
-          print(power.shape)
           power = windowing.window(power, audio_data, "mid")
 
         # save as dB power instead of absolute power
         power_dB = librosa.power_to_db(power, ref=np.max)
+
+        # debug
+        # plt.pcolormesh(time[:bins.shape[0]], bins, power_dB, shading='auto')
+        # plt.show()
 
         # save np array file
         np.save(os.path.join(images_folder, (file_name + ".npy")), power_dB)
