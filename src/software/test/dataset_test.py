@@ -11,5 +11,5 @@ images_folder = os.path.join(datasets_folder, "images")
 img_array = np.load(os.path.join(images_folder, '0_25_0.npy'))
 
 # imshow rotates the image for some reason? But this is fine for now
-plt.imshow(img_array)
+plt.imshow(img_array, origin="lower")
 plt.show()
