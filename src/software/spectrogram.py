@@ -108,14 +108,15 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
     # calculate frequency bins
     octave_ratio = 2 ** (1 / bins_per_octave)
     bins = [fmin * (octave_ratio ** i) for i in range(resolution)]
+    bins = np.array(bins, dtype=int)
 
     # calculate time indices (linear)
     time = np.linspace(0, len(audio_data), power.shape[1])
 
   elif spec_type == "mel":
 
-    fmin = 40
-    fmax = 3000
+    fmin = 0
+    fmax = sample_rate // 2
     n_mels = resolution
     hop_length = hop_length
 
