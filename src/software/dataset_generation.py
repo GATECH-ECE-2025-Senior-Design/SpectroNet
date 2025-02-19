@@ -32,6 +32,7 @@ parser.add_argument('--time', type=float, default=1, help="Define the time perio
 parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
 parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
 parser.add_argument('--samples_per_dft', type=int, default=256, help="Number of samples used for each DFT.")
+parser.add_argument('--time_min', type=float, default=0.8, help="The minimum time length for input files, files below this are zero-padded.")
 args = parser.parse_args()
 
 # TODO: Maybe parameterize the number of speakers to generate spectrograms for? 
@@ -85,7 +86,8 @@ for subdir, dirs, files in os.walk(digits_folder):
       # ignore the txt file
       if file_extension == ".wav":
         # read wav
-        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, target_dtype=dtype)    
+        audio_data = spec.read_wav(os.path.join(subdir, file), target_sample_rate=args.sr, \
+                                   target_dtype=dtype, time_min=args.time_min)    
         # apply cropping if specified
         if args.crop:
           audio_data = windowing.crop(audio_data, args.time, args.sr)

@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.signal import find_peaks
 import math
 
 def window(power: np.ndarray, amplitude: np.ndarray, algorithm: str) -> np.ndarray:
@@ -25,9 +26,44 @@ def window(power: np.ndarray, amplitude: np.ndarray, algorithm: str) -> np.ndarr
     start_col = math.floor((width - height) / 2)
     return power[:, start_col:start_col+height]
   elif algorithm == "end": # keep the rightmost pixels of the image ** this is not a "real" algorithm
-        return power[:, -power.shape[0]:]
+    return power[:, -power.shape[0]:]
   elif algorithm == "roll_power": # window based on a rolling average of power at fundamental frequency bins
-    return power
+    # implementation is strange but have to select the important bins manually for now...
+    # ideally, pick bins that cover the fundamental frequencies of voice (100-250 Hz)
+    # this should be very easy to do in hardware
+    # TODO: parameterize the bin range that is used for rolling average
+    selected_bins = power[2:6, :]
+    power_sum = np.sum(selected_bins, axis=0)
+
+    # 96 DFT rolling average of powers in the specified bins
+    power_sum_roll = np.convolve(power_sum, np.ones(96), 'valid') / 96
+
+    # peaks of the rolling average
+    peak_indices, _ = find_peaks(power_sum_roll) # avoid neighboring peaks
+
+    # get highest peak (real world this will just be getting a peak that exceeds some power)
+    # could modify code to return the first peak exceeding some threshold to test
+    peak_heights = power_sum_roll[peak_indices]
+    highest_peak_idx = peak_indices[np.argmax(peak_heights)] + (power.shape[0] // 2) # rolling avg idx is offset from correct idx
+
+    # crop the spectrogram centered at the power peak
+    start_idx = highest_peak_idx - (power.shape[0] // 2)
+    end_idx = start_idx + power.shape[0]
+ 
+    # check for out of bounds
+    if start_idx < 0:
+      # this is not a good outcome
+      print("Start index for \'roll_power\' windowing is below zero! Setting the start index to zero.")
+      start_idx = 0
+      end_idx = power.shape[0]
+    elif end_idx >= power.shape[1]:
+      # this is not a good outcome either
+      print("End index for \'roll_power\' windowing is past the end of the spectrogram! Setting the end index to the end.")
+      end_idx = power.shape[1] - 1
+      start_idx = end_idx - power.shape[0]
+
+    return power[:, start_idx:end_idx]
+
   else:
     print("Invalid argument for windowing!")
     exit()

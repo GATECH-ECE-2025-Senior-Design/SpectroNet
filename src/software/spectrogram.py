@@ -4,6 +4,7 @@ from scipy.signal import resample_poly
 import numpy as np
 import librosa
 import warnings
+import math
 
 # block out librosa warning for CQT
 warnings.filterwarnings("ignore", category=UserWarning, module="librosa")
@@ -35,8 +36,9 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
   # if the audio data is too small in time length, zero-pad the start
   samples_min = round(time_min * target_sample_rate) # min number of samples given min time
   if len(audio_data) < samples_min:
-    zero_pad = np.zeros(samples_min - len(audio_data)) # create min number of extra samples
-    audio_data = np.concatenate((zero_pad, audio_data)) # zero pad before the audio sample
+    # TODO: maybe add an option to pad with gaussian white noise?
+    zero_pad = np.zeros((samples_min - len(audio_data)) // 2) # create min number of extra samples
+    audio_data = np.concatenate((zero_pad, audio_data, zero_pad)) # zero pad before the audio sample
 
   # normalize based on peak amplitude
   amp_max_abs = max(abs(np.min(audio_data)), np.max(audio_data))

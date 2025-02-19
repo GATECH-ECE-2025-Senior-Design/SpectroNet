@@ -23,7 +23,7 @@ resolution = 96
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
                                               # can change this path to test different samples
-audio_data = read_wav(os.path.join(current_dir, "..", "..", "datasets", "digits", "38", "8_38_4.wav"), \
+audio_data = read_wav(os.path.join(current_dir, "..", "..", "datasets", "digits", "38", "5_38_4.wav"), \
                       target_sample_rate=sample_rate, target_dtype=target_dtype, time_min=time, normalize=normalize)
 
 audio_data = crop(audio_data, time=time, sr=sample_rate)
