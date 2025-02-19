@@ -9,19 +9,21 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from spectrogram import spectrogram_choice
 from spectrogram import read_wav
 from windowing import crop
+from windowing import window
 
 # change these parameters
 spec_type = "mel"
 sample_rate = 8000
-target_dtype = np.int32
+target_dtype = np.float32
 time = 0.8
 normalize = 1023
 hop_length = 54
-samples_per_dft = 256
+samples_per_dft = 384
+resolution = 96
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
                                               # can change this path to test different samples
-audio_data = read_wav(os.path.join(current_dir, "..", "..", "datasets", "digits", "38", "4_38_4.wav"), \
+audio_data = read_wav(os.path.join(current_dir, "..", "..", "datasets", "digits", "38", "8_38_4.wav"), \
                       target_sample_rate=sample_rate, target_dtype=target_dtype, time_min=time, normalize=normalize)
 
 audio_data = crop(audio_data, time=time, sr=sample_rate)
@@ -37,13 +39,18 @@ ax[0].set_ylabel('Amplitude')
 ax[0].grid(True)
 
 # Calculate the spectrogram
-bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, 
-                                       hop_length=hop_length, target_dtype=target_dtype, samples_per_dft=samples_per_dft)
+bins, time, power = spectrogram_choice(audio_data, sample_rate=sample_rate, spec_type=spec_type, \
+                                       hop_length=hop_length, target_dtype=target_dtype, \
+                                       samples_per_dft=samples_per_dft, resolution=resolution)
+
+# Used with crop setting
+power = window(power, None, "mid")
 
 power_dB = librosa.power_to_db(power, ref=np.max)
 
 # Plot the spectrogram on the second subplot
-c = ax[1].pcolormesh(time, bins, power_dB, shading='auto')
+                    # cropping time index so it plots correctly
+c = ax[1].pcolormesh(time[:bins.shape[0]], bins, power_dB, shading='auto')
 ax[1].set_title(f'Spectrogram: {spec_type}')
 ax[1].set_xlabel('Time [s]')
 ax[1].set_ylabel('Bin Label')
