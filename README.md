@@ -3,7 +3,5 @@ If you would like to see all of the steps below in a Colab notebook with everyth
 
 > **Note:** You have to run **Steps 1-4** on your own to connect to your own Google Drive account that has the `images.zip` file with all of the `.npy` spectrograms to use.
 
-![Alt Text](images/my-image.png)
-
-![Alt Text](READme_images/Screenshot 2025-02-22 at 6.28.02 PM.png)
+![Alt Text](READme_images/Screenshot-2025-02-22-at-6.28.02.png)
 
