@@ -37,7 +37,7 @@ If the above output is the same as what you have in colab, you have correctly se
 Step 4:
 Run the get_npy_files_from_google_drive.py code in a cell in colab to mount your google drive in colab (to access the images.zip currently in your Google Drive). There will be several pop ups asking for Google Drive access:
 
-![Alt Text](READme_images/Screenshot-2025-02-22-at-6.44.52.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-6.44.52.png" width="200">](READme_images/Screenshot-2025-02-22-at-6.44.52.png)
 Click Connect to Drive
 
 ![Alt Text](READme_images/Screenshot-2025-02-22-at-6.45.00.png)
