@@ -183,6 +183,7 @@ Step 11:
 Run plot_training.py to plot 2 graphs ( training vs validation accuracy and training vs validation loss) to note any appreciable change in training vs validation loss and accuracy.
 
 Example plot from the same training run shown in step 10:
+
 [<img src="READme_images/Screenshot-2025-02-22-at-9.28.25.png" width="500">](READme_images/Screenshot-2025-02-22-at-9.28.25.png)
 
 Can move to step 11 now:
