@@ -40,13 +40,13 @@ Run the get_npy_files_from_google_drive.py code in a cell in colab to mount your
 [<img src="READme_images/Screenshot-2025-02-22-at-6.44.52.png" width="500">](READme_images/Screenshot-2025-02-22-at-6.44.52.png)
 Click Connect to Drive
 
-![Alt Text](READme_images/Screenshot-2025-02-22-at-6.45.00.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-6.45.00.png" width="500">](READme_images/Screenshot-2025-02-22-at-6.45.00.png)
 Click the google account that has the google drive containing your images.zip file.
 
-![Alt Text](READme_images/Screenshot-2025-02-22-at-6.45.15.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-6.45.15.png" width="500">](READme_images/Screenshot-2025-02-22-at-6.45.15.png)
 Click continue
 
-![Alt Text](READme_images/Screenshot-2025-02-22-at-6.45.07.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-6.45.07.png" width="500">](READme_images/Screenshot-2025-02-22-at-6.45.07.png)
 Click continue
 
 If you run through the pop-ups as described in the above 4 steps, your colab should be granted access to your Google Drive and you will be able to access your images.zip file.
@@ -87,7 +87,7 @@ If there is any other output than the one shown above (some random spectogram fi
 
 Step 6: 
 Paste in code from check_spectogram_after_load.py into a colab cell. First uncomment out the # %matplotlib inline from the imports and run it - if you don’t uncomment, the spectogram will not show inside a colab cell. This code picks a random spectogram file to show you. If this succeeds, you will be able to see a spectogram like so:
-![Alt Text](READme_images/Screenshot-2025-02-22-at-9.21.32.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-9.21.32.png" width="500">](READme_images/Screenshot-2025-02-22-at-9.21.32.png)
 
 If the spectogram shows up, all file loading has been confirmed to work and you can move onto Step 7.
 
@@ -98,26 +98,19 @@ Correct output:
 Normalized spectrograms: Min 0.0, Max 1.0
 
 If the above output is correct, you can check labels by pasting code in check_label_first_num.py into the next colab cell to see if the extract_label function in extracts_label_loads_spectograms_load_dataset actually worked. Correct output should be something like:
+
 File: 9_19_47.npy → Extracted Label: 9
 File: 5_09_28.npy → Extracted Label: 5
 File: 0_48_15.npy → Extracted Label: 0
 File: 7_38_43.npy → Extracted Label: 7
-File: 8_25_46.npy → Extracted Label: 8
-File: 3_50_17.npy → Extracted Label: 3
-File: 4_13_46.npy → Extracted Label: 4
-File: 0_27_17.npy → Extracted Label: 0
-File: 4_43_9.npy → Extracted Label: 4
-File: 4_37_47.npy → Extracted Label: 4
-File: 5_20_31.npy → Extracted Label: 5
-File: 9_56_10.npy → Extracted Label: 9
-File: 2_51_29.npy → Extracted Label: 2
-File: 7_28_0.npy → Extracted Label: 7
-File: 8_37_26.npy → Extracted Label: 8
-File: 8_59_19.npy → Extracted Label: 8
+
+...
+
 File: 9_57_37.npy → Extracted Label: 9
 File: 0_46_38.npy → Extracted Label: 0
 File: 2_37_28.npy → Extracted Label: 2
 File: 5_27_33.npy → Extracted Label: 5
+
 Class Distribution: Counter({9: 3000, 4: 3000, 3: 3000, 8: 3000, 0: 3000, 1: 3000, 2: 3000, 5: 3000, 7: 3000, 6: 3000})
 
 Basically, the first number of every file should be the label, which should result in exactly 3000 files per spoken number (from 0-9).
@@ -174,9 +167,6 @@ Epoch 3/20
 
 ...
 
-Epoch 17/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 7s 38ms/step - accuracy: 0.9178 - loss: 0.2722 - val_accuracy: 0.8812 - val_loss: 0.3710
-
 Epoch 18/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 11s 57ms/step - accuracy: 0.9189 - loss: 0.2607 - val_accuracy: 0.8966 - val_loss: 0.3312
 
@@ -193,7 +183,7 @@ Step 11:
 Run plot_training.py to plot 2 graphs ( training vs validation accuracy and training vs validation loss) to note any appreciable change in training vs validation loss and accuracy.
 
 Example plot from the same training run shown in step 10:
-![Alt Text](READme_images/Screenshot-2025-02-22-at-9.28.25.png)
+[<img src="READme_images/Screenshot-2025-02-22-at-9.28.25.png" width="500">](READme_images/Screenshot-2025-02-22-at-9.28.25.png)
 
 Can move to step 11 now:
 
