@@ -165,42 +165,23 @@ During training, several spikes in validation loss have been observed, mainly be
 Example training run output:
 Epoch 1/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 23s 43ms/step - accuracy: 0.2440 - loss: 2.7908 - val_accuracy: 0.1994 - val_loss: 2.7909
+
 Epoch 2/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 9s 50ms/step - accuracy: 0.5552 - loss: 1.3790 - val_accuracy: 0.3927 - val_loss: 2.0264
+
 Epoch 3/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 6s 34ms/step - accuracy: 0.6624 - loss: 1.0217 - val_accuracy: 0.6800 - val_loss: 0.9285
-Epoch 4/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 53ms/step - accuracy: 0.7387 - loss: 0.7997 - val_accuracy: 0.7512 - val_loss: 0.7441
-Epoch 5/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 55ms/step - accuracy: 0.7824 - loss: 0.6615 - val_accuracy: 0.7525 - val_loss: 0.7852
-Epoch 6/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 5s 29ms/step - accuracy: 0.7998 - loss: 0.5778 - val_accuracy: 0.6835 - val_loss: 1.0598
-Epoch 7/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 54ms/step - accuracy: 0.8374 - loss: 0.5115 - val_accuracy: 0.7239 - val_loss: 0.9378
-Epoch 8/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 5s 28ms/step - accuracy: 0.8425 - loss: 0.4876 - val_accuracy: 0.7415 - val_loss: 0.8350
-Epoch 9/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 9s 50ms/step - accuracy: 0.8685 - loss: 0.4189 - val_accuracy: 0.7431 - val_loss: 0.8518
-Epoch 10/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 3s 18ms/step - accuracy: 0.8625 - loss: 0.4130 - val_accuracy: 0.7647 - val_loss: 0.7476
-Epoch 11/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 52ms/step - accuracy: 0.8792 - loss: 0.3791 - val_accuracy: 0.8095 - val_loss: 0.5878
-Epoch 12/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 2s 12ms/step - accuracy: 0.8831 - loss: 0.3573 - val_accuracy: 0.8392 - val_loss: 0.4985
-Epoch 13/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 55ms/step - accuracy: 0.8930 - loss: 0.3384 - val_accuracy: 0.8688 - val_loss: 0.3999
-Epoch 14/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 3s 14ms/step - accuracy: 0.8851 - loss: 0.3559 - val_accuracy: 0.8655 - val_loss: 0.4034
-Epoch 15/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 10s 55ms/step - accuracy: 0.9150 - loss: 0.2728 - val_accuracy: 0.8596 - val_loss: 0.4293
-Epoch 16/20
-187/187 ━━━━━━━━━━━━━━━━━━━━ 2s 11ms/step - accuracy: 0.8992 - loss: 0.3041 - val_accuracy: 0.8678 - val_loss: 0.3938
+
+...
 Epoch 17/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 7s 38ms/step - accuracy: 0.9178 - loss: 0.2722 - val_accuracy: 0.8812 - val_loss: 0.3710
+
 Epoch 18/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 11s 57ms/step - accuracy: 0.9189 - loss: 0.2607 - val_accuracy: 0.8966 - val_loss: 0.3312
+
 Epoch 19/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 2s 12ms/step - accuracy: 0.9125 - loss: 0.2726 - val_accuracy: 0.8907 - val_loss: 0.3555
+
 Epoch 20/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 6s 31ms/step - accuracy: 0.9221 - loss: 0.2412 - val_accuracy: 0.8862 - val_loss: 0.3432
 dict_keys(['accuracy', 'loss', 'val_accuracy', 'val_loss'])
