@@ -173,6 +173,7 @@ Epoch 3/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 6s 34ms/step - accuracy: 0.6624 - loss: 1.0217 - val_accuracy: 0.6800 - val_loss: 0.9285
 
 ...
+
 Epoch 17/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 7s 38ms/step - accuracy: 0.9178 - loss: 0.2722 - val_accuracy: 0.8812 - val_loss: 0.3710
 
