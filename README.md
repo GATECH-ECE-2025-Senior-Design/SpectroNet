@@ -128,7 +128,7 @@ If the above outputs are the same/similar to your outputs, you can move onto ste
 
 Step 8:
 Copy and paste the code from data_prerocessing.py into a colab cell and run it. This should split the training and validation data sets into a 80-20 split (80 for training, 20 for validation). Applies data augmentation to the training spectrogram dataset. Normalization to [0, 1] was done in the last line of extracts_label_loads_spectograms_load_dataset.py : 
-# Normalize spectrograms from [-80, 0] to [0,1]
+\# Normalize spectrograms from [-80, 0] to [0,1]
 X = (X + 80) / 80
 
 Correct outputs should be as follows:
@@ -193,6 +193,7 @@ Step 11:
 Run plot_training.py to plot 2 graphs ( training vs validation accuracy and training vs validation loss) to note any appreciable change in training vs validation loss and accuracy.
 
 Example plot from the same training run shown in step 10:
+![Alt Text](READme_images/Screenshot-2025-02-22-at-9.28.25.png)
 
 Can move to step 11 now:
 
