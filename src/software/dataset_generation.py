@@ -6,6 +6,9 @@ import argparse
 import librosa
 import math
 import os
+import matplotlib.pyplot as plt
+import random
+import sys
 
 # get folder paths
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -98,5 +101,42 @@ for subdir, dirs, files in os.walk(digits_folder):
         # save as dB power instead of absolute power
         power_dB = librosa.power_to_db(power, ref=np.max)
 
+        # plt.pcolormesh(time, bins, power_dB, shading='auto')
+        # plt.show()
+        
+        # np.set_printoptions(threshold=np.inf)
+        # print(power_dB)
         # save np array file
+      
+
         np.save(os.path.join(images_folder, (file_name + ".npy")), power_dB)
+
+        """
+                filepath = os.path.join(images_folder, (file_name + ".npy"))
+        # Load the NumPy array from the saved file
+        power_dB = np.load(filepath)
+
+        # Display the spectrogram
+        plt.imshow(power_dB, cmap="inferno", aspect="auto")
+        plt.figure(figsize=(12, 4))
+        plt.axis("off")
+        plt.title(file)
+
+        plt.show()
+        """
+
+        # power_dB2 = np.load(filepath)
+
+
+        # print(power_dB2)
+
+        # sys.exit()
+        # plt.subplot(1, 3, i+1)
+        """
+        
+        plt.title(file)
+        plt.axis("off")
+        # plt.figure(figsize=(12, 4))
+        plt.show()
+        """
+        
