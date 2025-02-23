@@ -72,15 +72,25 @@ Step 5:
 Next, paste in the code from check_bad_spectogram.py into the next colab cell to see if there are any corrupted .npy files. If there is not, the following should be the correct output:
 
 Checked 30000 files.
+
 Unique spectrogram shapes found: {(96, 96)}
+
 0 corrupt files: []
+
 0 all-zero files: []
+
 2_12_15.npy | Shape: (96, 96) | Min: -80.0 | Max: 0.0 | Mean: -65.06060028076172
+
 8_12_25.npy | Shape: (96, 96) | Min: -80.0 | Max: 0.0 | Mean: -67.90231323242188
+
 2_12_11.npy | Shape: (96, 96) | Min: -80.0 | Max: 0.0 | Mean: -65.53494262695312
+
 1_10_22.npy | Shape: (96, 96) | Min: -80.0 | Max: 0.0 | Mean: -63.55265426635742
+
 3_49_24.npy | Shape: (96, 96) | Min: -80.0 | Max: 0.0 | Mean: -65.1098861694336
+
 Contains NaN? False
+
 Contains Inf? False
 
 If there is any other output than the one shown above (some random spectogram file numbers will be shown, but min, max, and mean should all be the same for every spectogram), redo data generation to get uncorrupted .npy files. Otherwise, Neural Net training validation accuracy and loss will suffer. Once the correct outputs for this step happens, move onto step 6.
@@ -100,15 +110,21 @@ Normalized spectrograms: Min 0.0, Max 1.0
 If the above output is correct, you can check labels by pasting code in check_label_first_num.py into the next colab cell to see if the extract_label function in extracts_label_loads_spectograms_load_dataset actually worked. Correct output should be something like:
 
 File: 9_19_47.npy → Extracted Label: 9
+
 File: 5_09_28.npy → Extracted Label: 5
+
 File: 0_48_15.npy → Extracted Label: 0
+
 File: 7_38_43.npy → Extracted Label: 7
 
 ...
 
 File: 9_57_37.npy → Extracted Label: 9
+
 File: 0_46_38.npy → Extracted Label: 0
+
 File: 2_37_28.npy → Extracted Label: 2
+
 File: 5_27_33.npy → Extracted Label: 5
 
 Class Distribution: Counter({9: 3000, 4: 3000, 3: 3000, 8: 3000, 0: 3000, 1: 3000, 2: 3000, 5: 3000, 7: 3000, 6: 3000})
@@ -125,10 +141,15 @@ Copy and paste the code from data_prerocessing.py into a colab cell and run it. 
 X = (X + 80) / 80
 
 Correct outputs should be as follows:
+
 Total Dataset Size: 30000
+
 Train Dataset Size: 24000
+
 Expected Validation Dataset Size: 6000
+
 Validation Batch Shape: (32, 96, 96, 1), Labels: (32,)
+
 Train size: 24000, Batches per epoch: 750
 
 If the above outputs are correct, then can move onto Step 9.
@@ -137,11 +158,17 @@ Step 9:
 Copy and paste code from cnn_structure_setup.py to setup the structure of the CNN for training. The current structure is the same as the kaggle tutorial, but will modify for better training as time progresses. This part will be updated to reflect those changes.
 
 Current structure:
+
 Three Convolutional Layers (Conv2D) → Extracts spatial features from spectrograms
+
 Max Pooling (MaxPooling2D) → Reduces dimensionality, preventing overfitting.
+
 Batch Normalization (BatchNormalization) → Stabilizes training and speeds up convergence.
+
 L2 Regularization (kernel_regularizer=regularizers.l2(0.01)) → Helps prevent overfitting.
+
 Dropout (Dropout(0.5)) → Adds randomness to prevent memorization.
+
 Final Dense Layer with Softmax (Dense(N_CLASSES, activation='softmax')) → Classifies into N_CLASSES.
 
 Used loss='sparse_categorical_crossentropy',  # Matches Example to match the kaggle tutorial  (y is still a vector of integer class labels (0–9), not one-hot vectors). 
@@ -156,6 +183,7 @@ After several attempts at training, validation accuracy ranged from 88% - 91% wh
 During training, several spikes in validation loss have been observed, mainly between epochs 6-12 of the total 20 epochs. Currently working to overcome this issue.
 
 Example training run output:
+
 Epoch 1/20
 187/187 ━━━━━━━━━━━━━━━━━━━━ 23s 43ms/step - accuracy: 0.2440 - loss: 2.7908 - val_accuracy: 0.1994 - val_loss: 2.7909
 
@@ -194,40 +222,54 @@ Copy and paste the code in softmax_prob.py to check the softmax probabilities (c
 Current prediction confidence is around 20%. Working on increasing that further.
 
 Example output from the above training run:
+
 Sample 1 - File: 9_17_26.npy
+
 Predicted Class: 9
+
 Softmax Probabilities: [0.0856 0.0868 0.0856 0.0856 0.0856 0.0858 0.0856 0.0856 0.0856 0.2285]
 
 Sample 2 - File: 1_08_41.npy
+
 Predicted Class: 1
+
 Softmax Probabilities: [0.08575 0.2257  0.08575 0.08575 0.0878  0.0861  0.08575 0.08575 0.08575
  0.0859 ]
 
 Sample 3 - File: 7_06_15.npy
+
 Predicted Class: 7
+
 Softmax Probabilities: [0.08704 0.08636 0.0895  0.0867  0.0864  0.08685 0.08636 0.2155  0.08813
  0.0873 ]
 
 Sample 4 - File: 6_12_12.npy
+
 Predicted Class: 6
+
 Softmax Probabilities: [0.0857  0.0857  0.08575 0.0857  0.08575 0.0857  0.226   0.0857  0.08826
  0.0857 ]
 
 Sample 5 - File: 8_02_35.npy
+
 Predicted Class: 8
+
 Softmax Probabilities: [0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.2319 0.0853]
 
 To export model as a .pb file, put the following in the colab cell after training and run it:
 
 import shutil
+
 from google.colab import files
 
 
 \# Export the model as a SavedModel format (.pb)
+
 model.export("/content/spectrogram_model")
 
 
 \# Zip the model directory
+
 shutil.make_archive("/content/spectrogram_model", 'zip', "/content/spectrogram_model")
 
 
