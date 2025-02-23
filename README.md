@@ -192,3 +192,54 @@ Step 11:
 Run plot_training.py to plot 2 graphs ( training vs validation accuracy and training vs validation loss) to note any appreciable change in training vs validation loss and accuracy.
 
 Example plot from the same training run shown in step 10:
+
+Can move to step 11 now:
+
+Step 11:
+Copy and paste the code in softmax_prob.py to check the softmax probabilities (confidence of the model during prediction). The code loads and processes the spectrograms from the images folder loaded from google drive, converts the list to tensorflow tensor, and gets the model logits to produce softmax probabilities to check model prediction confidence.
+
+Current prediction confidence is around 20%. Working on increasing that further.
+
+Example output from the above training run:
+Sample 1 - File: 9_17_26.npy
+Predicted Class: 9
+Softmax Probabilities: [0.0856 0.0868 0.0856 0.0856 0.0856 0.0858 0.0856 0.0856 0.0856 0.2285]
+
+Sample 2 - File: 1_08_41.npy
+Predicted Class: 1
+Softmax Probabilities: [0.08575 0.2257  0.08575 0.08575 0.0878  0.0861  0.08575 0.08575 0.08575
+ 0.0859 ]
+
+Sample 3 - File: 7_06_15.npy
+Predicted Class: 7
+Softmax Probabilities: [0.08704 0.08636 0.0895  0.0867  0.0864  0.08685 0.08636 0.2155  0.08813
+ 0.0873 ]
+
+Sample 4 - File: 6_12_12.npy
+Predicted Class: 6
+Softmax Probabilities: [0.0857  0.0857  0.08575 0.0857  0.08575 0.0857  0.226   0.0857  0.08826
+ 0.0857 ]
+
+Sample 5 - File: 8_02_35.npy
+Predicted Class: 8
+Softmax Probabilities: [0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.0853 0.2319 0.0853]
+
+To export model as a .pb file, put the following in the colab cell after training and run it:
+
+import shutil
+from google.colab import files
+
+
+\# Export the model as a SavedModel format (.pb)
+model.export("/content/spectrogram_model")
+
+
+\# Zip the model directory
+shutil.make_archive("/content/spectrogram_model", 'zip', "/content/spectrogram_model")
+
+
+print("Model zipped successfully!")
+
+
+\# Download the zipped model
+files.download("/content/spectrogram_model.zip")
