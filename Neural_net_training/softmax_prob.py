@@ -3,16 +3,13 @@ import tensorflow as tf
 import os
 import random
 
-# Define spectrogram folder path
-spectrogram_folder = "/content/spectrogram_data/images"
-
 # Get a list of all spectrogram `.npy` files
 spectrogram_files = [os.path.join(spectrogram_folder, f) for f in os.listdir(spectrogram_folder) if f.endswith(".npy")]
 
 # Select 5 random spectrograms
 random_samples = random.sample(spectrogram_files, 5)
 
-# ✅ Load and preprocess spectrograms
+# Load and preprocess spectrograms
 spectrograms = []
 for file in random_samples:
     spectrogram = np.load(file)  # Load file

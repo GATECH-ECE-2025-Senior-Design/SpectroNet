@@ -15,31 +15,33 @@ def extract_label(filename):
     match = re.match(r'(\d+)_(\d+)_(\d+)\.npy', filename)  # Match full filename pattern
     if match:
         first_num = int(match.group(1))  # Take only the first number (X)
-        return first_num
-    return None  # Return None for invalid cases
+        speaker = int(match.group(2))
+        return first_num, speaker
+    return None, None  # Return None for invalid cases
 
 
 # Function to load spectrograms
 def load_spectrograms(folder):
-    spectrograms, labels = [], []
+    spectrograms, labels, speakers = [], [], []
 
     for file in os.listdir(folder):
         if file.endswith(".npy"):
             filepath = os.path.join(folder, file)
-            label = extract_label(file)
+            label, speaker = extract_label(file)
 
-            if label is None or not (0 <= label < 10):
+            if label is None or not (0 <= label < N_CLASSES):
                 continue
 
             spectrogram = np.load(filepath)
             spectrogram = np.expand_dims(spectrogram, axis=-1)  # Add channel dim
             spectrograms.append(spectrogram)
             labels.append(label)
+            speakers.append(speaker)
 
-    return np.array(spectrograms, dtype=np.float32), np.array(labels, dtype=np.int32)
+    return np.array(spectrograms, dtype=np.float32), np.array(labels, dtype=np.int32), np.array(speakers, dtype=np.int32)
 
 # 
-X, y = load_spectrograms(spectrogram_folder)
+X, y, speaker_ids = load_spectrograms(spectrogram_folder)
 
 # One-hot encode labels
 # y = tf.keras.utils.to_categorical(y, num_classes=N_CLASSES)
@@ -47,3 +49,4 @@ X, y = load_spectrograms(spectrogram_folder)
 # Normalize spectrograms from [-80, 0] to [0,1]
 X = (X + 80) / 80
 print(f"Normalized spectrograms: Min {np.min(X)}, Max {np.max(X)}")
+print("Unique speakers:", np.unique(speaker_ids))

@@ -1,4 +1,6 @@
 import tensorflow as tf
+import numpy as np
+from sklearn.model_selection import train_test_split
 
 # Define Preprocessing Function
 def prepare(ds, augment=False):
@@ -19,21 +21,33 @@ def prepare(ds, augment=False):
 
     return ds
 
-# Ensure `train_size` is defined
-train_size = int(0.8 * len(X))  # 80% training, 20% validation
+# Get unique speaker IDs
+unique_speakers = np.unique(speaker_ids)
 
-# Convert X, y to TensorFlow dataset
-dataset = tf.data.Dataset.from_tensor_slices((X, y))
-dataset = dataset.shuffle(len(X))
+# Split speakers into training (80%) and validation (20%) groups
+train_speakers, val_speakers = train_test_split(unique_speakers, test_size=0.2, random_state=42)
 
-# Apply batching AFTER splitting
-train_dataset = dataset.take(train_size).batch(BATCH_SIZE).repeat()  # Training dataset
-valid_dataset = dataset.skip(train_size).batch(BATCH_SIZE)  # Validation dataset
+
+# Create masks to select samples based on speaker IDs
+train_mask = np.isin(speaker_ids, train_speakers)
+val_mask = np.isin(speaker_ids, val_speakers)
+
+# Split the data using the masks
+X_train, y_train = X[train_mask], y[train_mask]
+X_val, y_val = X[val_mask], y[val_mask]
 
 # Check dataset sizes
 print(f"Total Dataset Size: {len(X)}")
-print(f"Train Dataset Size: {train_size}")
-print(f"Expected Validation Dataset Size: {len(X) - train_size}")
+print(f"Train Dataset Size: {len(X_train)}")
+print(f"Expected Validation Dataset Size: {len(X_val)}")
+
+# Convert X, y to TensorFlow dataset
+# --- Create tf.data.Datasets ---
+train_dataset = tf.data.Dataset.from_tensor_slices((X_train, y_train))
+train_dataset = train_dataset.shuffle(len(X_train)).batch(BATCH_SIZE).repeat()
+
+valid_dataset = tf.data.Dataset.from_tensor_slices((X_val, y_val))
+valid_dataset = valid_dataset.batch(BATCH_SIZE)
 
 # Apply Preprocessing (Augmentation for Training Only)
 train_dataset = prepare(train_dataset, augment=True)  # Augmentation applied

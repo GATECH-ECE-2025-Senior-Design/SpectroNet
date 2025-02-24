@@ -28,3 +28,6 @@ for file in test_files:
     print(f"File: {file} → Extracted Label: {label}")
 
 print("Class Distribution:", collections.Counter(y))
+
+# Check speaker distribution
+print("Speaker Distribution:", collections.Counter(speaker_ids))
