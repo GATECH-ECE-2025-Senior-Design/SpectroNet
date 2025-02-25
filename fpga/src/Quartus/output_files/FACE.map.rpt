@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FACE
-Sun Feb  9 18:23:59 2025
+Tue Feb 25 16:35:03 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -10,22 +10,47 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis IP Cores Summary
-  6. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component
-  7. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated
-  8. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p
-  9. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p
- 10. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram
- 11. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp
- 12. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10
- 13. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp
- 14. Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13
- 15. Parameter Settings for User Entity Instance: oneshot_i2c:inst2|i2c_master:inst
- 16. Parameter Settings for User Entity Instance: pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i
- 17. Parameter Settings for User Entity Instance: adc_interface:inst3
- 18. Parameter Settings for User Entity Instance: adc_interface:inst3|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component
- 19. Parameter Settings for User Entity Instance: adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component
- 20. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis IP Cores Summary
+ 10. State Machine - |FACE|pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state
+ 11. State Machine - |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|state
+ 12. State Machine - |FACE|oneshot_i2c:inst2|i2c_master:inst|state
+ 13. Registers Protected by Synthesis
+ 14. Registers Removed During Synthesis
+ 15. Removed Registers Triggering Further Register Optimizations
+ 16. General Register Statistics
+ 17. Inverted Register Statistics
+ 18. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 19. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i
+ 20. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_0
+ 21. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_1
+ 22. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_2
+ 23. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_3
+ 24. Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_4
+ 25. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component
+ 26. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated
+ 27. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p
+ 28. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p
+ 29. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram
+ 30. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp
+ 31. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10
+ 32. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp
+ 33. Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13
+ 34. Parameter Settings for User Entity Instance: oneshot_i2c:inst2|i2c_master:inst
+ 35. Parameter Settings for User Entity Instance: oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3
+ 36. Parameter Settings for User Entity Instance: pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i
+ 37. Parameter Settings for User Entity Instance: adc_interface:inst4
+ 38. Parameter Settings for User Entity Instance: adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component
+ 39. Parameter Settings for User Entity Instance: adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component
+ 40. Parameter Settings for User Entity Instance: LPM_CONSTANT:inst3
+ 41. lpm_shiftreg Parameter Settings by Entity Instance
+ 42. dcfifo Parameter Settings by Entity Instance
+ 43. Post-Synthesis Netlist Statistics for Top Partition
+ 44. Elapsed Time Per Partition
+ 45. Analysis & Synthesis Messages
 
 
 
@@ -49,22 +74,27 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Sun Feb  9 18:23:59 2025              ;
-; Quartus Prime Version       ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
-; Revision Name               ; FACE                                           ;
-; Top-level Entity Name       ; FACE                                           ;
-; Family                      ; Cyclone V                                      ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                      ;
-; Total registers             ; N/A until Partition Merge                      ;
-; Total pins                  ; N/A until Partition Merge                      ;
-; Total virtual pins          ; N/A until Partition Merge                      ;
-; Total block memory bits     ; N/A until Partition Merge                      ;
-; Total PLLs                  ; N/A until Partition Merge                      ;
-; Total DLLs                  ; N/A until Partition Merge                      ;
-+-----------------------------+------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Tue Feb 25 16:35:03 2025          ;
+; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
+; Revision Name                   ; FACE                                           ;
+; Top-level Entity Name           ; FACE                                           ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 141                                            ;
+; Total pins                      ; 55                                             ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 64                                             ;
+; Total DSP Blocks                ; 0                                              ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 1                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -163,11 +193,139 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-16        ;   0.0%      ;
 +----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                          ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------------------------------------+----------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                                               ; Library  ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------------------------------------+----------+
+; ../verilog/adc_interface.sv      ; yes             ; User SystemVerilog HDL File        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv          ;          ;
+; ../verilog/HEX_DISP.vhd          ; yes             ; User VHDL File                     ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/HEX_DISP.vhd              ;          ;
+; HEX_DISP_6.bdf                   ; yes             ; User Block Diagram/Schematic File  ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/HEX_DISP_6.bdf            ;          ;
+; i2c_oneshot_ctrl.vhd             ; yes             ; User VHDL File                     ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd      ;          ;
+; i2c_master.vhd                   ; yes             ; User VHDL File                     ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_master.vhd            ;          ;
+; oneshot_i2c.bdf                  ; yes             ; User Block Diagram/Schematic File  ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/oneshot_i2c.bdf           ;          ;
+; FACE.bdf                         ; yes             ; User Block Diagram/Schematic File  ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/FACE.bdf                  ;          ;
+; adc_shiftreg.v                   ; yes             ; User Wizard-Generated File         ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v            ;          ;
+; ADC_FIFO.vhd                     ; yes             ; User Wizard-Generated File         ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd              ;          ;
+; pll_main.v                       ; yes             ; User Wizard-Generated File         ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v                ; pll_main ;
+; pll_main/pll_main_0002.v         ; yes             ; User Verilog HDL File              ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v  ; pll_main ;
+; altera_pll.v                     ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v                                          ;          ;
+; altera_pll_dps_lcell_comb.v      ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll_dps_lcell_comb.v                           ;          ;
+; altera_cyclonev_pll.v            ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v                                 ;          ;
+; lpm_shiftreg.tdf                 ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_shiftreg.tdf                                      ;          ;
+; lpm_constant.inc                 ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_constant.inc                                      ;          ;
+; dffeea.inc                       ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/dffeea.inc                                            ;          ;
+; aglobal231.inc                   ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/aglobal231.inc                                        ;          ;
+; dcfifo.tdf                       ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/dcfifo.tdf                                            ;          ;
+; lpm_counter.inc                  ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_counter.inc                                       ;          ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_add_sub.inc                                       ;          ;
+; altdpram.inc                     ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altdpram.inc                                          ;          ;
+; a_graycounter.inc                ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/a_graycounter.inc                                     ;          ;
+; a_fefifo.inc                     ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/a_fefifo.inc                                          ;          ;
+; a_gray2bin.inc                   ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/a_gray2bin.inc                                        ;          ;
+; dffpipe.inc                      ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/dffpipe.inc                                           ;          ;
+; alt_sync_fifo.inc                ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/alt_sync_fifo.inc                                     ;          ;
+; lpm_compare.inc                  ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_compare.inc                                       ;          ;
+; altsyncram_fifo.inc              ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altsyncram_fifo.inc                                   ;          ;
+; db/dcfifo_1rk1.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf        ;          ;
+; db/a_graycounter_7g6.tdf         ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/a_graycounter_7g6.tdf  ;          ;
+; db/a_graycounter_3ub.tdf         ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/a_graycounter_3ub.tdf  ;          ;
+; db/altsyncram_6ia1.tdf           ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/altsyncram_6ia1.tdf    ;          ;
+; db/alt_synch_pipe_b9l.tdf        ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_b9l.tdf ;          ;
+; db/dffpipe_su8.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dffpipe_su8.tdf        ;          ;
+; db/alt_synch_pipe_c9l.tdf        ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_c9l.tdf ;          ;
+; db/dffpipe_tu8.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dffpipe_tu8.tdf        ;          ;
+; db/cmpr_ru5.tdf                  ; yes             ; Auto-Generated Megafunction        ; C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/cmpr_ru5.tdf           ;          ;
+; lpm_constant.tdf                 ; yes             ; Megafunction                       ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_constant.tdf                                      ;          ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------------------------------------------+----------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimate of Logic utilization (ALMs needed) ; 96             ;
+;                                             ;                ;
+; Combinational ALUT usage for logic          ; 150            ;
+;     -- 7 input functions                    ; 4              ;
+;     -- 6 input functions                    ; 24             ;
+;     -- 5 input functions                    ; 17             ;
+;     -- 4 input functions                    ; 42             ;
+;     -- <=3 input functions                  ; 63             ;
+;                                             ;                ;
+; Dedicated logic registers                   ; 141            ;
+;                                             ;                ;
+; I/O pins                                    ; 55             ;
+; Total MLAB memory bits                      ; 0              ;
+; Total block memory bits                     ; 64             ;
+;                                             ;                ;
+; Total DSP Blocks                            ; 0              ;
+;                                             ;                ;
+; Total PLLs                                  ; 1              ;
+;     -- Fractional PLLs                      ; 1              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; AUD_BCLK~input ;
+; Maximum fan-out                             ; 82             ;
+; Total fan-out                               ; 1221           ;
+; Average fan-out                             ; 2.89           ;
++---------------------------------------------+----------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                               ;
++--------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------------+--------------+
+; Compilation Hierarchy Node                       ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                         ; Entity Name              ; Library Name ;
++--------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------------+--------------+
+; |FACE                                            ; 150 (0)             ; 141 (0)                   ; 64                ; 0          ; 55   ; 0            ; |FACE                                                                                                                                       ; FACE                     ; work         ;
+;    |HEX_DISP_6:inst5|                            ; 28 (0)              ; 17 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5                                                                                                                      ; HEX_DISP_6               ; work         ;
+;       |HEX_DISP:inst1|                           ; 7 (7)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5|HEX_DISP:inst1                                                                                                       ; HEX_DISP                 ; work         ;
+;       |HEX_DISP:inst2|                           ; 7 (7)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5|HEX_DISP:inst2                                                                                                       ; HEX_DISP                 ; work         ;
+;       |HEX_DISP:inst3|                           ; 7 (7)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5|HEX_DISP:inst3                                                                                                       ; HEX_DISP                 ; work         ;
+;       |HEX_DISP:inst4|                           ; 7 (7)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5|HEX_DISP:inst4                                                                                                       ; HEX_DISP                 ; work         ;
+;       |HEX_DISP:inst6|                           ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|HEX_DISP_6:inst5|HEX_DISP:inst6                                                                                                       ; HEX_DISP                 ; work         ;
+;    |adc_interface:inst4|                         ; 58 (42)             ; 80 (35)                   ; 64                ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4                                                                                                                   ; adc_interface            ; work         ;
+;       |ADC_FIFO:fifo|                            ; 16 (0)              ; 29 (0)                    ; 64                ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo                                                                                                     ; ADC_FIFO                 ; work         ;
+;          |dcfifo:dcfifo_component|               ; 16 (0)              ; 29 (0)                    ; 64                ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component                                                                             ; dcfifo                   ; work         ;
+;             |dcfifo_1rk1:auto_generated|         ; 16 (4)              ; 29 (9)                    ; 64                ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated                                                  ; dcfifo_1rk1              ; work         ;
+;                |a_graycounter_3ub:wrptr_g1p|     ; 4 (4)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p                      ; a_graycounter_3ub        ; work         ;
+;                |a_graycounter_7g6:rdptr_g1p|     ; 6 (6)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p                      ; a_graycounter_7g6        ; work         ;
+;                |alt_synch_pipe_b9l:rs_dgwp|      ; 0 (0)               ; 6 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp                       ; alt_synch_pipe_b9l       ; work         ;
+;                   |dffpipe_su8:dffpipe10|        ; 0 (0)               ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10 ; dffpipe_su8              ; work         ;
+;                |alt_synch_pipe_c9l:ws_dgrp|      ; 0 (0)               ; 6 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp                       ; alt_synch_pipe_c9l       ; work         ;
+;                   |dffpipe_tu8:dffpipe13|        ; 0 (0)               ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13 ; dffpipe_tu8              ; work         ;
+;                |altsyncram_6ia1:fifo_ram|        ; 0 (0)               ; 0 (0)                     ; 64                ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram                         ; altsyncram_6ia1          ; work         ;
+;                |cmpr_ru5:rdempty_eq_comp|        ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|cmpr_ru5:rdempty_eq_comp                         ; cmpr_ru5                 ; work         ;
+;                |cmpr_ru5:wrfull_eq_comp|         ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|cmpr_ru5:wrfull_eq_comp                          ; cmpr_ru5                 ; work         ;
+;       |adc_shiftreg:serialize|                   ; 0 (0)               ; 16 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|adc_shiftreg:serialize                                                                                            ; adc_shiftreg             ; work         ;
+;          |lpm_shiftreg:LPM_SHIFTREG_component|   ; 0 (0)               ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |FACE|adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component                                                        ; lpm_shiftreg             ; work         ;
+;    |oneshot_i2c:inst2|                           ; 64 (0)              ; 44 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |FACE|oneshot_i2c:inst2                                                                                                                     ; oneshot_i2c              ; work         ;
+;       |i2c_master:inst|                          ; 38 (38)             ; 27 (27)                   ; 0                 ; 0          ; 0    ; 0            ; |FACE|oneshot_i2c:inst2|i2c_master:inst                                                                                                     ; i2c_master               ; work         ;
+;       |i2c_oneshot_ctrl:inst3|                   ; 26 (26)             ; 17 (17)                   ; 0                 ; 0          ; 0    ; 0            ; |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3                                                                                              ; i2c_oneshot_ctrl         ; work         ;
+;    |pll_main:inst1|                              ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|pll_main:inst1                                                                                                                        ; pll_main                 ; pll_main     ;
+;       |pll_main_0002:pll_main_inst|              ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|pll_main:inst1|pll_main_0002:pll_main_inst                                                                                            ; pll_main_0002            ; pll_main     ;
+;          |altera_pll:altera_pll_i|               ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i                                                                    ; altera_pll               ; work         ;
+;             |altera_cyclonev_pll:cyclonev_pll|   ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll                                   ; altera_cyclonev_pll      ; work         ;
+;                |altera_cyclonev_pll_base:fpll_0| ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FACE|pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll|altera_cyclonev_pll_base:fpll_0   ; altera_cyclonev_pll_base ; work         ;
++--------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                             ;
++--------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                                     ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++--------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 4            ; 16           ; 4            ; 16           ; 64   ; None ;
++--------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------+
@@ -176,13 +334,262 @@ https://fpgasoftware.intel.com/eula.
 ; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                                  ; IP Include File ;
 +--------+--------------+---------+--------------+--------------+--------------------------------------------------+-----------------+
 ; Altera ; altera_pll   ; 23.1    ; N/A          ; N/A          ; |FACE|pll_main:inst1                             ; pll_main.v      ;
-; Altera ; FIFO         ; 23.1    ; N/A          ; N/A          ; |FACE|adc_interface:inst3|adc_fifo:fifo          ; adc_fifo.v      ;
-; Altera ; LPM_SHIFTREG ; 23.1    ; N/A          ; N/A          ; |FACE|adc_interface:inst3|adc_shiftreg:serialize ; adc_shiftreg.v  ;
+; Altera ; FIFO         ; 19.1    ; N/A          ; N/A          ; |FACE|adc_interface:inst4|ADC_FIFO:fifo          ; ADC_FIFO.vhd    ;
+; Altera ; LPM_SHIFTREG ; 23.1    ; N/A          ; N/A          ; |FACE|adc_interface:inst4|adc_shiftreg:serialize ; adc_shiftreg.v  ;
 +--------+--------------+---------+--------------+--------------+--------------------------------------------------+-----------------+
 
 
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |FACE|pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state                                                                                                                        ;
++------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+-----------------------------------+
+; Name                               ; dps_current_state.PHASE_DONE_LOW_0 ; dps_current_state.PHASE_DONE_LOW_4 ; dps_current_state.PHASE_DONE_LOW_3 ; dps_current_state.PHASE_DONE_LOW_2 ; dps_current_state.PHASE_DONE_LOW_1 ; dps_current_state.PHASE_DONE_HIGH ;
++------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+-----------------------------------+
+; dps_current_state.PHASE_DONE_HIGH  ; 0                                  ; 0                                  ; 0                                  ; 0                                  ; 0                                  ; 0                                 ;
+; dps_current_state.PHASE_DONE_LOW_1 ; 0                                  ; 0                                  ; 0                                  ; 0                                  ; 1                                  ; 1                                 ;
+; dps_current_state.PHASE_DONE_LOW_2 ; 0                                  ; 0                                  ; 0                                  ; 1                                  ; 0                                  ; 1                                 ;
+; dps_current_state.PHASE_DONE_LOW_3 ; 0                                  ; 0                                  ; 1                                  ; 0                                  ; 0                                  ; 1                                 ;
+; dps_current_state.PHASE_DONE_LOW_4 ; 0                                  ; 1                                  ; 0                                  ; 0                                  ; 0                                  ; 1                                 ;
+; dps_current_state.PHASE_DONE_LOW_0 ; 1                                  ; 0                                  ; 0                                  ; 0                                  ; 0                                  ; 1                                 ;
++------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+------------------------------------+-----------------------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------+
+; State Machine - |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|state ;
++-------------+-----------+-----------+------------+-------------------+
+; Name        ; state.Tx1 ; state.Tx2 ; state.idle ; state.delay       ;
++-------------+-----------+-----------+------------+-------------------+
+; state.delay ; 0         ; 0         ; 0          ; 0                 ;
+; state.idle  ; 0         ; 0         ; 1          ; 1                 ;
+; state.Tx2   ; 0         ; 1         ; 0          ; 1                 ;
+; state.Tx1   ; 1         ; 0         ; 0          ; 1                 ;
++-------------+-----------+-----------+------------+-------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |FACE|oneshot_i2c:inst2|i2c_master:inst|state                                                                                                    ;
++----------------+------------+----------------+----------------+----------+----------+----------------+---------------+---------------+-------------+-------------+
+; Name           ; state.stop ; state.mstr_ack ; state.slv_ack2 ; state.rd ; state.wr ; state.slv_ack1 ; state.command ; state.restart ; state.start ; state.ready ;
++----------------+------------+----------------+----------------+----------+----------+----------------+---------------+---------------+-------------+-------------+
+; state.ready    ; 0          ; 0              ; 0              ; 0        ; 0        ; 0              ; 0             ; 0             ; 0           ; 0           ;
+; state.start    ; 0          ; 0              ; 0              ; 0        ; 0        ; 0              ; 0             ; 0             ; 1           ; 1           ;
+; state.restart  ; 0          ; 0              ; 0              ; 0        ; 0        ; 0              ; 0             ; 1             ; 0           ; 1           ;
+; state.command  ; 0          ; 0              ; 0              ; 0        ; 0        ; 0              ; 1             ; 0             ; 0           ; 1           ;
+; state.slv_ack1 ; 0          ; 0              ; 0              ; 0        ; 0        ; 1              ; 0             ; 0             ; 0           ; 1           ;
+; state.wr       ; 0          ; 0              ; 0              ; 0        ; 1        ; 0              ; 0             ; 0             ; 0           ; 1           ;
+; state.rd       ; 0          ; 0              ; 0              ; 1        ; 0        ; 0              ; 0             ; 0             ; 0           ; 1           ;
+; state.slv_ack2 ; 0          ; 0              ; 1              ; 0        ; 0        ; 0              ; 0             ; 0             ; 0           ; 1           ;
+; state.mstr_ack ; 0          ; 1              ; 0              ; 0        ; 0        ; 0              ; 0             ; 0             ; 0           ; 1           ;
+; state.stop     ; 1          ; 0              ; 0              ; 0        ; 0        ; 0              ; 0             ; 0             ; 0           ; 1           ;
++----------------+------------+----------------+----------------+----------+----------+----------------+---------------+---------------+-------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Protected by Synthesis                                                                                                                                                                                                                                 ;
++--------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; Register Name                                                                                                                                    ; Protected by Synthesis Attribute or Preserve Register Assignment ; Not to be Touched by Netlist Optimizations ;
++--------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe12a[2] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe12a[0] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe12a[1] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe15a[2] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe15a[0] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe15a[1] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe11a[2] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe11a[0] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10|dffe11a[1] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe14a[2] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe14a[0] ; yes                                                              ; yes                                        ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13|dffe14a[1] ; yes                                                              ; yes                                        ;
+; Total number of protected registers is 12                                                                                                        ;                                                                  ;                                            ;
++--------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                                               ;
++-------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
+; Register name                                                                                                                       ; Reason for Removal                                         ;
++-------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
+; HEX_DISP_6:inst5|HEX_DISP:inst6|latched_hex[0,1]                                                                                    ; Stuck at GND due to stuck port data_in                     ;
+; HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[1]                                                                                      ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|scl_clk                                                                                           ; Stuck at GND due to stuck port data_in                     ;
+; HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[0]                                                                                      ; Merged with HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[2] ;
+; HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[2]                                                                                      ; Merged with HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[3] ;
+; HEX_DISP_6:inst5|HEX_DISP:inst5|latched_hex[3]                                                                                      ; Merged with HEX_DISP_6:inst5|HEX_DISP:inst6|latched_hex[2] ;
+; HEX_DISP_6:inst5|HEX_DISP:inst6|latched_hex[2]                                                                                      ; Merged with HEX_DISP_6:inst5|HEX_DISP:inst6|latched_hex[3] ;
+; oneshot_i2c:inst2|i2c_master:inst|addr_rw[1,3,6,7]                                                                                  ; Merged with oneshot_i2c:inst2|i2c_master:inst|addr_rw[0]   ;
+; oneshot_i2c:inst2|i2c_master:inst|addr_rw[4,5]                                                                                      ; Merged with oneshot_i2c:inst2|i2c_master:inst|addr_rw[2]   ;
+; oneshot_i2c:inst2|i2c_master:inst|addr_rw[2]                                                                                        ; Stuck at VCC due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|addr_rw[0]                                                                                        ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|count[2]                                                                                          ; Stuck at GND due to stuck port data_in                     ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state~2                ; Lost fanout                                                ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state~3                ; Lost fanout                                                ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state~4                ; Lost fanout                                                ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state~5                ; Lost fanout                                                ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_HIGH  ; Stuck at GND due to stuck port clock                       ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_1 ; Stuck at GND due to stuck port clock                       ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_0 ; Lost fanout                                                ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_2 ; Stuck at GND due to stuck port clock                       ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_3 ; Stuck at GND due to stuck port clock                       ;
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_4 ; Stuck at GND due to stuck port clock                       ;
+; oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|tx_byte[7]                                                                                 ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|state.rd                                                                                          ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|data_tx[7]                                                                                        ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|state.mstr_ack                                                                                    ; Stuck at GND due to stuck port data_in                     ;
+; oneshot_i2c:inst2|i2c_master:inst|state.restart                                                                                     ; Stuck at GND due to stuck port data_in                     ;
+; Total Number of Removed Registers = 32                                                                                              ;                                                            ;
++-------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                                                                            ;
++-------------------------------------------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+; Register name                                                                                                                       ; Reason for Removal        ; Registers Removed due to This Register                                                                                               ;
++-------------------------------------------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_1 ; Stuck at GND              ; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_0, ;
+;                                                                                                                                     ; due to stuck port clock   ; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_2, ;
+;                                                                                                                                     ;                           ; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_3, ;
+;                                                                                                                                     ;                           ; pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst|dps_current_state.PHASE_DONE_LOW_4  ;
+; oneshot_i2c:inst2|i2c_master:inst|addr_rw[2]                                                                                        ; Stuck at VCC              ; oneshot_i2c:inst2|i2c_master:inst|data_tx[7]                                                                                         ;
+;                                                                                                                                     ; due to stuck port data_in ;                                                                                                                                      ;
+; oneshot_i2c:inst2|i2c_master:inst|state.mstr_ack                                                                                    ; Stuck at GND              ; oneshot_i2c:inst2|i2c_master:inst|state.restart                                                                                      ;
+;                                                                                                                                     ; due to stuck port data_in ;                                                                                                                                      ;
++-------------------------------------------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 141   ;
+; Number of registers using Synchronous Clear  ; 31    ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 43    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 57    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                                                          ;
++-----------------------------------------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                                                           ; Fan out ;
++-----------------------------------------------------------------------------------------------------------------------------+---------+
+; oneshot_i2c:inst2|i2c_master:inst|sda_int                                                                                   ; 3       ;
+; oneshot_i2c:inst2|i2c_master:inst|bit_cnt[2]                                                                                ; 11      ;
+; oneshot_i2c:inst2|i2c_master:inst|bit_cnt[1]                                                                                ; 12      ;
+; oneshot_i2c:inst2|i2c_master:inst|bit_cnt[0]                                                                                ; 11      ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p|counter5a0 ; 6       ;
+; oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[0]                                                                         ; 13      ;
+; oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[3]                                                                         ; 11      ;
+; oneshot_i2c:inst2|i2c_master:inst|busy                                                                                      ; 12      ;
+; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p|counter7a0 ; 5       ;
+; Total number of inverted registers = 9                                                                                      ;         ;
++-----------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; 3:1                ; 31 bits   ; 62 LEs        ; 0 LEs                ; 62 LEs                 ; Yes        ; |FACE|adc_interface:inst4|bit_count[23]                   ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 0 LEs                ; 6 LEs                  ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[1] ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 0 LEs                ; 4 LEs                  ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_master:inst|addr_rw[0]        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_master:inst|data_tx[3]        ;
+; 21:1               ; 4 bits    ; 56 LEs        ; 40 LEs               ; 16 LEs                 ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|tx_byte[3] ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_master:inst|bit_cnt[0]        ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 0 LEs                ; 6 LEs                  ; Yes        ; |FACE|oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[0] ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |FACE|oneshot_i2c:inst2|i2c_master:inst|count             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i ;
++------------------------------+-------+------+---------------------------------------------+
+; Assignment                   ; Value ; From ; To                                          ;
++------------------------------+-------+------+---------------------------------------------+
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; cntsel_temp[4]                              ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; cntsel_temp[4]                              ;
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; cntsel_temp[3]                              ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; cntsel_temp[3]                              ;
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; cntsel_temp[2]                              ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; cntsel_temp[2]                              ;
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; cntsel_temp[1]                              ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; cntsel_temp[1]                              ;
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; cntsel_temp[0]                              ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; cntsel_temp[0]                              ;
+; IGNORE_LCELL_BUFFERS         ; off   ; -    ; gnd                                         ;
+; REMOVE_REDUNDANT_LOGIC_CELLS ; off   ; -    ; gnd                                         ;
++------------------------------+-------+------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_0 ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment                           ; Value ; From ; To                                                                               ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; OFF   ; -    ; -                                                                                ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; OFF   ; -    ; -                                                                                ;
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP  ; OFF   ; -    ; -                                                                                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS         ; OFF   ; -    ; -                                                                                ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_1 ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment                           ; Value ; From ; To                                                                               ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; OFF   ; -    ; -                                                                                ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; OFF   ; -    ; -                                                                                ;
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP  ; OFF   ; -    ; -                                                                                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS         ; OFF   ; -    ; -                                                                                ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_2 ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment                           ; Value ; From ; To                                                                               ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; OFF   ; -    ; -                                                                                ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; OFF   ; -    ; -                                                                                ;
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP  ; OFF   ; -    ; -                                                                                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS         ; OFF   ; -    ; -                                                                                ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_3 ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment                           ; Value ; From ; To                                                                               ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; OFF   ; -    ; -                                                                                ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; OFF   ; -    ; -                                                                                ;
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP  ; OFF   ; -    ; -                                                                                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS         ; OFF   ; -    ; -                                                                                ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_4 ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; Assignment                           ; Value ; From ; To                                                                               ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; OFF   ; -    ; -                                                                                ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; OFF   ; -    ; -                                                                                ;
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP  ; OFF   ; -    ; -                                                                                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS         ; OFF   ; -    ; -                                                                                ;
++--------------------------------------+-------+------+----------------------------------------------------------------------------------+
+
+
 +----------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component ;
 +---------------------------------+-------+------+---------------------------------+
 ; Assignment                      ; Value ; From ; To                              ;
 +---------------------------------+-------+------+---------------------------------+
@@ -191,7 +598,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +-------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated ;
 +---------------------------------------+-------+------+------------------------------------------------------+
 ; Assignment                            ; Value ; From ; To                                                   ;
 +---------------------------------------+-------+------+------------------------------------------------------+
@@ -204,7 +611,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p ;
 +----------------+-------+------+---------------------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                                      ;
 +----------------+-------+------+---------------------------------------------------------------------------------------------------------+
@@ -214,7 +621,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p ;
 +----------------+-------+------+---------------------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                                      ;
 +----------------+-------+------+---------------------------------------------------------------------------------------------------------+
@@ -224,7 +631,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram ;
 +---------------------------------+--------------------+------+------------------------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                                     ;
 +---------------------------------+--------------------+------+------------------------------------------------------------------------+
@@ -233,7 +640,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp ;
 +-----------------------------+------------------------+------+--------------------------------------------------------------------------+
 ; Assignment                  ; Value                  ; From ; To                                                                       ;
 +-----------------------------+------------------------+------+--------------------------------------------------------------------------+
@@ -246,7 +653,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10 ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10 ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
@@ -255,7 +662,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp ;
 +-----------------------------+------------------------+------+--------------------------------------------------------------------------+
 ; Assignment                  ; Value                  ; From ; To                                                                       ;
 +-----------------------------+------------------------+------+--------------------------------------------------------------------------+
@@ -268,7 +675,7 @@ https://fpgasoftware.intel.com/eula.
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13 ;
+; Source assignments for adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13 ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------------------------------------------------------+
@@ -287,27 +694,38 @@ https://fpgasoftware.intel.com/eula.
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3 ;
++----------------+--------+-------------------------------------------------------------+
+; Parameter Name ; Value  ; Type                                                        ;
++----------------+--------+-------------------------------------------------------------+
+; iwl            ; 00     ; Unsigned Binary                                             ;
+; sample_control ; 001101 ; Unsigned Binary                                             ;
++----------------+--------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i ;
 +--------------------------------------+------------------------+-------------------------------------------------+
 ; Parameter Name                       ; Value                  ; Type                                            ;
 +--------------------------------------+------------------------+-------------------------------------------------+
-; reference_clock_frequency            ; 100.0 MHz              ; String                                          ;
+; reference_clock_frequency            ; 50.0 MHz               ; String                                          ;
 ; fractional_vco_multiplier            ; false                  ; String                                          ;
-; pll_type                             ; General                ; String                                          ;
+; pll_type                             ; Cyclone V              ; String                                          ;
 ; pll_subtype                          ; General                ; String                                          ;
-; number_of_clocks                     ; 2                      ; Signed Integer                                  ;
+; number_of_clocks                     ; 3                      ; Signed Integer                                  ;
 ; operation_mode                       ; direct                 ; String                                          ;
 ; deserialization_factor               ; 4                      ; Signed Integer                                  ;
 ; data_rate                            ; 0                      ; Signed Integer                                  ;
 ; sim_additional_refclk_cycles_to_lock ; 0                      ; Signed Integer                                  ;
-; output_clock_frequency0              ; 100.000000 MHz         ; String                                          ;
+; output_clock_frequency0              ; 12.000000 MHz          ; String                                          ;
 ; phase_shift0                         ; 0 ps                   ; String                                          ;
 ; duty_cycle0                          ; 50                     ; Signed Integer                                  ;
-; output_clock_frequency1              ; 100.000000 MHz         ; String                                          ;
+; output_clock_frequency1              ; 1.200000 MHz           ; String                                          ;
 ; phase_shift1                         ; 0 ps                   ; String                                          ;
 ; duty_cycle1                          ; 50                     ; Signed Integer                                  ;
-; output_clock_frequency2              ; 0 MHz                  ; String                                          ;
+; output_clock_frequency2              ; 100.000000 MHz         ; String                                          ;
 ; phase_shift2                         ; 0 ps                   ; String                                          ;
 ; duty_cycle2                          ; 50                     ; Signed Integer                                  ;
 ; output_clock_frequency3              ; 0 MHz                  ; String                                          ;
@@ -373,152 +791,152 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; clock_name_global_6                  ; false                  ; String                                          ;
 ; clock_name_global_7                  ; false                  ; String                                          ;
 ; clock_name_global_8                  ; false                  ; String                                          ;
-; m_cnt_hi_div                         ; 1                      ; Signed Integer                                  ;
-; m_cnt_lo_div                         ; 1                      ; Signed Integer                                  ;
+; m_cnt_hi_div                         ; 3                      ; Signed Integer                                  ;
+; m_cnt_lo_div                         ; 3                      ; Signed Integer                                  ;
 ; m_cnt_bypass_en                      ; false                  ; String                                          ;
 ; m_cnt_odd_div_duty_en                ; false                  ; String                                          ;
-; n_cnt_hi_div                         ; 1                      ; Signed Integer                                  ;
-; n_cnt_lo_div                         ; 1                      ; Signed Integer                                  ;
-; n_cnt_bypass_en                      ; false                  ; String                                          ;
+; n_cnt_hi_div                         ; 256                    ; Signed Integer                                  ;
+; n_cnt_lo_div                         ; 256                    ; Signed Integer                                  ;
+; n_cnt_bypass_en                      ; true                   ; String                                          ;
 ; n_cnt_odd_div_duty_en                ; false                  ; String                                          ;
-; c_cnt_hi_div0                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_lo_div0                        ; 1                      ; Signed Integer                                  ;
+; c_cnt_hi_div0                        ; 13                     ; Signed Integer                                  ;
+; c_cnt_lo_div0                        ; 12                     ; Signed Integer                                  ;
 ; c_cnt_bypass_en0                     ; false                  ; String                                          ;
 ; c_cnt_in_src0                        ; ph_mux_clk             ; String                                          ;
-; c_cnt_odd_div_duty_en0               ; false                  ; String                                          ;
+; c_cnt_odd_div_duty_en0               ; true                   ; String                                          ;
 ; c_cnt_prst0                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst0                   ; 0                      ; Signed Integer                                  ;
-; c_cnt_hi_div1                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_lo_div1                        ; 1                      ; Signed Integer                                  ;
+; c_cnt_hi_div1                        ; 125                    ; Signed Integer                                  ;
+; c_cnt_lo_div1                        ; 125                    ; Signed Integer                                  ;
 ; c_cnt_bypass_en1                     ; false                  ; String                                          ;
 ; c_cnt_in_src1                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en1               ; false                  ; String                                          ;
 ; c_cnt_prst1                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst1                   ; 0                      ; Signed Integer                                  ;
-; c_cnt_hi_div2                        ; 1                      ; Signed Integer                                  ;
+; c_cnt_hi_div2                        ; 2                      ; Signed Integer                                  ;
 ; c_cnt_lo_div2                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_bypass_en2                     ; false                  ; String                                          ;
-; c_cnt_in_src2                        ; ph_mux_clk             ; String                                          ;
-; c_cnt_odd_div_duty_en2               ; false                  ; String                                          ;
+; c_cnt_in_src2                        ; cscd_clk               ; String                                          ;
+; c_cnt_odd_div_duty_en2               ; true                   ; String                                          ;
 ; c_cnt_prst2                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst2                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div3                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div3                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en3                     ; false                  ; String                                          ;
+; c_cnt_bypass_en3                     ; true                   ; String                                          ;
 ; c_cnt_in_src3                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en3               ; false                  ; String                                          ;
 ; c_cnt_prst3                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst3                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div4                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div4                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en4                     ; false                  ; String                                          ;
+; c_cnt_bypass_en4                     ; true                   ; String                                          ;
 ; c_cnt_in_src4                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en4               ; false                  ; String                                          ;
 ; c_cnt_prst4                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst4                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div5                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div5                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en5                     ; false                  ; String                                          ;
+; c_cnt_bypass_en5                     ; true                   ; String                                          ;
 ; c_cnt_in_src5                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en5               ; false                  ; String                                          ;
 ; c_cnt_prst5                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst5                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div6                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div6                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en6                     ; false                  ; String                                          ;
+; c_cnt_bypass_en6                     ; true                   ; String                                          ;
 ; c_cnt_in_src6                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en6               ; false                  ; String                                          ;
 ; c_cnt_prst6                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst6                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div7                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div7                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en7                     ; false                  ; String                                          ;
+; c_cnt_bypass_en7                     ; true                   ; String                                          ;
 ; c_cnt_in_src7                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en7               ; false                  ; String                                          ;
 ; c_cnt_prst7                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst7                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div8                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div8                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en8                     ; false                  ; String                                          ;
+; c_cnt_bypass_en8                     ; true                   ; String                                          ;
 ; c_cnt_in_src8                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en8               ; false                  ; String                                          ;
 ; c_cnt_prst8                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst8                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div9                        ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div9                        ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en9                     ; false                  ; String                                          ;
+; c_cnt_bypass_en9                     ; true                   ; String                                          ;
 ; c_cnt_in_src9                        ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en9               ; false                  ; String                                          ;
 ; c_cnt_prst9                          ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst9                   ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div10                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div10                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en10                    ; false                  ; String                                          ;
+; c_cnt_bypass_en10                    ; true                   ; String                                          ;
 ; c_cnt_in_src10                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en10              ; false                  ; String                                          ;
 ; c_cnt_prst10                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst10                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div11                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div11                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en11                    ; false                  ; String                                          ;
+; c_cnt_bypass_en11                    ; true                   ; String                                          ;
 ; c_cnt_in_src11                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en11              ; false                  ; String                                          ;
 ; c_cnt_prst11                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst11                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div12                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div12                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en12                    ; false                  ; String                                          ;
+; c_cnt_bypass_en12                    ; true                   ; String                                          ;
 ; c_cnt_in_src12                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en12              ; false                  ; String                                          ;
 ; c_cnt_prst12                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst12                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div13                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div13                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en13                    ; false                  ; String                                          ;
+; c_cnt_bypass_en13                    ; true                   ; String                                          ;
 ; c_cnt_in_src13                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en13              ; false                  ; String                                          ;
 ; c_cnt_prst13                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst13                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div14                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div14                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en14                    ; false                  ; String                                          ;
+; c_cnt_bypass_en14                    ; true                   ; String                                          ;
 ; c_cnt_in_src14                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en14              ; false                  ; String                                          ;
 ; c_cnt_prst14                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst14                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div15                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div15                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en15                    ; false                  ; String                                          ;
+; c_cnt_bypass_en15                    ; true                   ; String                                          ;
 ; c_cnt_in_src15                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en15              ; false                  ; String                                          ;
 ; c_cnt_prst15                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst15                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div16                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div16                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en16                    ; false                  ; String                                          ;
+; c_cnt_bypass_en16                    ; true                   ; String                                          ;
 ; c_cnt_in_src16                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en16              ; false                  ; String                                          ;
 ; c_cnt_prst16                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst16                  ; 0                      ; Signed Integer                                  ;
 ; c_cnt_hi_div17                       ; 1                      ; Signed Integer                                  ;
 ; c_cnt_lo_div17                       ; 1                      ; Signed Integer                                  ;
-; c_cnt_bypass_en17                    ; false                  ; String                                          ;
+; c_cnt_bypass_en17                    ; true                   ; String                                          ;
 ; c_cnt_in_src17                       ; ph_mux_clk             ; String                                          ;
 ; c_cnt_odd_div_duty_en17              ; false                  ; String                                          ;
 ; c_cnt_prst17                         ; 1                      ; Signed Integer                                  ;
 ; c_cnt_ph_mux_prst17                  ; 0                      ; Signed Integer                                  ;
-; pll_vco_div                          ; 1                      ; Signed Integer                                  ;
+; pll_vco_div                          ; 2                      ; Signed Integer                                  ;
 ; pll_slf_rst                          ; false                  ; String                                          ;
 ; pll_bw_sel                           ; low                    ; String                                          ;
-; pll_output_clk_frequency             ; 0 MHz                  ; String                                          ;
-; pll_cp_current                       ; 0                      ; Signed Integer                                  ;
-; pll_bwctrl                           ; 0                      ; Signed Integer                                  ;
-; pll_fractional_division              ; 1                      ; Signed Integer                                  ;
-; pll_fractional_cout                  ; 24                     ; Signed Integer                                  ;
+; pll_output_clk_frequency             ; 300.0 MHz              ; String                                          ;
+; pll_cp_current                       ; 20                     ; Signed Integer                                  ;
+; pll_bwctrl                           ; 2000                   ; Signed Integer                                  ;
+; pll_fractional_division              ; 1                      ; String                                          ;
+; pll_fractional_cout                  ; 32                     ; Signed Integer                                  ;
 ; pll_dsm_out_sel                      ; 1st_order              ; String                                          ;
-; mimic_fbclk_type                     ; gclk                   ; String                                          ;
+; mimic_fbclk_type                     ; none                   ; String                                          ;
 ; pll_fbclk_mux_1                      ; glb                    ; String                                          ;
-; pll_fbclk_mux_2                      ; fb_1                   ; String                                          ;
+; pll_fbclk_mux_2                      ; m_cnt                  ; String                                          ;
 ; pll_m_cnt_in_src                     ; ph_mux_clk             ; String                                          ;
 ; pll_vcoph_div                        ; 1                      ; Signed Integer                                  ;
 ; refclk1_frequency                    ; 0 MHz                  ; String                                          ;
@@ -535,7 +953,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: adc_interface:inst3 ;
+; Parameter Settings for User Entity Instance: adc_interface:inst4 ;
 +----------------+-------+-----------------------------------------+
 ; Parameter Name ; Value ; Type                                    ;
 +----------------+-------+-----------------------------------------+
@@ -545,7 +963,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-----------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: adc_interface:inst3|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component ;
+; Parameter Settings for User Entity Instance: adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component ;
 +------------------------+-----------+----------------------------------------------------------------------------------------+
 ; Parameter Name         ; Value     ; Type                                                                                   ;
 +------------------------+-----------+----------------------------------------------------------------------------------------+
@@ -563,7 +981,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +--------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component ;
+; Parameter Settings for User Entity Instance: adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component ;
 +-------------------------+-------------+----------------------------------------------------------------+
 ; Parameter Name          ; Value       ; Type                                                           ;
 +-------------------------+-------------+----------------------------------------------------------------+
@@ -596,61 +1014,160 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LPM_CONSTANT:inst3 ;
++--------------------+------------------+-------------------------+
+; Parameter Name     ; Value            ; Type                    ;
++--------------------+------------------+-------------------------+
+; LPM_WIDTH          ; 16               ; Untyped                 ;
+; LPM_CVALUE         ; abcd             ; Unsigned Hexadecimal    ;
+; ENABLE_RUNTIME_MOD ; NO               ; Untyped                 ;
+; CBXI_PARAMETER     ; lpm_constant_cj4 ; Untyped                 ;
++--------------------+------------------+-------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------+
+; lpm_shiftreg Parameter Settings by Entity Instance                                                          ;
++----------------------------+--------------------------------------------------------------------------------+
+; Name                       ; Value                                                                          ;
++----------------------------+--------------------------------------------------------------------------------+
+; Number of entity instances ; 1                                                                              ;
+; Entity Instance            ; adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component ;
+;     -- LPM_WIDTH           ; 16                                                                             ;
+;     -- LPM_DIRECTION       ; LEFT                                                                           ;
++----------------------------+--------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; dcfifo Parameter Settings by Entity Instance                                           ;
++----------------------------+-----------------------------------------------------------+
+; Name                       ; Value                                                     ;
++----------------------------+-----------------------------------------------------------+
+; Number of entity instances ; 1                                                         ;
+; Entity Instance            ; adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                                                ;
+;     -- LPM_WIDTH           ; 16                                                        ;
+;     -- LPM_NUMWORDS        ; 4                                                         ;
+;     -- LPM_SHOWAHEAD       ; OFF                                                       ;
+;     -- USE_EAB             ; ON                                                        ;
++----------------------------+-----------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------------+-----------------------+
+; Type                        ; Count                 ;
++-----------------------------+-----------------------+
+; arriav_ff                   ; 141                   ;
+;     CLR                     ; 40                    ;
+;     ENA                     ; 23                    ;
+;     ENA CLR                 ; 3                     ;
+;     ENA SCLR                ; 31                    ;
+;     SLD                     ; 1                     ;
+;     plain                   ; 43                    ;
+; arriav_io_obuf              ; 2                     ;
+; arriav_lcell_comb           ; 157                   ;
+;     arith                   ; 32                    ;
+;         1 data inputs       ; 32                    ;
+;     extend                  ; 4                     ;
+;         7 data inputs       ; 4                     ;
+;     normal                  ; 121                   ;
+;         0 data inputs       ; 2                     ;
+;         1 data inputs       ; 12                    ;
+;         2 data inputs       ; 11                    ;
+;         3 data inputs       ; 13                    ;
+;         4 data inputs       ; 42                    ;
+;         5 data inputs       ; 17                    ;
+;         6 data inputs       ; 24                    ;
+; boundary_port               ; 55                    ;
+; cyclonev_fractional_pll     ; 1                     ;
+; cyclonev_pll_output_counter ; 3                     ;
+; cyclonev_pll_reconfig       ; 1                     ;
+; cyclonev_pll_refclk_select  ; 1                     ;
+; stratixv_ram_block          ; 16                    ;
+;                             ;                       ;
+; Max LUT depth               ; 4.10                  ;
+; Average LUT depth           ; 1.83                  ;
++-----------------------------+-----------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Sun Feb  9 18:23:55 2025
+    Info: Processing started: Tue Feb 25 16:34:58 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FACE -c FACE
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /users/gamin/documents/1georgia tech/senior design/spectronet/fpga/src/verilog/adc_interface.sv
+    Info (12023): Found entity 1: adc_interface File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /users/gamin/documents/1georgia tech/senior design/spectronet/fpga/src/verilog/hex_disp.vhd
+    Info (12022): Found design unit 1: HEX_DISP-a File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/HEX_DISP.vhd Line: 17
+    Info (12023): Found entity 1: HEX_DISP File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/HEX_DISP.vhd Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file hex_disp_6.bdf
+    Info (12023): Found entity 1: HEX_DISP_6
 Info (12021): Found 2 design units, including 1 entities, in source file i2c_oneshot_ctrl.vhd
-    Info (12022): Found design unit 1: i2c_oneshot_ctrl-main File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 25
-    Info (12023): Found entity 1: i2c_oneshot_ctrl File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 12
+    Info (12022): Found design unit 1: i2c_oneshot_ctrl-main File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 30
+    Info (12023): Found entity 1: i2c_oneshot_ctrl File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 14
 Info (12021): Found 2 design units, including 1 entities, in source file i2c_master.vhd
     Info (12022): Found design unit 1: i2c_master-logic File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_master.vhd Line: 49
     Info (12023): Found entity 1: i2c_master File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_master.vhd Line: 31
 Info (12021): Found 1 design units, including 1 entities, in source file oneshot_i2c.bdf
     Info (12023): Found entity 1: oneshot_i2c
-Info (12021): Found 1 design units, including 1 entities, in source file /users/gamin/documents/1georgia tech/senior design/spectronet/fpga/src/verilog/adc_interface.sv
-    Info (12023): Found entity 1: adc_interface File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 8
 Info (12021): Found 0 design units, including 0 entities, in source file /users/gamin/documents/1georgia tech/senior design/spectronet/fpga/src/verilog/face_top_pkg.sv
 Info (12021): Found 1 design units, including 1 entities, in source file /users/gamin/documents/1georgia tech/senior design/spectronet/fpga/src/verilog/face_top.sv
     Info (12023): Found entity 1: face_top File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/face_top.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file pll_main.v
-    Info (12023): Found entity 1: pll_main File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v Line: 8
-Info (12021): Found 1 design units, including 1 entities, in source file pll_main/pll_main_0002.v
-    Info (12023): Found entity 1: pll_main_0002 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file face.bdf
     Info (12023): Found entity 1: FACE
 Info (12021): Found 1 design units, including 1 entities, in source file adc_shiftreg.v
     Info (12023): Found entity 1: adc_shiftreg File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 40
-Info (12021): Found 1 design units, including 1 entities, in source file adc_fifo.v
-    Info (12023): Found entity 1: adc_fifo File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_fifo.v Line: 40
+Info (12021): Found 2 design units, including 1 entities, in source file adc_fifo.vhd
+    Info (12022): Found design unit 1: adc_fifo-SYN File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd Line: 57
+    Info (12023): Found entity 1: ADC_FIFO File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file pll_main.v
+    Info (12023): Found entity 1: pll_main File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file pll_main/pll_main_0002.v
+    Info (12023): Found entity 1: pll_main_0002 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 2
 Info (12127): Elaborating entity "FACE" for the top level hierarchy
 Info (12128): Elaborating entity "oneshot_i2c" for hierarchy "oneshot_i2c:inst2"
 Info (12128): Elaborating entity "i2c_master" for hierarchy "oneshot_i2c:inst2|i2c_master:inst"
 Info (12128): Elaborating entity "i2c_oneshot_ctrl" for hierarchy "oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3"
-Warning (10873): Using initial value X (don't care) for net "commands[8]" at i2c_oneshot_ctrl.vhd(33) File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 33
+Warning (10873): Using initial value X (don't care) for net "commands[8]" at i2c_oneshot_ctrl.vhd(38) File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 38
 Info (12128): Elaborating entity "pll_main" for hierarchy "pll_main:inst1"
-Info (12128): Elaborating entity "pll_main_0002" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v Line: 22
-Info (12128): Elaborating entity "altera_pll" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 88
+Info (12128): Elaborating entity "pll_main_0002" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v Line: 23
+Warning (10034): Output port "outclk_1" at pll_main_0002.v(14) has no driver File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 14
+Info (12128): Elaborating entity "altera_pll" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 238
+Warning (10034): Output port "lvds_clk" at altera_pll.v(320) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 320
+Warning (10034): Output port "loaden" at altera_pll.v(321) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 321
+Warning (10034): Output port "extclk_out" at altera_pll.v(322) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 322
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
-Info (12130): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 88
-Info (12133): Instantiated megafunction "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 88
+Info (12130): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 238
+Info (12133): Instantiated megafunction "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main/pll_main_0002.v Line: 238
     Info (12134): Parameter "fractional_vco_multiplier" = "false"
-    Info (12134): Parameter "reference_clock_frequency" = "100.0 MHz"
+    Info (12134): Parameter "reference_clock_frequency" = "50.0 MHz"
+    Info (12134): Parameter "pll_fractional_cout" = "32"
+    Info (12134): Parameter "pll_dsm_out_sel" = "1st_order"
     Info (12134): Parameter "operation_mode" = "direct"
-    Info (12134): Parameter "number_of_clocks" = "2"
-    Info (12134): Parameter "output_clock_frequency0" = "100.000000 MHz"
+    Info (12134): Parameter "number_of_clocks" = "3"
+    Info (12134): Parameter "output_clock_frequency0" = "12.000000 MHz"
     Info (12134): Parameter "phase_shift0" = "0 ps"
     Info (12134): Parameter "duty_cycle0" = "50"
-    Info (12134): Parameter "output_clock_frequency1" = "100.000000 MHz"
+    Info (12134): Parameter "output_clock_frequency1" = "1.200000 MHz"
     Info (12134): Parameter "phase_shift1" = "0 ps"
     Info (12134): Parameter "duty_cycle1" = "50"
-    Info (12134): Parameter "output_clock_frequency2" = "0 MHz"
+    Info (12134): Parameter "output_clock_frequency2" = "100.000000 MHz"
     Info (12134): Parameter "phase_shift2" = "0 ps"
     Info (12134): Parameter "duty_cycle2" = "50"
     Info (12134): Parameter "output_clock_frequency3" = "0 MHz"
@@ -698,20 +1215,186 @@ Info (12133): Instantiated megafunction "pll_main:inst1|pll_main_0002:pll_main_i
     Info (12134): Parameter "output_clock_frequency17" = "0 MHz"
     Info (12134): Parameter "phase_shift17" = "0 ps"
     Info (12134): Parameter "duty_cycle17" = "50"
-    Info (12134): Parameter "pll_type" = "General"
+    Info (12134): Parameter "pll_type" = "Cyclone V"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst3"
-Info (12128): Elaborating entity "adc_shiftreg" for hierarchy "adc_interface:inst3|adc_shiftreg:serialize" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 33
-Info (12128): Elaborating entity "lpm_shiftreg" for hierarchy "adc_interface:inst3|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
-Info (12130): Elaborated megafunction instantiation "adc_interface:inst3|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
-Info (12133): Instantiated megafunction "adc_interface:inst3|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
+    Info (12134): Parameter "m_cnt_hi_div" = "3"
+    Info (12134): Parameter "m_cnt_lo_div" = "3"
+    Info (12134): Parameter "n_cnt_hi_div" = "256"
+    Info (12134): Parameter "n_cnt_lo_div" = "256"
+    Info (12134): Parameter "m_cnt_bypass_en" = "false"
+    Info (12134): Parameter "n_cnt_bypass_en" = "true"
+    Info (12134): Parameter "m_cnt_odd_div_duty_en" = "false"
+    Info (12134): Parameter "n_cnt_odd_div_duty_en" = "false"
+    Info (12134): Parameter "c_cnt_hi_div0" = "13"
+    Info (12134): Parameter "c_cnt_lo_div0" = "12"
+    Info (12134): Parameter "c_cnt_prst0" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst0" = "0"
+    Info (12134): Parameter "c_cnt_in_src0" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en0" = "false"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en0" = "true"
+    Info (12134): Parameter "c_cnt_hi_div1" = "125"
+    Info (12134): Parameter "c_cnt_lo_div1" = "125"
+    Info (12134): Parameter "c_cnt_prst1" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst1" = "0"
+    Info (12134): Parameter "c_cnt_in_src1" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en1" = "false"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en1" = "false"
+    Info (12134): Parameter "c_cnt_hi_div2" = "2"
+    Info (12134): Parameter "c_cnt_lo_div2" = "1"
+    Info (12134): Parameter "c_cnt_prst2" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst2" = "0"
+    Info (12134): Parameter "c_cnt_in_src2" = "cscd_clk"
+    Info (12134): Parameter "c_cnt_bypass_en2" = "false"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en2" = "true"
+    Info (12134): Parameter "c_cnt_hi_div3" = "1"
+    Info (12134): Parameter "c_cnt_lo_div3" = "1"
+    Info (12134): Parameter "c_cnt_prst3" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst3" = "0"
+    Info (12134): Parameter "c_cnt_in_src3" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en3" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en3" = "false"
+    Info (12134): Parameter "c_cnt_hi_div4" = "1"
+    Info (12134): Parameter "c_cnt_lo_div4" = "1"
+    Info (12134): Parameter "c_cnt_prst4" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst4" = "0"
+    Info (12134): Parameter "c_cnt_in_src4" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en4" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en4" = "false"
+    Info (12134): Parameter "c_cnt_hi_div5" = "1"
+    Info (12134): Parameter "c_cnt_lo_div5" = "1"
+    Info (12134): Parameter "c_cnt_prst5" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst5" = "0"
+    Info (12134): Parameter "c_cnt_in_src5" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en5" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en5" = "false"
+    Info (12134): Parameter "c_cnt_hi_div6" = "1"
+    Info (12134): Parameter "c_cnt_lo_div6" = "1"
+    Info (12134): Parameter "c_cnt_prst6" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst6" = "0"
+    Info (12134): Parameter "c_cnt_in_src6" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en6" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en6" = "false"
+    Info (12134): Parameter "c_cnt_hi_div7" = "1"
+    Info (12134): Parameter "c_cnt_lo_div7" = "1"
+    Info (12134): Parameter "c_cnt_prst7" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst7" = "0"
+    Info (12134): Parameter "c_cnt_in_src7" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en7" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en7" = "false"
+    Info (12134): Parameter "c_cnt_hi_div8" = "1"
+    Info (12134): Parameter "c_cnt_lo_div8" = "1"
+    Info (12134): Parameter "c_cnt_prst8" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst8" = "0"
+    Info (12134): Parameter "c_cnt_in_src8" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en8" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en8" = "false"
+    Info (12134): Parameter "c_cnt_hi_div9" = "1"
+    Info (12134): Parameter "c_cnt_lo_div9" = "1"
+    Info (12134): Parameter "c_cnt_prst9" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst9" = "0"
+    Info (12134): Parameter "c_cnt_in_src9" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en9" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en9" = "false"
+    Info (12134): Parameter "c_cnt_hi_div10" = "1"
+    Info (12134): Parameter "c_cnt_lo_div10" = "1"
+    Info (12134): Parameter "c_cnt_prst10" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst10" = "0"
+    Info (12134): Parameter "c_cnt_in_src10" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en10" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en10" = "false"
+    Info (12134): Parameter "c_cnt_hi_div11" = "1"
+    Info (12134): Parameter "c_cnt_lo_div11" = "1"
+    Info (12134): Parameter "c_cnt_prst11" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst11" = "0"
+    Info (12134): Parameter "c_cnt_in_src11" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en11" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en11" = "false"
+    Info (12134): Parameter "c_cnt_hi_div12" = "1"
+    Info (12134): Parameter "c_cnt_lo_div12" = "1"
+    Info (12134): Parameter "c_cnt_prst12" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst12" = "0"
+    Info (12134): Parameter "c_cnt_in_src12" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en12" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en12" = "false"
+    Info (12134): Parameter "c_cnt_hi_div13" = "1"
+    Info (12134): Parameter "c_cnt_lo_div13" = "1"
+    Info (12134): Parameter "c_cnt_prst13" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst13" = "0"
+    Info (12134): Parameter "c_cnt_in_src13" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en13" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en13" = "false"
+    Info (12134): Parameter "c_cnt_hi_div14" = "1"
+    Info (12134): Parameter "c_cnt_lo_div14" = "1"
+    Info (12134): Parameter "c_cnt_prst14" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst14" = "0"
+    Info (12134): Parameter "c_cnt_in_src14" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en14" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en14" = "false"
+    Info (12134): Parameter "c_cnt_hi_div15" = "1"
+    Info (12134): Parameter "c_cnt_lo_div15" = "1"
+    Info (12134): Parameter "c_cnt_prst15" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst15" = "0"
+    Info (12134): Parameter "c_cnt_in_src15" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en15" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en15" = "false"
+    Info (12134): Parameter "c_cnt_hi_div16" = "1"
+    Info (12134): Parameter "c_cnt_lo_div16" = "1"
+    Info (12134): Parameter "c_cnt_prst16" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst16" = "0"
+    Info (12134): Parameter "c_cnt_in_src16" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en16" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en16" = "false"
+    Info (12134): Parameter "c_cnt_hi_div17" = "1"
+    Info (12134): Parameter "c_cnt_lo_div17" = "1"
+    Info (12134): Parameter "c_cnt_prst17" = "1"
+    Info (12134): Parameter "c_cnt_ph_mux_prst17" = "0"
+    Info (12134): Parameter "c_cnt_in_src17" = "ph_mux_clk"
+    Info (12134): Parameter "c_cnt_bypass_en17" = "true"
+    Info (12134): Parameter "c_cnt_odd_div_duty_en17" = "false"
+    Info (12134): Parameter "pll_vco_div" = "2"
+    Info (12134): Parameter "pll_cp_current" = "20"
+    Info (12134): Parameter "pll_bwctrl" = "2000"
+    Info (12134): Parameter "pll_output_clk_frequency" = "300.0 MHz"
+    Info (12134): Parameter "pll_fractional_division" = "1"
+    Info (12134): Parameter "mimic_fbclk_type" = "none"
+    Info (12134): Parameter "pll_fbclk_mux_1" = "glb"
+    Info (12134): Parameter "pll_fbclk_mux_2" = "m_cnt"
+    Info (12134): Parameter "pll_m_cnt_in_src" = "ph_mux_clk"
+    Info (12134): Parameter "pll_slf_rst" = "false"
+Info (12128): Elaborating entity "dps_extra_kick" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 769
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dps_extra_kick:dps_extra_inst", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 769
+Info (12128): Elaborating entity "dprio_init" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dprio_init:dprio_init_inst" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 784
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|dprio_init:dprio_init_inst", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 784
+Info (12128): Elaborating entity "altera_pll_dps_lcell_comb" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_0" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1961
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_0", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1961
+Info (12128): Elaborating entity "altera_pll_dps_lcell_comb" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_1" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1972
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_1", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1972
+Info (12128): Elaborating entity "altera_pll_dps_lcell_comb" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_2" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1983
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_2", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1983
+Info (12128): Elaborating entity "altera_pll_dps_lcell_comb" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_3" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1994
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_3", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 1994
+Info (12128): Elaborating entity "altera_pll_dps_lcell_comb" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_4" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 2005
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_pll_dps_lcell_comb:lcell_cntsel_int_4", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 2005
+Info (12128): Elaborating entity "altera_cyclonev_pll" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 2224
+Warning (10034): Output port "extclk" at altera_cyclonev_pll.v(632) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 632
+Warning (10034): Output port "clkout[0]" at altera_cyclonev_pll.v(637) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 637
+Warning (10034): Output port "loaden" at altera_cyclonev_pll.v(641) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 641
+Warning (10034): Output port "lvdsclk" at altera_cyclonev_pll.v(642) has no driver File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 642
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 2224
+Info (12128): Elaborating entity "altera_cyclonev_pll_base" for hierarchy "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll|altera_cyclonev_pll_base:fpll_0" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 1153
+Info (12131): Elaborated megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|altera_cyclonev_pll:cyclonev_pll|altera_cyclonev_pll_base:fpll_0", which is child of megafunction instantiation "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_cyclonev_pll.v Line: 1153
+Info (12128): Elaborating entity "adc_interface" for hierarchy "adc_interface:inst4"
+Info (12128): Elaborating entity "adc_shiftreg" for hierarchy "adc_interface:inst4|adc_shiftreg:serialize" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 33
+Info (12128): Elaborating entity "lpm_shiftreg" for hierarchy "adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
+Info (12130): Elaborated megafunction instantiation "adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
+Info (12133): Instantiated megafunction "adc_interface:inst4|adc_shiftreg:serialize|lpm_shiftreg:LPM_SHIFTREG_component" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_shiftreg.v Line: 67
     Info (12134): Parameter "lpm_direction" = "LEFT"
     Info (12134): Parameter "lpm_type" = "LPM_SHIFTREG"
     Info (12134): Parameter "lpm_width" = "16"
-Info (12128): Elaborating entity "adc_fifo" for hierarchy "adc_interface:inst3|adc_fifo:fifo" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 45
-Info (12128): Elaborating entity "dcfifo" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_fifo.v Line: 76
-Info (12130): Elaborated megafunction instantiation "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_fifo.v Line: 76
-Info (12133): Instantiated megafunction "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/adc_fifo.v Line: 76
+Info (12128): Elaborating entity "ADC_FIFO" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/verilog/adc_interface.sv Line: 45
+Info (12128): Elaborating entity "dcfifo" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd Line: 93
+Info (12130): Elaborated megafunction instantiation "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd Line: 93
+Info (12133): Instantiated megafunction "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component" with the following parameter: File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/ADC_FIFO.vhd Line: 93
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
     Info (12134): Parameter "lpm_numwords" = "4"
     Info (12134): Parameter "lpm_showahead" = "OFF"
@@ -725,37 +1408,77 @@ Info (12133): Instantiated megafunction "adc_interface:inst3|adc_fifo:fifo|dcfif
     Info (12134): Parameter "wrsync_delaypipe" = "4"
 Info (12021): Found 1 design units, including 1 entities, in source file db/dcfifo_1rk1.tdf
     Info (12023): Found entity 1: dcfifo_1rk1 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 37
-Info (12128): Elaborating entity "dcfifo_1rk1" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/dcfifo.tdf Line: 191
+Info (12128): Elaborating entity "dcfifo_1rk1" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/dcfifo.tdf Line: 191
 Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_7g6.tdf
     Info (12023): Found entity 1: a_graycounter_7g6 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/a_graycounter_7g6.tdf Line: 25
-Info (12128): Elaborating entity "a_graycounter_7g6" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 48
+Info (12128): Elaborating entity "a_graycounter_7g6" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_7g6:rdptr_g1p" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 48
 Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_3ub.tdf
     Info (12023): Found entity 1: a_graycounter_3ub File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/a_graycounter_3ub.tdf Line: 25
-Info (12128): Elaborating entity "a_graycounter_3ub" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 49
+Info (12128): Elaborating entity "a_graycounter_3ub" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|a_graycounter_3ub:wrptr_g1p" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 49
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_6ia1.tdf
     Info (12023): Found entity 1: altsyncram_6ia1 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/altsyncram_6ia1.tdf Line: 28
-Info (12128): Elaborating entity "altsyncram_6ia1" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 50
+Info (12128): Elaborating entity "altsyncram_6ia1" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|altsyncram_6ia1:fifo_ram" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 50
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_b9l.tdf
     Info (12023): Found entity 1: alt_synch_pipe_b9l File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_b9l.tdf Line: 27
-Info (12128): Elaborating entity "alt_synch_pipe_b9l" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 57
+Info (12128): Elaborating entity "alt_synch_pipe_b9l" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 57
 Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_su8.tdf
     Info (12023): Found entity 1: dffpipe_su8 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dffpipe_su8.tdf Line: 25
-Info (12128): Elaborating entity "dffpipe_su8" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_b9l.tdf Line: 34
+Info (12128): Elaborating entity "dffpipe_su8" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_b9l:rs_dgwp|dffpipe_su8:dffpipe10" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_b9l.tdf Line: 34
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_c9l.tdf
     Info (12023): Found entity 1: alt_synch_pipe_c9l File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_c9l.tdf Line: 27
-Info (12128): Elaborating entity "alt_synch_pipe_c9l" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 58
+Info (12128): Elaborating entity "alt_synch_pipe_c9l" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 58
 Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_tu8.tdf
     Info (12023): Found entity 1: dffpipe_tu8 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dffpipe_tu8.tdf Line: 25
-Info (12128): Elaborating entity "dffpipe_tu8" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_c9l.tdf Line: 34
+Info (12128): Elaborating entity "dffpipe_tu8" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|alt_synch_pipe_c9l:ws_dgrp|dffpipe_tu8:dffpipe13" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/alt_synch_pipe_c9l.tdf Line: 34
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ru5.tdf
     Info (12023): Found entity 1: cmpr_ru5 File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/cmpr_ru5.tdf Line: 23
-Info (12128): Elaborating entity "cmpr_ru5" for hierarchy "adc_interface:inst3|adc_fifo:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|cmpr_ru5:rdempty_eq_comp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 59
-Error (12009): Node "clk_400kHz" is missing source
-Error (12009): Node "clk_12MHz" is missing source
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 2 warnings
-    Error: Peak virtual memory: 4856 megabytes
-    Error: Processing ended: Sun Feb  9 18:23:59 2025
-    Error: Elapsed time: 00:00:04
-    Error: Total CPU time (on all processors): 00:00:10
+Info (12128): Elaborating entity "cmpr_ru5" for hierarchy "adc_interface:inst4|ADC_FIFO:fifo|dcfifo:dcfifo_component|dcfifo_1rk1:auto_generated|cmpr_ru5:rdempty_eq_comp" File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/db/dcfifo_1rk1.tdf Line: 59
+Info (12128): Elaborating entity "HEX_DISP_6" for hierarchy "HEX_DISP_6:inst5"
+Info (12128): Elaborating entity "HEX_DISP" for hierarchy "HEX_DISP_6:inst5|HEX_DISP:inst1"
+Info (12128): Elaborating entity "LPM_CONSTANT" for hierarchy "LPM_CONSTANT:inst3"
+Info (12130): Elaborated megafunction instantiation "LPM_CONSTANT:inst3"
+Info (12133): Instantiated megafunction "LPM_CONSTANT:inst3" with the following parameter:
+    Info (12134): Parameter "LPM_CVALUE" = "abcd"
+    Info (12134): Parameter "LPM_WIDTH" = "16"
+Warning (12030): Port "extclk" on the entity instantiation of "cyclonev_pll" is connected to a signal of width 1. The formal width of the signal in the module is 2.  The extra bits will be left dangling without any fan-out logic. File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 2224
+Warning (14284): Synthesized away the following node(s):
+    Warning (14285): Synthesized away the following LCELL buffer node(s):
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|cntsel_temp[4]" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 425
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|cntsel_temp[3]" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 425
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|cntsel_temp[2]" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 425
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|cntsel_temp[1]" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 425
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|cntsel_temp[0]" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 425
+        Warning (14320): Synthesized away node "pll_main:inst1|pll_main_0002:pll_main_inst|altera_pll:altera_pll_i|gnd" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v Line: 427
+Warning (13050): Open-drain buffer(s) that do not directly drive top-level pin(s) are removed
+    Warning (13051): Converted the fanout from the open-drain buffer "oneshot_i2c:inst2|i2c_master:inst|scl" to the node "oneshot_i2c:inst2|i2c_master:inst|stretch" into a wire File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_master.vhd Line: 46
+    Warning (13051): Converted the fanout from the open-drain buffer "oneshot_i2c:inst2|i2c_master:inst|sda" to the node "oneshot_i2c:inst2|i2c_master:inst|process_1" into a wire File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_master.vhd Line: 45
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "AUD_DACDAT" is stuck at GND
+    Warning (13410): Pin "HEX4[4]" is stuck at GND
+    Warning (13410): Pin "HEX4[3]" is stuck at GND
+    Warning (13410): Pin "HEX4[2]" is stuck at GND
+    Warning (13410): Pin "HEX4[1]" is stuck at GND
+    Warning (13410): Pin "HEX5[6]" is stuck at VCC
+    Warning (13410): Pin "HEX5[5]" is stuck at GND
+    Warning (13410): Pin "HEX5[4]" is stuck at GND
+    Warning (13410): Pin "HEX5[3]" is stuck at GND
+    Warning (13410): Pin "HEX5[0]" is stuck at GND
+Info (286030): Timing-Driven Synthesis is running
+Critical Warning (18061): Ignored Power-Up Level option on the following registers
+    Critical Warning (18010): Register oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[0] will power up to High File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 81
+    Critical Warning (18010): Register oneshot_i2c:inst2|i2c_oneshot_ctrl:inst3|cmd_num[3] will power up to High File: C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/i2c_oneshot_ctrl.vhd Line: 81
+Info (17049): 5 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 12 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 294 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 50 output pins
+    Info (21061): Implemented 217 logic cells
+    Info (21064): Implemented 16 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
+    Info: Peak virtual memory: 4937 megabytes
+    Info: Processing ended: Tue Feb 25 16:35:03 2025
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:11
 
 

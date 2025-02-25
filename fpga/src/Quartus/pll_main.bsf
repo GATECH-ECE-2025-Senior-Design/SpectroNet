@@ -48,8 +48,8 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 160 112)
 		(output)
-		(text "outclk_1" (rect 0 0 31 12)(font "Arial" (font_size 8)))
-		(text "outclk_1" (rect 119 101 167 112)(font "Arial" (font_size 8)))
+		(text "outclk_2" (rect 0 0 33 12)(font "Arial" (font_size 8)))
+		(text "outclk_2" (rect 117 101 165 112)(font "Arial" (font_size 8)))
 		(line (pt 160 112)(pt 112 112)(line_width 1))
 	)
 	(port
@@ -66,7 +66,7 @@ https://fpgasoftware.intel.com/eula.
 		(text "reset" (rect 53 107 136 224)(font "Arial" (color 0 0 0)))
 		(text "outclk0" (rect 113 43 268 99)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "clk" (rect 97 67 212 144)(font "Arial" (color 0 0 0)))
-		(text "outclk1" (rect 113 83 268 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "outclk2" (rect 113 83 268 179)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "clk" (rect 97 107 212 224)(font "Arial" (color 0 0 0)))
 		(text "locked" (rect 113 123 262 259)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "export" (rect 82 147 200 304)(font "Arial" (color 0 0 0)))

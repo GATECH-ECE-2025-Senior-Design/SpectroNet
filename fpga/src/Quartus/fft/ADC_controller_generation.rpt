@@ -1,0 +1,58 @@
+Info: Starting: Create simulation model
+Info: qsys-generate "C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\ADC_controller.qsys" --simulation=VERILOG --allow-mixed-language-simulation --output-directory="C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\fft\simulation" --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading Quartus/ADC_controller.qsys
+Progress: Reading input file
+Progress: Adding adc_mega_0 [altera_up_avalon_adc_mega 18.0]
+Progress: Parameterizing module adc_mega_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: ADC_controller: Generating ADC_controller "ADC_controller" for SIM_VERILOG
+Info: adc_mega_0: Starting Generation of ADC Controller for DE-series Board
+Info: adc_mega_0: C:/intelfpga/23.1std/ip/altera/university_program/input_output/altera_up_avalon_adc/hdl/altera_up_avalon_adv_adc.v C:/Users/gamin/AppData/Local/Temp/alt0140_3945786937441754942.dir/0002_sopcgen/ADC_controller_adc_mega_0.v
+Warning: adc_mega_0: Generation callback did not provide a top level file.  Found ADC_controller_adc_mega_0.v in output directory - callback must `add_file $output_dir/ADC_controller_adc_mega_0.v {SIMULATION SYNTHESIS}`
+Info: adc_mega_0: "ADC_controller" instantiated altera_up_avalon_adc_mega "adc_mega_0"
+Info: ADC_controller: Done "ADC_controller" with 2 modules, 3 files
+Info: qsys-generate succeeded.
+Info: Finished: Create simulation model
+Info: Starting: Create Modelsim Project.
+Info: sim-script-gen --spd="C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\fft\ADC_controller.spd" --output-directory="C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/fft/simulation/" --use-relative-paths=true
+Info: Doing: ip-make-simscript --spd=C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\fft\ADC_controller.spd --output-directory=C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/fft/simulation/ --use-relative-paths=true
+Info: Generating the following file(s) for MODELSIM simulator in C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/fft/simulation/ directory:
+Info: 	mentor/msim_setup.tcl
+Info: Generating the following file(s) for RIVIERA simulator in C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/fft/simulation/ directory:
+Info: 	aldec/rivierapro_setup.tcl
+Info: For information on how to simulate your IP, see the explanatory comments in the simulator-specific subdirectories under C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/fft/simulation/.
+Info: Regenerate these scripts whenever you make any change to any Quartus-generated IP in your project.
+Info: Finished: Create Modelsim Project.
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate "C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\ADC_controller.qsys" --block-symbol-file --output-directory="C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\fft" --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading Quartus/ADC_controller.qsys
+Progress: Reading input file
+Progress: Adding adc_mega_0 [altera_up_avalon_adc_mega 18.0]
+Progress: Parameterizing module adc_mega_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate "C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\ADC_controller.qsys" --synthesis=VERILOG --output-directory="C:\Users\gamin\Documents\1Georgia Tech\Senior Design\SpectroNet\fpga\src\Quartus\fft\synthesis" --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading Quartus/ADC_controller.qsys
+Progress: Reading input file
+Progress: Adding adc_mega_0 [altera_up_avalon_adc_mega 18.0]
+Progress: Parameterizing module adc_mega_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: ADC_controller: Generating ADC_controller "ADC_controller" for QUARTUS_SYNTH
+Info: adc_mega_0: Starting Generation of ADC Controller for DE-series Board
+Info: adc_mega_0: C:/intelfpga/23.1std/ip/altera/university_program/input_output/altera_up_avalon_adc/hdl/altera_up_avalon_adv_adc.v C:/Users/gamin/AppData/Local/Temp/alt0140_3945786937441754942.dir/0006_sopcgen/ADC_controller_adc_mega_0.v
+Info: adc_mega_0: "ADC_controller" instantiated altera_up_avalon_adc_mega "adc_mega_0"
+Info: ADC_controller: Done "ADC_controller" with 2 modules, 3 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
