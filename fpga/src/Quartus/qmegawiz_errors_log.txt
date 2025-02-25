@@ -1,0 +1,36 @@
+
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 02PM:16:54>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 02PM:16:55>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 02PM:16:56>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 04PM:39:18>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 04PM:39:26>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 04PM:39:50>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/gamin/Documents/1Georgia Tech/Senior Design/SpectroNet/fpga/src/Quartus/pll_main.v
+
+Feb 23 04PM:39:57>: Megafunction PLL Intel FPGA IP v23.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted

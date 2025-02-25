@@ -11,7 +11,7 @@ module hex_disp
     logic [3:0] latched_hex;
     logic [3:0] hex_d;
 
-    always @(posedge cs, resetn) begin
+    always @(posedge cs, negedge resetn) begin
         if (resetn == '0)
             latched_hex <= 4'b0000; 
         else begin
