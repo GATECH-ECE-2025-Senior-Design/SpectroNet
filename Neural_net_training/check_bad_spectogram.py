@@ -2,8 +2,6 @@ import os
 import numpy as np
 import random
 
-spectrogram_folder = "/content/spectrogram_data/images"
-
 # List all .npy files
 npy_files = [f for f in os.listdir(spectrogram_folder) if f.endswith('.npy')]
 

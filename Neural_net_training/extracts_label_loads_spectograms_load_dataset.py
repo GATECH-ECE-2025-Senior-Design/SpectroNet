@@ -12,7 +12,7 @@ N_CLASSES = 10
 
 # Extract only the first number (X) from filename
 def extract_label(filename):
-    match = re.match(r'(\d+)_(\d+)_(\d+)\.npy', filename)  # Match full filename pattern
+    match = re.match(r'(\d+)_(\d+)_(\d+)_noisy\.npy', filename)  # Match full filename pattern
     if match:
         first_num = int(match.group(1))  # Take only the first number (X)
         speaker = int(match.group(2))

@@ -2,13 +2,13 @@ from tensorflow.keras.callbacks import ReduceLROnPlateau
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 # Callback to save the best model based on validation loss
-checkpoint = ModelCheckpoint("best_model.keras", monitor="val_loss", 
+checkpoint = ModelCheckpoint("best_model.keras", monitor="val_accuracy", mode="max", 
                              save_best_only=True, verbose=1)
 
 # early_stopping = EarlyStopping(monitor="val_loss", patience=3, restore_best_weights=True, verbose=1)
 
 # Reduce learning rate when val_loss stops improving
-lr_scheduler = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=2, verbose=1, min_lr=1e-6)
+lr_scheduler = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, verbose=1, min_lr=5e-5)
 
 # Train model for 20 epochs
 history = model.fit(
