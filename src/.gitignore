@@ -1,0 +1,20 @@
+# Ignore everything by default
+**
+
+# Allow everything inside cnn_modeling/
+!cnn_modeling/
+!cnn_modeling/**
+
+# Exclude specific files and directories in cnn_modeling/
+cnn_modeling/__pycache__/
+cnn_modeling/**/*.log
+cnn_modeling/**/*.out
+cnn_modeling/**/*.pth
+
+# Allow all directories inside datasets/
+!datasets/noise/PCAFETER/*
+!output/
+!output/**/
+
+# Prevent ignoring the .gitignore file itself
+!.gitignore
