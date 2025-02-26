@@ -1,0 +1,15 @@
+# Dataset folder
+src/datasets/
+
+# Quartus project files
+*.qws
+*.qdf
+
+# Quartus generated directories
+fpga/quartus/db/
+fpga/quartus/incremental_db/
+fpga/quartus/output_files/
+
+# Quartus generated files
+fpga/quartus/*.txt
+fpga/src/rtl/*.bak
