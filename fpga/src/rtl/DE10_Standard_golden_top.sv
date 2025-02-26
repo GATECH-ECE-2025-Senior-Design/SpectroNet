@@ -40,7 +40,7 @@ module DE10_Standard_golden_top(
       input              CLOCK2_50,
       input              CLOCK3_50,
       input              CLOCK4_50,
-      input              CLOCK_50,
+      input              CLOCK_50, // 50 MHz
 
       ///////// KEY /////////
       input    [ 3: 0]   KEY,
@@ -206,19 +206,54 @@ module DE10_Standard_golden_top(
       input              IRDA_RXD
 );
 
+parameter ADC_WIDTH = 16;
 
-//=======================================================
-//  REG/WIRE declarations
-//=======================================================
-
-
+logic [15:0]      adc_data;
+logic             adc_data_valid;
 
 
-//=======================================================
-//  Structural coding
-//=======================================================
+adc_interface # (
+    .ADC_WIDTH(ADC_WIDTH)
+  )
+  adc_interface_inst (
+    .i_adc_wclk(AUD_ADCLRCK),
+    .i_adc_bclk(AUD_BCLK),
+    .i_adc_dat(AUD_ADCDAT),
+    .i_poll_clk(CLOCK_50),
+    .o_adc_dat(adc_data),
+    .o_sample_rdy(adc_data_valid)
+  );
 
+  hex_disp  hex_disp_3_inst (
+    .hex_val(adc_data[15:12]),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(1),
+    .segments(HEX3)
+  );
 
+  hex_disp  hex_disp_2_inst (
+    .hex_val(adc_data[11:8]),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(1),
+    .segments(HEX2)
+  );
 
+  hex_disp  hex_disp_1_inst (
+    .hex_val(adc_data[7:4]),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(1),
+    .segments(HEX1)
+  );
+
+  hex_disp  hex_disp_0_inst (
+    .hex_val(adc_data[3:0]),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(1),
+    .segments(HEX0)
+  );
 
 endmodule
