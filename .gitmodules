@@ -1,3 +1,0 @@
-[submodule "src/software/AudioMNIST"]
-	path = src/software/AudioMNIST
-	url = https://github.com/soerenab/AudioMNIST.git
