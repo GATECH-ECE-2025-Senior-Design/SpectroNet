@@ -1,8 +1,0 @@
-module face_top 
-    (
-        input logic     i_clk,
-        input logic     i_rst
-    );
-
-
-endmodule
