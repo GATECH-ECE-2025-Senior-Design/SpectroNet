@@ -1,3 +1,4 @@
+import socket
 import spectrogram as spec
 import numpy as np
 import noise_integration
@@ -75,8 +76,12 @@ dtype = np.dtype(args.dtype).type
 # Notes: noise gen preserves sample rate of digit, resamples noise
 # should it have a different sample rate from the digit
 if (args.enable_noise):
-  noise_integration.integrate_noise(args.snr, args.noise_samples, args.verbose)
+  noise_integration.integrate_noise(args.snr, args.noise_samples, args.verbose, 800)
   digits_folder = os.path.join(datasets_folder, "noisy_digits")
+  print("noise enabled")
+  if(socket.gethostname().find("linlab") != -1):
+    digits_folder = "/usr/scratch/spectronet/noisy_digits"
+    print("linlab detected, using scratch folder")
 
 # walk the Audio MNIST dataset
 for subdir, dirs, files in os.walk(digits_folder):
