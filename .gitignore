@@ -21,3 +21,4 @@ fpga/quartus/simulation/
 # Quartus generated files
 fpga/quartus/*.txt
 fpga/src/rtl/*.bak
+fpga/src/constraints/*.bak

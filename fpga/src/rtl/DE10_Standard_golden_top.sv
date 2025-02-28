@@ -180,7 +180,7 @@ module DE10_Standard_golden_top(
       inout              HPS_LCM_RST_N,
       output             HPS_LCM_SPIM_CLK,
       output             HPS_LCM_SPIM_MOSI,
-		input					 HPS_LCM_SPIM_MISO,
+      input              HPS_LCM_SPIM_MISO,
       output             HPS_LCM_SPIM_SS,
       inout              HPS_LED,
       inout              HPS_LTC_GPIO,
@@ -206,13 +206,36 @@ module DE10_Standard_golden_top(
       input              IRDA_RXD
 );
 
-parameter ADC_WIDTH = 16;
+  ////////////////
+  // PARAMETERS //
+  ////////////////
 
-logic [15:0]      adc_data;
-logic             adc_data_valid;
+  parameter ADC_WIDTH = 16;
 
+  /////////////
+  // SIGNALS //
+  /////////////
 
-adc_interface # (
+  // Mic signals
+  logic [15:0]      adc_data;
+  logic             adc_data_valid;
+ 
+  // I2C signals
+  logic             i2c_busy;
+  logic [7:0]       i2c_addr;
+  logic [7:0]       i2c_data_wr;
+  logic [7:0]       i2c_data_rd;  // open
+  logic             i2c_ack_err;  // open
+  logic             i2c_cmd_valid;
+  
+  ///////////////
+  // Instances //
+  ///////////////
+
+  // Mic input --> 16 bit audio out.
+  // Can be configured to 24 bit via I2C.
+  // 32 bit configuration is just zero-padded 24 bit.
+  adc_interface # (
     .ADC_WIDTH(ADC_WIDTH)
   )
   adc_interface_inst (
@@ -224,6 +247,40 @@ adc_interface # (
     .o_sample_rdy(adc_data_valid)
   );
 
+  // State Machine to Configure WM8731
+  i2c_oneshot_ctrl  i2c_oneshot_ctrl_inst (
+    .resetn(1'b1),
+    .clk(CLOCK_50),
+    .i2c_busy(i2c_busy),
+    .tx_addr(i2c_addr),
+    .tx_byte(i2c_data_wr),
+    .comm_en(i2c_cmd_valid)
+  );
+
+  // I2C Master for WM8731 Control
+  i2c_master # (
+    .input_clk(50_000_000),
+    .bus_clk(100_000)
+  )
+  i2c_master_inst (
+    .clk(CLOCK_50),
+    .reset_n(1'b1),
+    .ena(i2c_cmd_valid),
+    .addr(i2c_addr[6:0]),
+    .rw(1'b0), // write only
+    .data_wr(i2c_data_wr),
+    .busy(i2c_busy),
+    .data_rd(i2c_data_rd),  // open
+    .ack_error(i2c_ack_err),  // open
+    .sda(FPGA_I2C_SDAT),
+    .scl(FPGA_I2C_SCLK)
+  );
+
+  ///////////
+  // DEBUG //
+  ///////////
+  
+  // Display raw audio as four 7-segs
   hex_disp  hex_disp_3_inst (
     .hex_val(adc_data[15:12]),
     .cs(CLOCK_50),
