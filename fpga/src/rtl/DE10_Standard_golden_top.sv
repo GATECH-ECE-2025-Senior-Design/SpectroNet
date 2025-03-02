@@ -217,7 +217,8 @@ module DE10_Standard_golden_top(
   /////////////
 
   // Internal reset
-  logic             sys_rst; // TODO: hook to something
+  logic             rst_s1, rst_s2; // reset synch stages
+  logic             sys_rst;
   logic             sys_rst_n;
 
   // Mic signals
@@ -241,7 +242,14 @@ module DE10_Standard_golden_top(
   // Logic //
   ///////////
 
-  assign sys_rst_n = ~sys_rst;
+  assign sys_rst = ~sys_rst_n;
+  assign sys_rst_n = rst_s2;
+
+  // 2 flop sync the reset from an active low KEY[0]
+  always_ff @(posedge CLOCK_50) begin
+    rst_s2 <= rst_s1;
+    rst_s1 <= KEY[0];
+  end
 
   // Mic input --> 16 bit audio out.
   // Can be configured to 24 bit via I2C.
@@ -335,6 +343,23 @@ module DE10_Standard_golden_top(
     .free(adc_data_valid),
     .resetn(sys_rst_n),
     .segments(HEX0)
+  );
+
+  // Display for other values
+  hex_disp  hex_disp_04_inst (
+    .hex_val(4'b1010),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(sys_rst_n),
+    .segments(HEX4)
+  );
+
+  hex_disp  hex_disp_5_inst (
+    .hex_val(4'b0101),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(sys_rst_n),
+    .segments(HEX5)
   );
   
   // Display classification on 10 LEDs
