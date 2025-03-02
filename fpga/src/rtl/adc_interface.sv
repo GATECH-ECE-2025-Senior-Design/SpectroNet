@@ -6,8 +6,9 @@
     Ported to SV by: Jacob Dudik
 */
 
-module adc_interface
-    (
+module adc_interface #(
+        parameter ADC_WIDTH = 16
+    )(
         input logic i_adc_wclk, // audio CODEC LR clock | PIN_AH29
         input logic i_adc_bclk, // audio CODEC bitstream clock | PIN_AF30
         input logic i_adc_dat,  // audio CODEC ADC data | PIN_AJ29
@@ -16,8 +17,6 @@ module adc_interface
         output logic [ADC_WIDTH-1:0] o_adc_dat,
         output logic o_sample_rdy
     );
-	 
-	 parameter ADC_WIDTH = 16;
 
     logic [ADC_WIDTH-1:0] shifted_data; // Shift register output
     logic [ADC_WIDTH-1:0] buffer_data;  // Output buffer
@@ -52,10 +51,10 @@ module adc_interface
     always_ff @(negedge i_poll_clk) begin
         /*
             Using the falling edge keeps changes away from sample times
-		    in your peripheral.  This isn't a good practice because it can
-		    cut your effective max frequency in half, but this isn't a
-		    bleeding-edge system and this is much easier than trying to
-		    design around timing constraints.
+        in your peripheral.  This isn't a good practice because it can
+        cut your effective max frequency in half, but this isn't a
+        bleeding-edge system and this is much easier than trying to
+        design around timing constraints.
         */
 
         // Indicate data new after pulled from FIFO.

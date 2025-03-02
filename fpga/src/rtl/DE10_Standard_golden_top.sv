@@ -216,6 +216,10 @@ module DE10_Standard_golden_top(
   // SIGNALS //
   /////////////
 
+  // Internal reset
+  logic             sys_rst; // TODO: hook to something
+  logic             sys_rst_n;
+
   // Mic signals
   logic [15:0]      adc_data;
   logic             adc_data_valid;
@@ -227,10 +231,17 @@ module DE10_Standard_golden_top(
   logic [7:0]       i2c_data_rd;  // open
   logic             i2c_ack_err;  // open
   logic             i2c_cmd_valid;
-  
-  ///////////////
-  // Instances //
-  ///////////////
+
+  //  FACE signals
+
+  logic [9:0]       face_out;
+  logic             face_out_valid;
+
+  ///////////
+  // Logic //
+  ///////////
+
+  assign sys_rst_n = ~sys_rst;
 
   // Mic input --> 16 bit audio out.
   // Can be configured to 24 bit via I2C.
@@ -249,7 +260,7 @@ module DE10_Standard_golden_top(
 
   // State Machine to Configure WM8731
   i2c_oneshot_ctrl  i2c_oneshot_ctrl_inst (
-    .resetn(1'b1),
+    .resetn(sys_rst_n),
     .clk(CLOCK_50),
     .i2c_busy(i2c_busy),
     .tx_addr(i2c_addr),
@@ -264,7 +275,7 @@ module DE10_Standard_golden_top(
   )
   i2c_master_inst (
     .clk(CLOCK_50),
-    .reset_n(1'b1),
+    .reset_n(sys_rst_n),
     .ena(i2c_cmd_valid),
     .addr(i2c_addr[6:0]),
     .rw(1'b0), // write only
@@ -274,6 +285,19 @@ module DE10_Standard_golden_top(
     .ack_error(i2c_ack_err),  // open
     .sda(FPGA_I2C_SDAT),
     .scl(FPGA_I2C_SCLK)
+  );
+  
+  // FPGA Audio Classification Engine
+  face_top #(
+    .DATA_WIDTH(ADC_WIDTH)
+  )
+  face_top_inst (
+    .i_clk(CLOCK_50),
+    .i_rst(sys_rst),
+    .i_aud_data(adc_data),
+    .i_aud_data_valid(adc_data_valid),
+    .o_classify(face_out),
+    .o_classify_valid(face_out_valid)
   );
 
   ///////////
@@ -285,7 +309,7 @@ module DE10_Standard_golden_top(
     .hex_val(adc_data[15:12]),
     .cs(CLOCK_50),
     .free(adc_data_valid),
-    .resetn(1),
+    .resetn(sys_rst_n),
     .segments(HEX3)
   );
 
@@ -293,7 +317,7 @@ module DE10_Standard_golden_top(
     .hex_val(adc_data[11:8]),
     .cs(CLOCK_50),
     .free(adc_data_valid),
-    .resetn(1),
+    .resetn(sys_rst_n),
     .segments(HEX2)
   );
 
@@ -301,7 +325,7 @@ module DE10_Standard_golden_top(
     .hex_val(adc_data[7:4]),
     .cs(CLOCK_50),
     .free(adc_data_valid),
-    .resetn(1),
+    .resetn(sys_rst_n),
     .segments(HEX1)
   );
 
@@ -309,8 +333,20 @@ module DE10_Standard_golden_top(
     .hex_val(adc_data[3:0]),
     .cs(CLOCK_50),
     .free(adc_data_valid),
-    .resetn(1),
+    .resetn(sys_rst_n),
     .segments(HEX0)
   );
+  
+  // Display classification on 10 LEDs
+  always_ff @(posedge CLOCK_50) begin
+    if (sys_rst == 1) begin
+      LEDR <= 0;
+    end
+    else begin
+      if (face_out_valid == 1) begin
+        LEDR <= face_out;
+      end
+    end
+  end
 
 endmodule
