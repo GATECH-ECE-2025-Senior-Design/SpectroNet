@@ -79,7 +79,7 @@ module face_top # (
     .sclr(i_rst),                 //input, width = 1, synch reset
     .wrreq(fifo_dout_ready),      //input, width = 1
     .q(fifo_dout),                //output, width = DATA_WIDTH
-    .usedw(/*fft_sample_cntr*/),      //output, width = ADDR_WIDTH
+    .usedw(fft_sample_cntr),      //output, width = ADDR_WIDTH
     .empty(fifo_empty),           //output, width = 1
     .full(fifo_full)              //output, width = 1
   );
@@ -107,17 +107,18 @@ module face_top # (
     .fftpts_out   ()                    //       .fftpts_out
   );
   
-  // Track samples going into the FFT core & handle SoP, EoP
-  always_ff @(posedge i_clk) begin
-    if (i_rst == 1) begin
-      fft_sample_cntr <= 0;
-    end
-    else begin
-      if (fifo_dout_valid && fifo_dout_ready) begin
-        fft_sample_cntr <= fft_sample_cntr + 1;
-      end
-    end
-  end
+  // // Track samples going into the FFT core & handle SoP, EoP
+  // always_ff @(posedge i_clk) begin
+  //   if (i_rst == 1) begin
+  //     fft_sample_cntr <= 0;
+  //   end
+  //   else begin
+  //     if (fifo_dout_valid && fifo_dout_ready) begin
+  //       fft_sample_cntr <= fft_sample_cntr + 1;
+  //     end
+  //   end
+  // end
+
   // Constant 512 point FFT, could make variable/interleaved later.
   assign fft_sop_in = (fft_sample_cntr == 0) && fifo_dout_valid;
   assign fft_eop_in = (fft_sample_cntr == 511) && fifo_dout_valid;
