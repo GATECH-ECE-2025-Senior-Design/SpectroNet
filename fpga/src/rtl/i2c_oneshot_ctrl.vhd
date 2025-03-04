@@ -10,7 +10,10 @@ use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
 entity i2c_oneshot_ctrl is
-
+  generic(
+		iwl : std_logic_vector(1 downto 0) := "00"; -- input word length in bits (2'b00=16bit, 2'b01=20bit, 2'b10=24bit, 2'b11=32bit)
+		sample_control : std_logic_vector(5 downto 0) := "001101" -- sampling control bits (default 8kHz USB mode; refer to WM8731 manual)
+	);
   port(
     resetn          : in  std_logic;
     clk             : in  std_logic;
@@ -39,21 +42,33 @@ architecture main of i2c_oneshot_ctrl is
 begin
 
   tx_addr <= x"34";  -- set the I2C controller's address
+
   commands(0) <= 
     std_logic_vector(to_unsigned(2#0001111_000000000#, 16));  -- full reset
+
   commands(1) <= 
-    std_logic_vector(to_unsigned(2#0000111_001010011#, 16));  -- dsp master, 16-bit, data on 2nd clock
+    "00001110" 	-- Digital Audio Interface Register Addr
+    & "0101" 		-- dsp master, data on 2nd BCLK
+    & iwl				-- parameterized input word length
+    & "11";		  -- dsp mode
+  
   commands(2) <= 
-    std_logic_vector(to_unsigned(2#0001000_000000001#, 16));  -- usb mode, 48khz sampling
-  commands(3) <= 
+    "0001000000" -- Sampling Control Register Addr and pad
+    & sample_control; 
+  
+    commands(3) <= 
     std_logic_vector(to_unsigned(2#0001001_000000001#, 16));  -- activate digital interface
-  commands(4) <= 
+  
+    commands(4) <= 
     std_logic_vector(to_unsigned(2#0000010_100000000#, 16));  -- headphone mute
-  commands(5) <= 
+  
+    commands(5) <= 
     std_logic_vector(to_unsigned(2#0000100_000000100#, 16));  -- enable mic to adc, unmute mic, no boost
-  commands(6) <= 
+  
+    commands(6) <= 
     std_logic_vector(to_unsigned(2#0000000_100000011#, 16));  -- unmute line-in, high attenuation
-  commands(7) <= 
+  
+    commands(7) <= 
     std_logic_vector(to_unsigned(2#0000110_001111001#, 16));  -- power up adc and mic, powerdown everything else
 
   
