@@ -37,10 +37,10 @@
 module DE10_Standard_golden_top(
 
       ///////// CLOCK /////////
+      input              CLOCK_50, // 50 MHz
       input              CLOCK2_50,
       input              CLOCK3_50,
       input              CLOCK4_50,
-      input              CLOCK_50, // 50 MHz
 
       ///////// KEY /////////
       input    [ 3: 0]   KEY,
@@ -217,8 +217,14 @@ module DE10_Standard_golden_top(
   /////////////
 
   // Internal reset
-  logic             sys_rst; // TODO: hook to something
+  logic             rst_s1, rst_s2; // reset synch stages
+  logic             sys_rst;
   logic             sys_rst_n;
+
+  // Internal clocks
+  logic             clk_adc;  // 12MHz clock for the audio CODEC
+  logic             clk_400k; // currently unused 400kHz clock
+  logic             pll_locked;
 
   // Mic signals
   logic [15:0]      adc_data;
@@ -237,11 +243,30 @@ module DE10_Standard_golden_top(
   logic [9:0]       face_out;
   logic             face_out_valid;
 
+
+
   ///////////
   // Logic //
   ///////////
 
-  assign sys_rst_n = ~sys_rst;
+  assign sys_rst = ~sys_rst_n;
+  assign sys_rst_n = rst_s2;
+
+  // 2 flop sync the reset from an active low KEY[0]
+  always_ff @(posedge CLOCK_50) begin
+    rst_s2 <= rst_s1;
+    rst_s1 <= KEY[0];
+  end
+
+  // PLL for the CODEC clock
+  pll_main pll_main_inst (
+    .refclk(CLOCK_50),
+    .rst(sys_rst),
+    .outclk_0(clk_adc),
+    .outclk_2(clk_400k),
+    .locked(pll_locked)
+  );
+  assign AUD_XCK = clk_adc;
 
   // Mic input --> 16 bit audio out.
   // Can be configured to 24 bit via I2C.
@@ -253,7 +278,7 @@ module DE10_Standard_golden_top(
     .i_adc_wclk(AUD_ADCLRCK),
     .i_adc_bclk(AUD_BCLK),
     .i_adc_dat(AUD_ADCDAT),
-    .i_poll_clk(CLOCK_50),
+    .i_poll_clk(AUD_XCK), // 12MHz, changed from CLOCK_50
     .o_adc_dat(adc_data),
     .o_sample_rdy(adc_data_valid)
   );
@@ -277,7 +302,7 @@ module DE10_Standard_golden_top(
     .clk(CLOCK_50),
     .reset_n(sys_rst_n),
     .ena(i2c_cmd_valid),
-    .addr(i2c_addr[6:0]),
+    .addr(i2c_addr[7:1]),
     .rw(1'b0), // write only
     .data_wr(i2c_data_wr),
     .busy(i2c_busy),
@@ -336,6 +361,23 @@ module DE10_Standard_golden_top(
     .resetn(sys_rst_n),
     .segments(HEX0)
   );
+
+  // Display for other values
+  hex_disp  hex_disp_04_inst (
+    .hex_val(4'b0000),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(sys_rst_n),
+    .segments(HEX4)
+  );
+
+  hex_disp  hex_disp_5_inst (
+    .hex_val(4'b0000),
+    .cs(CLOCK_50),
+    .free(adc_data_valid),
+    .resetn(sys_rst_n),
+    .segments(HEX5)
+  );
   
   // Display classification on 10 LEDs
   always_ff @(posedge CLOCK_50) begin
@@ -343,9 +385,14 @@ module DE10_Standard_golden_top(
       LEDR <= 0;
     end
     else begin
+      LEDR[9:2] <= '0;
+      LEDR[0] <= adc_data_valid;
+      LEDR[1] <= AUD_XCK;
+      /*
       if (face_out_valid == 1) begin
         LEDR <= face_out;
       end
+      */
     end
   end
 
