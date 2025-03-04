@@ -74,7 +74,7 @@ def make_noisy_folder(path: str, SNR: int, num_noise_samples: int, verbose, len:
           digit = AudioSegment.from_file(os.path.normpath(os.path.join(path,file)))
           noisy_digit = add_noise(digit, SNR, num_noise_samples, verbose, file, len)
           noisy_digit_path = os.path.join(noisy_digits_subfolder, os.path.basename(file))
-          noisy_digit.export(noisy_digit_path, format="wav", bitrate="768k", parameters=['-f', 's16le'])
+          noisy_digit.export(noisy_digit_path, format="wav", bitrate="768k", parameters=['-f', 'f32le'])
 
 
 def integrate_noise(SNR: int, num_noise_samples: int, verbose: bool, len: int):
