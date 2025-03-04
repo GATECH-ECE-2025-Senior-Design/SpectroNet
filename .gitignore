@@ -17,7 +17,7 @@ fpga/quartus/pll_main/
 fpga/quartus/pll_main_sim/
 fpga/quartus/unnamed/
 fpga/quartus/simulation/
-fpga/ip/.qsys_edit/
+fpga/src/ip/.qsys_edit/
 
 # Quartus generated files
 fpga/quartus/*.txt

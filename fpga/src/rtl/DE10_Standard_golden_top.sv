@@ -261,7 +261,7 @@ module DE10_Standard_golden_top(
     .i_adc_wclk(AUD_ADCLRCK),
     .i_adc_bclk(AUD_BCLK),
     .i_adc_dat(AUD_ADCDAT),
-    .i_poll_clk(CLOCK_50),
+    .i_poll_clk(AUD_XCK), // 12MHz, changed from CLOCK_50
     .o_adc_dat(adc_data),
     .o_sample_rdy(adc_data_valid)
   );
@@ -285,7 +285,7 @@ module DE10_Standard_golden_top(
     .clk(CLOCK_50),
     .reset_n(sys_rst_n),
     .ena(i2c_cmd_valid),
-    .addr(i2c_addr[6:0]),
+    .addr(i2c_addr[7:1]),
     .rw(1'b0), // write only
     .data_wr(i2c_data_wr),
     .busy(i2c_busy),
@@ -368,9 +368,14 @@ module DE10_Standard_golden_top(
       LEDR <= 0;
     end
     else begin
+      LEDR[9:2] <= '0;
+      LEDR[0] <= adc_data_valid;
+      LEDR[1] <= AUD_XCK;
+      /*
       if (face_out_valid == 1) begin
         LEDR <= face_out;
       end
+      */
     end
   end
 
