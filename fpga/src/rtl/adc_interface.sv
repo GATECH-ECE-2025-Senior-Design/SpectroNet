@@ -3,7 +3,7 @@
     and crosses between the sampling clk and the ADC capture clock domains
 
     Author: Kevin Johnson
-    Ported to SV by: Jacob Dudik
+    Ported to SV and modified by: Jacob Dudik
 */
 
 module adc_interface #(
@@ -25,6 +25,7 @@ module adc_interface #(
     int bit_count;  // Counter for number of bits shifted in
 
     // Shift register to parallelize the data from the ADC
+    // THIS IS 16 BITS LONG AND WILL NEED TO BE ADJUSTED IF ADC_WIDHT != 16
     adc_shiftreg serialize 
     (
         .clock(i_adc_bclk),
@@ -64,10 +65,10 @@ module adc_interface #(
 
     // Track number of bits coming in and latch into FIFO when needed
     always_ff @(posedge i_adc_bclk) begin
-        if (i_adc_wclk == '1) bit_count <= 16; // Start counting when word clock is high
+        if (i_adc_wclk == '1) bit_count <= ADC_WIDTH; // Start counting when word clock is high
         else if (bit_count != 0) bit_count <= bit_count - 1;
         
-        if (bit_count == 1) write_req <= '1; // Write data to FIFO after 16 bits have been shifted in
+        if (bit_count == 1) write_req <= '1; // Write data to FIFO after ADC_WIDTH bits have been shifted in
         else write_req <= '0;
     end
 endmodule

@@ -364,7 +364,7 @@ module DE10_Standard_golden_top(
 
   // Display for other values
   hex_disp  hex_disp_04_inst (
-    .hex_val(4'b1010),
+    .hex_val(4'b0000),
     .cs(CLOCK_50),
     .free(adc_data_valid),
     .resetn(sys_rst_n),
@@ -372,7 +372,7 @@ module DE10_Standard_golden_top(
   );
 
   hex_disp  hex_disp_5_inst (
-    .hex_val(4'b0101),
+    .hex_val(4'b0000),
     .cs(CLOCK_50),
     .free(adc_data_valid),
     .resetn(sys_rst_n),
