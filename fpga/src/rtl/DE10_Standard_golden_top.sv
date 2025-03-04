@@ -37,10 +37,10 @@
 module DE10_Standard_golden_top(
 
       ///////// CLOCK /////////
+      input              CLOCK_50, // 50 MHz
       input              CLOCK2_50,
       input              CLOCK3_50,
       input              CLOCK4_50,
-      input              CLOCK_50, // 50 MHz
 
       ///////// KEY /////////
       input    [ 3: 0]   KEY,
@@ -221,6 +221,11 @@ module DE10_Standard_golden_top(
   logic             sys_rst;
   logic             sys_rst_n;
 
+  // Internal clocks
+  logic             clk_adc;  // 12MHz clock for the audio CODEC
+  logic             clk_400k; // currently unused 400kHz clock
+  logic             pll_locked;
+
   // Mic signals
   logic [15:0]      adc_data;
   logic             adc_data_valid;
@@ -238,6 +243,8 @@ module DE10_Standard_golden_top(
   logic [9:0]       face_out;
   logic             face_out_valid;
 
+
+
   ///////////
   // Logic //
   ///////////
@@ -250,6 +257,16 @@ module DE10_Standard_golden_top(
     rst_s2 <= rst_s1;
     rst_s1 <= KEY[0];
   end
+
+  // PLL for the CODEC clock
+  pll_main pll_main_inst (
+    .refclk(CLOCK_50),
+    .rst(sys_rst),
+    .outclk_0(clk_adc),
+    .outclk_2(clk_400k),
+    .locked(pll_locked)
+  );
+  assign AUD_XCK = clk_adc;
 
   // Mic input --> 16 bit audio out.
   // Can be configured to 24 bit via I2C.
