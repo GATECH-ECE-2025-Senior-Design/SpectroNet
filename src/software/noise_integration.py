@@ -23,13 +23,23 @@ if(socket.gethostname().find("linlab") != -1):
 if (os.path.exists(noisy_digits_folder) == False):
     os.makedirs(noisy_digits_folder)
 
-def float32_to_fixed_point(arr, m, n):
-    arr = arr.astype(np.float32)
+def float32_to_fixed_point(arr, m, n, num_type: str):
+    arr = (arr[1]).astype(np.float32)
     scale = 2 ** n
     fixed_point_array = np.round(arr * scale).astype(np.int32)
+    if (m + n == 16 and num_type == 'int16'):
+        print()
+    elif (m + n == 8 and num_type == 'int8'):
+        print()
+    else:
+        raise Exception("you're skill issued the conversion check your m and n and num_type it needs to be int8 or int16")
     max_val = (1 << (m + n - 1)) - 1
     min_val = - (1 << (m + n - 1))
     fixed_point_array = np.clip(fixed_point_array, min_val, max_val)
+    if num_type == 'int8':
+        fixed_point_array = fixed_point_array.astype(np.int8)
+    elif num_type == 'int16':
+        fixed_point_array = fixed_point_array.astype(np.int16)
     return fixed_point_array
 
 # Because the noise samples are considerably longer than the number samples
