@@ -4,6 +4,7 @@ from pydub import AudioSegment
 from pydub.silence import detect_leading_silence
 import threading
 import socket
+import numpy as np
 
 # Run this file to integrate noise into the dataset - it currently is set to output a bunch of 
 # noisy WAV files into datasets/noisy_digits with the SNR set below
@@ -21,6 +22,15 @@ if(socket.gethostname().find("linlab") != -1):
 
 if (os.path.exists(noisy_digits_folder) == False):
     os.makedirs(noisy_digits_folder)
+
+def float32_to_fixed_point(arr, m, n):
+    arr = arr.astype(np.float32)
+    scale = 2 ** n
+    fixed_point_array = np.round(arr * scale).astype(np.int32)
+    max_val = (1 << (m + n - 1)) - 1
+    min_val = - (1 << (m + n - 1))
+    fixed_point_array = np.clip(fixed_point_array, min_val, max_val)
+    return fixed_point_array
 
 # Because the noise samples are considerably longer than the number samples
 # I will clip a random portion of the noise sample and overlay the digit on it.
