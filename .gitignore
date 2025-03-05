@@ -21,6 +21,12 @@ fpga/src/ip/.qsys_edit/
 
 # Quartus generated files
 fpga/quartus/*.txt
-fpga/src/rtl/*.bak
-fpga/src/constraints/*.bak
-fpga/quartus/*.sopcinfo
+fpga/src/ip/*.csv
+fpga/src/ip/fft_512
+
+# These are for Quartus but feel free to change if they are too broad
+*.sopcinfo
+*.rpt
+*.bak
+*.bsf
+*.cmp

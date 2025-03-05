@@ -39,7 +39,7 @@ set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name 
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "bGF0ZW5jeV90YXJnZXQ=::Mg==::VGFyZ2V0"
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "cGVyZm9ybWFuY2VfZ29hbA==::ZnJlcXVlbmN5::R29hbA=="
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "cm91bmRpbmdfbW9kZQ==::bmVhcmVzdCB3aXRoIHRpZSBicmVha2luZyBhd2F5IGZyb20gemVybw==::TW9kZQ=="
-set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "cm91bmRpbmdfbW9kZV9kZXJpdmVk::bmVhcmVzdCB3aXRoIHRpZSBicmVha2luZyBhd2F5IGZyb20gemVybw==::TW9kZQ=="
+set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "cm91bmRpbmdfbW9kZV9kZXJpdmVk::bmVhcmVzdCB3aXRoIHRpZSBicmVha2luZyB0byBldmVu::TW9kZQ=="
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "dXNlX3JvdW5kaW5nX21vZGU=::ZmFsc2U=::dXNlX3JvdW5kaW5nX21vZGU="
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "ZmFpdGhmdWxfcm91bmRpbmc=::ZmFsc2U=::UmVsYXggcm91bmRpbmcgdG8gcm91bmQgdXAgb3IgZG93biB0byByZWR1Y2UgcmVzb3VyY2UgdXNhZ2U="
 set_global_assignment -entity "int_to_float_0002" -library "int_to_float" -name IP_COMPONENT_PARAMETER "Z2VuX2VuYWJsZQ==::ZmFsc2U=::R2VuZXJhdGUgYW4gZW5hYmxlIHBvcnQ="

@@ -17,7 +17,7 @@ module face_top # (
   ////////////////
   // PARAMETERS //
   ////////////////
-
+  
   // The IP core doesn't come with a valid out port...
   parameter INT_FLT_DELAY = 2;
 
@@ -26,24 +26,25 @@ module face_top # (
   /////////////
 
   // Reset
-  logic                   i_rst_n;
+  logic                     i_rst_n;
 
   // Int -> float conversion
-  logic [31:0]            aud_data_flt;
-  logic [INT_FLT_DELAY:0] aud_data_valid_shift;
-  logic                   aud_data_flt_valid;
+  logic [31:0]              aud_data_pad;
+  logic [31:0]              aud_data_flt;
+  logic [INT_FLT_DELAY-1:0] aud_data_valid_shift;
+  logic                     aud_data_flt_valid;
 
   // Buffer to FFT
-  logic [31:0]            fifo_dout;
-  logic                   fifo_dout_valid;
-  logic                   fifo_dout_ready;
-  logic                   fifo_empty;
-  logic                   fifo_full; // open
+  logic [31:0]              fifo_dout;
+  logic                     fifo_dout_valid;
+  logic                     fifo_dout_ready;
+  logic                     fifo_empty;
+  logic                     fifo_full; // open
   
   // FFT
-  logic [8:0]             fft_sample_cntr;
-  logic                   fft_sop_in;
-  logic                   fft_eop_in;
+  logic [8:0]               fft_sample_cntr;
+  logic                     fft_sop_in;
+  logic                     fft_eop_in;
   
   
   ///////////
@@ -51,12 +52,13 @@ module face_top # (
   ///////////
 
   assign i_rst_n = ~i_rst;
+  assign aud_data_pad = $signed(i_aud_data); // sign ext to 32 bits
 
   // Convert int -> float for FFT core
   int_to_float int_to_float_inst (
     .clk(i_clk),
     .areset(i_rst),
-    .a(i_aud_data),
+    .a(aud_data_pad),
     .q(aud_data_flt)
   );
 
@@ -66,7 +68,7 @@ module face_top # (
       aud_data_valid_shift <= 0;
     end
     else begin
-      aud_data_valid_shift <= {i_aud_data_valid, aud_data_valid_shift[INT_FLT_DELAY:1]};
+      aud_data_valid_shift <= {i_aud_data_valid, aud_data_valid_shift[INT_FLT_DELAY-1:1]};
     end
   end
   assign aud_data_flt_valid = aud_data_valid_shift[0];

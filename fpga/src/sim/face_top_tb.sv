@@ -1,4 +1,4 @@
-
+`timescale 1ns/10ps
 module face_top_tb;
 
   // Parameters

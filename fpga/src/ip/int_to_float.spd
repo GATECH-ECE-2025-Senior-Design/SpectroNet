@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="int_to_float_sim/int_to_float.vo" type="VERILOG" />
+ <topLevel name="int_to_float" />
+ <deviceFamily name="cyclonev" />
+</simPackage>
