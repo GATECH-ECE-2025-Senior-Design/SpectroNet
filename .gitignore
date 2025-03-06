@@ -1,6 +1,9 @@
 # Dataset folder
 src/datasets/
 
+# TPU Data Set Folder
+tpu/data/
+
 # Quartus project files
 *.qws
 *.qdf
