@@ -38,10 +38,17 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
     zero_pad = np.zeros(samples_min - len(audio_data)) # create min number of extra samples
     audio_data = np.concatenate((zero_pad, audio_data)) # zero pad before the audio sample
 
-  # normalize based on peak amplitude
+  # Normalize based on peak amplitude
   amp_max_abs = max(abs(np.min(audio_data)), np.max(audio_data))
+
+  # Prevent division by zero
+  if amp_max_abs == 0:
+      print(f"⚠️ Warning: Silent or empty audio detected in {file_path}. Using fallback normalization.")
+      amp_max_abs = 1  # Prevents division by zero, keeps audio unchanged
+
   normalize_coeff = normalize / amp_max_abs
   audio_data *= normalize_coeff
+
     
   # convert to target quantization
   if target_dtype != audio_data.dtype:

@@ -88,6 +88,12 @@ def crop(audio_data: np.ndarray, time: float, sr: int) -> np.ndarray:
   samples_required = time * sr
 
   # zero pad left & right uniformly
-  zero_pad_left = np.zeros(math.ceil((samples_required - audio_data.size) / 2))
-  zero_pad_right = np.zeros(math.floor((samples_required - audio_data.size) / 2))
+  # zero_pad_left = np.zeros(math.ceil((samples_required - audio_data.size) / 2))
+  pad_size = max(0, samples_required - audio_data.size)  # Ensure non-negative padding
+  zero_pad_left = np.zeros(math.ceil(pad_size / 2))
+
+  # zero_pad_right = np.zeros(math.floor((samples_required - audio_data.size) / 2))
+  pad_size = max(0, samples_required - audio_data.size)  # Ensure non-negative padding
+  zero_pad_right = np.zeros(math.floor(pad_size / 2))
+
   return np.concatenate((zero_pad_left, audio_data, zero_pad_right))
