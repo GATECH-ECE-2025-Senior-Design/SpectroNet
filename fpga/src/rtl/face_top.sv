@@ -51,6 +51,9 @@ module face_top # (
   logic [31:0]              fft_imag_out;
   logic [9:0]               fft_pts_out;
   
+  // FFT (cropped with magnitude)
+  logic [31:0] fft_abs_out;
+  logic        fft_abs_valid_out;
   
   ///////////
   // LOGIC //
@@ -113,6 +116,19 @@ module face_top # (
     .source_real  (fft_real_out),       //       .source_real
     .source_imag  (fft_imag_out),       //       .source_imag
     .fftpts_out   (fft_pts_out)         //       .fftpts_out
+  );
+
+  // Get magnitude from complex output and crop to 1st-256th values.
+  magnitude_conv magnitude_conv_inst (
+    .i_clk(i_clk),
+    .i_rst(i_rst),
+    .i_fft_real(fft_real_out),
+    .i_fft_imag(fft_imag_out),
+    .i_fft_valid(fft_valid_out),
+    // use sop as an easy way to make the state machine
+    .i_fft_sop(fft_sop_out),
+    .o_fft_abs(fft_abs_out),
+    .o_fft_valid(fft_abs_valid_out)
   );
 
   ///////////
