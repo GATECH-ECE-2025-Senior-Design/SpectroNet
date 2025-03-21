@@ -35,16 +35,21 @@ module face_top # (
   logic                     aud_data_flt_valid;
 
   // Buffer to FFT
-  logic [31:0]              fifo_dout;
-  logic                     fifo_dout_valid;
-  logic                     fifo_dout_ready;
-  logic                     fifo_empty;
-  logic                     fifo_full; // open
-  
+  logic [31:0]              buffer_dout;
+  logic                     buffer_dout_valid;
+  logic                     buffer_dout_ready;
+  logic                     buffer_dout_sop;
+  logic                     buffer_dout_eop;
+
   // FFT
-  logic [8:0]               fft_sample_cntr;
-  logic                     fft_sop_in;
-  logic                     fft_eop_in;
+  logic                     fft_err_in; // unused
+  logic                     fft_valid_out;
+  logic                     fft_err_out;
+  logic                     fft_sop_out;
+  logic                     fft_eop_out;
+  logic [31:0]              fft_real_out;
+  logic [31:0]              fft_imag_out;
+  logic [9:0]               fft_pts_out;
   
   
   ///////////
@@ -73,58 +78,43 @@ module face_top # (
   end
   assign aud_data_flt_valid = aud_data_valid_shift[0];
 
-  // Buffer the audio data until FFT core is ready
-  aud_data_buffer aud_data_buffer_inst (
-    .clock(i_clk),                //input, width = 1
-    .data (aud_data_flt),         //input, width = DATA_WIDTH
-    .rdreq(fifo_dout_ready),      //input, width = 1
-    .sclr(i_rst),                 //input, width = 1, synch reset
-    .wrreq(fifo_dout_ready),      //input, width = 1
-    .q(fifo_dout),                //output, width = DATA_WIDTH
-    .usedw(fft_sample_cntr),      //output, width = ADDR_WIDTH
-    .empty(fifo_empty),           //output, width = 1
-    .full(fifo_full)              //output, width = 1
+  wave_buffer_fsm # (
+    .N_FFT(384),
+    .HOP_LENGTH(64)
+  )
+  wave_buffer_fsm_inst (
+    .i_clk(i_clk),
+    .i_rst(i_rst),
+    .i_aud_data(aud_data_flt),
+    .i_aud_data_valid(aud_data_flt_valid),
+    .o_buf_data(buffer_dout),
+    .o_buf_data_valid(buffer_dout_valid),
+    .i_buf_data_ready(buffer_dout_ready),
+    .o_buf_data_sop(buffer_dout_sop),
+    .o_buf_data_eop(buffer_dout_eop)
   );
-
-  assign fifo_dout_valid = fifo_dout_ready && ~fifo_empty;
 
   fft_512 fft_512_inst (
     .clk          (i_clk),              //    clk.clk
     .reset_n      (i_rst_n),            //    rst.reset_n
-    .sink_valid   (fifo_dout_valid),    //   sink.sink_valid
-    .sink_ready   (fifo_dout_ready),    //       .sink_ready
-    .sink_error   (),                   //       .sink_error
-    .sink_sop     (fft_sop_in),         //       .sink_sop
-    .sink_eop     (fft_eop_in),         //       .sink_eop
-    .sink_real    (fifo_dout),          //       .sink_real
-    .sink_imag    (32'd0),              //       .sink_imag
+    .sink_valid   (buffer_dout_valid),  //   sink.sink_valid
+    .sink_ready   (buffer_dout_ready),  //       .sink_ready
+    .sink_error   (1'b0),               //       .sink_error
+    .sink_sop     (buffer_dout_sop),    //       .sink_sop
+    .sink_eop     (buffer_dout_eop),    //       .sink_eop
+    .sink_real    (buffer_dout),        //       .sink_real
+    .sink_imag    (32'b0),              //       .sink_imag
     .fftpts_in    (10'd512),            //       .fftpts_in
-    .source_valid (),                   // source.source_valid
+    .source_valid (fft_valid_out),      // source.source_valid
     .source_ready (1'b1),               //       .source_ready
-    .source_error (),                   //       .source_error
-    .source_sop   (),                   //       .source_sop
-    .source_eop   (),                   //       .source_eop
-    .source_real  (),                   //       .source_real
-    .source_imag  (),                   //       .source_imag
-    .fftpts_out   ()                    //       .fftpts_out
+    .source_error (fft_err_out),        //       .source_error
+    .source_sop   (fft_sop_out),        //       .source_sop
+    .source_eop   (fft_eop_out),        //       .source_eop
+    .source_real  (fft_real_out),       //       .source_real
+    .source_imag  (fft_imag_out),       //       .source_imag
+    .fftpts_out   (fft_pts_out)         //       .fftpts_out
   );
-  
-  // // Track samples going into the FFT core & handle SoP, EoP
-  // always_ff @(posedge i_clk) begin
-  //   if (i_rst == 1) begin
-  //     fft_sample_cntr <= 0;
-  //   end
-  //   else begin
-  //     if (fifo_dout_valid && fifo_dout_ready) begin
-  //       fft_sample_cntr <= fft_sample_cntr + 1;
-  //     end
-  //   end
-  // end
 
-  // Constant 512 point FFT, could make variable/interleaved later.
-  assign fft_sop_in = (fft_sample_cntr == 0) && fifo_dout_valid;
-  assign fft_eop_in = (fft_sample_cntr == 511) && fifo_dout_valid;
-  
   ///////////
   // DEBUG //
   ///////////
