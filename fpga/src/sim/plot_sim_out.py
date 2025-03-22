@@ -6,22 +6,19 @@ import librosa
 def hex_to_float(hex_str: str) -> np.float32:
     return struct.unpack('!f', bytes.fromhex(hex_str))[0]
 
-def load_complex_numbers_from_txt(file_path: str) -> np.ndarray:
+def load_from_txt(file_path: str) -> np.ndarray:
     with open(file_path, 'r') as f:
         lines = [line.strip() for line in f]
 
-    if len(lines) % 2 != 0:
-        raise ValueError("File must contain an even number of lines (real/imag pairs)")
+    # if len(lines) % 2 != 0:
+    #     raise ValueError("File must contain an even number of lines (real/imag pairs)")
     
-    complex_numbers = [complex(hex_to_float(lines[i]), hex_to_float(lines[i+1])) 
-                       for i in range(0, len(lines), 2)]
+    values_1D = [(hex_to_float(line)) for line in lines]
     
-    complex_array = np.array(complex_numbers, dtype=np.complex64)
+    if len(values_1D) % 256 != 0:
+        raise ValueError("Total number of values must be a multiple of 256.")
     
-    if len(complex_array) % 512 != 0:
-        raise ValueError("Total number of complex numbers must be a multiple of 384")
-    
-    return np.transpose(complex_array.reshape(-1,512)) # 512 output bins (we only need 192 though)
+    return np.transpose(np.asarray(values_1D).reshape(-1,256)) # 256 output bins
 
 def plot_heatmap(complex_array: np.ndarray):
     magnitude = np.abs(complex_array)  # Compute magnitude of complex numbers
@@ -38,5 +35,5 @@ def plot_heatmap(complex_array: np.ndarray):
 
 if __name__ == "__main__":
     file_path = "sim_out.txt"
-    complex_array = load_complex_numbers_from_txt(file_path)
+    complex_array = load_from_txt(file_path)
     plot_heatmap(complex_array)

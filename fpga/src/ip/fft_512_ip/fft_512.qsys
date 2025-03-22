@@ -6,7 +6,7 @@
    version="1.0"
    description=""
    tags="INTERNAL_COMPONENT=true"
-   categories="System" />
+   categories="" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
    element fft_ii_0

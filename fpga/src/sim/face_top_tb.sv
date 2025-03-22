@@ -27,9 +27,8 @@ module face_top_tb;
     file = $fopen("C:/Users/irowd/Downloads/Git/SpectroNet/fpga/src/sim/sim_out.txt", "w");
   end
   always_ff @(posedge i_clk) begin
-    if (face_top_inst.fft_valid_out) begin
-      $fwrite(file, "%08x\n", face_top_inst.fft_real_out & 32'hFFFFFFFF);
-      $fwrite(file, "%08x\n", face_top_inst.fft_imag_out & 32'hFFFFFFFF);
+    if (face_top_inst.fft_abs_valid_out) begin
+      $fwrite(file, "%08x\n", face_top_inst.fft_abs_out & 32'hFFFFFFFF);
     end
   end
 
