@@ -21,14 +21,21 @@ module face_top_tb;
   logic [12:0] wave_arr_idx;
 
   // input/output files
-  int file;
+  int file1;
+  int file2;
   initial begin
     $readmemh("C:/Users/irowd/Downloads/Git/SpectroNet/fpga/src/sim/0_01_0.txt", wave_arr);
-    file = $fopen("C:/Users/irowd/Downloads/Git/SpectroNet/fpga/src/sim/sim_out.txt", "w");
+    file1 = $fopen("C:/Users/irowd/Downloads/Git/SpectroNet/fpga/src/sim/spec_out.txt", "w");
+    file2 = $fopen("C:/Users/irowd/Downloads/Git/SpectroNet/fpga/src/sim/mel_out.txt", "w");
   end
   always_ff @(posedge i_clk) begin
-    if (face_top_inst.fft_abs_valid_out) begin
-      $fwrite(file, "%08x\n", face_top_inst.fft_abs_out & 32'hFFFFFFFF);
+    if (face_top_inst.fft_mag_sq_valid_out) begin
+      $fwrite(file1, "%08x\n", face_top_inst.fft_mag_sq_out & 32'hFFFFFFFF);
+    end
+  end
+  always_ff @(posedge i_clk) begin
+    if (face_top_inst.mel_data_valid) begin
+      $fwrite(file2, "%08x\n", face_top_inst.mel_data_out & 32'hFFFFFFFF);
     end
   end
 
@@ -74,8 +81,11 @@ initial begin
 
   end
 
-  @(posedge face_top_inst.fft_eop_out) #100;
-  $fclose(file);
+  @(posedge face_top_inst.fft_eop_out);
+  repeat(2000) // give mel spectrogram processing time
+    @(posedge i_clk);
+  $fclose(file1);
+  $fclose(file2);
   $finish;
 
 end

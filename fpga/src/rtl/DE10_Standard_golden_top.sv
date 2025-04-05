@@ -383,9 +383,7 @@ module DE10_Standard_golden_top(
       LEDR <= 0;
     end
     else begin
-      LEDR[9:2] <= '0;
-      LEDR[0] <= adc_data_valid;
-      LEDR[1] <= AUD_XCK;
+      LEDR <= face_out;
       /*
       if (face_out_valid == 1) begin
         LEDR <= face_out;

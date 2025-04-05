@@ -6,34 +6,36 @@ import librosa
 def hex_to_float(hex_str: str) -> np.float32:
     return struct.unpack('!f', bytes.fromhex(hex_str))[0]
 
-def load_from_txt(file_path: str) -> np.ndarray:
+def load_from_txt(file_path: str, height: int) -> np.ndarray:
+    # hex string float
     with open(file_path, 'r') as f:
         lines = [line.strip() for line in f]
-
-    # if len(lines) % 2 != 0:
-    #     raise ValueError("File must contain an even number of lines (real/imag pairs)")
-    
+    # convert to float
     values_1D = [(hex_to_float(line)) for line in lines]
-    
-    if len(values_1D) % 256 != 0:
-        raise ValueError("Total number of values must be a multiple of 256.")
-    
-    return np.transpose(np.asarray(values_1D).reshape(-1,256)) # 256 output bins
+    # check that output is a multiple of height (else there is a hardware problem)
+    if len(values_1D) % height != 0:
+        raise ValueError(f"Total number of values must be a multiple of {height}.")
+    # 2d array that is [height] tall
+    # transpose is used because the first [height] samples represent a vertical set of pixels
+    return np.transpose(np.asarray(values_1D).reshape(-1, height))
 
-def plot_heatmap(complex_array: np.ndarray):
-    magnitude = np.abs(complex_array)  # Compute magnitude of complex numbers
-    magnitude_dB = librosa.power_to_db(magnitude, ref=np.max)
+def plot_heatmap(power: np.ndarray):
+    power_dB = librosa.power_to_db(power, ref=np.max)
 
     plt.figure(figsize=(10, 6))
-    plt.imshow(magnitude_dB, aspect='auto', interpolation='nearest', origin='lower')
-    plt.ylim(bottom=1, top=192) # cut out DC bin, cut out bins above half-nyquist
-    plt.colorbar(label='Log Magnitude')
-    plt.xlabel("Index in Row")
-    plt.ylabel("Row Number")
-    plt.title("Log-Scaled Heatmap of Complex Number Magnitudes")
+    plt.imshow(power_dB, aspect='auto', interpolation='nearest', origin='lower')
+    plt.colorbar(label='Log Power')
+    plt.xlabel("FFT Index")
+    plt.ylabel("FFT Bin")
+    plt.title("Wiwiwi")
     plt.show()
 
 if __name__ == "__main__":
-    file_path = "sim_out.txt"
-    complex_array = load_from_txt(file_path)
-    plot_heatmap(complex_array)
+    # spectrogram -- log(stft^2)
+    file_spec = "spec_out.txt"
+    spec = load_from_txt(file_spec, 256)
+    plot_heatmap(spec)
+    # mel spectrogram -- log spaced spectrogram
+    file_mel = "mel_out.txt"
+    mel = load_from_txt(file_mel, 96)
+    plot_heatmap(mel)

@@ -52,9 +52,19 @@ module face_top # (
   logic [9:0]               fft_pts_out;
   
   // FFT (cropped with magnitude)
-  logic [31:0] fft_abs_out;
-  logic        fft_abs_valid_out;
+  logic [31:0] fft_mag_sq_out;
+  logic        fft_mag_sq_valid_out;
+
+  // FFT Buffer
+  logic [7:0]   fft_buf_wr_cntr;
+  logic         fft_buf_trig;
+  logic [7:0]   mel_fb_rd_addr;
+  logic [31:0]  mel_fb_rd_data;
   
+  // Mel filterbank
+  logic [31:0]  mel_data_out;
+  logic         mel_data_valid;
+
   ///////////
   // LOGIC //
   ///////////
@@ -81,6 +91,7 @@ module face_top # (
   end
   assign aud_data_flt_valid = aud_data_valid_shift[0];
 
+  // Buffers N_FFT samples, zero pads to 512 samples
   wave_buffer_fsm # (
     .N_FFT(384),
     .HOP_LENGTH(64)
@@ -97,6 +108,7 @@ module face_top # (
     .o_buf_data_eop(buffer_dout_eop)
   );
 
+  // Computes FFT, 384 input samples zero-padded to 512 samples
   fft_512 fft_512_inst (
     .clk          (i_clk),              //    clk.clk
     .reset_n      (i_rst_n),            //    rst.reset_n
@@ -118,24 +130,55 @@ module face_top # (
     .fftpts_out   (fft_pts_out)         //       .fftpts_out
   );
 
-  // Get magnitude from complex output and crop to 1st-256th values.
-  magnitude_conv magnitude_conv_inst (
+  // Get magnitude from complex output and crop to 1st-256th values (256 bins)
+  magnitude_sq_conv magnitude_sq_conv_inst (
     .i_clk(i_clk),
     .i_rst(i_rst),
     .i_fft_real(fft_real_out),
     .i_fft_imag(fft_imag_out),
     .i_fft_valid(fft_valid_out),
-    // use sop as an easy way to make the state machine
-    .i_fft_sop(fft_sop_out),
-    .o_fft_abs(fft_abs_out),
-    .o_fft_valid(fft_abs_valid_out)
+    .i_fft_sop(fft_sop_out),     // use sop as a lazy way to make the state machine
+    .o_fft_mag_sq(fft_mag_sq_out),
+    .o_fft_valid(fft_mag_sq_valid_out)
+  );
+
+  // Buffer 256 frequency bins to the mel filterbank
+  fft_buffer fft_buffer_inst (
+    .clock(i_clk),
+    .aclr(i_rst),
+    .wraddress(fft_buf_wr_cntr),
+    .wren(fft_mag_sq_valid_out),
+    .data(fft_mag_sq_out),
+    .rdaddress(mel_fb_rd_addr),
+    .q(mel_fb_rd_data)
+  );
+
+  // Free-running counter (0-255) to index writes to the FFT buffer
+  always_ff @(posedge i_clk)
+    if (i_rst) fft_buf_wr_cntr <= 0;
+    else if (fft_mag_sq_valid_out) fft_buf_wr_cntr <= fft_buf_wr_cntr + 1;
+
+  // Trigger mel filterbank on reception of 256th FFT bin
+  assign fft_buf_trig = (fft_buf_wr_cntr == 255) && fft_mag_sq_valid_out;
+
+  // Read FFT bins from FFT buffer, apply filterbank
+  // 256 bins in, 96 bins out
+  mel_filterbank  mel_filterbank_inst (
+    .i_clk(i_clk),
+    .i_rst(i_rst),
+    .i_fft_buf_trig(fft_buf_trig),
+    .i_fft_buf_data(mel_fb_rd_data),
+    .o_fft_buf_addr(mel_fb_rd_addr),
+    .o_mel_data_out(mel_data_out),
+    .o_mel_valid(mel_data_valid)
   );
 
   ///////////
   // DEBUG //
   ///////////
   
-  assign o_classify = 10'd1;
-  assign o_classify_valid = 1;
+  // just to avoid the logic from being optimized out
+  assign o_classify = mel_data_out[9:0];
+  assign o_classify_valid = mel_data_valid;
 
 endmodule

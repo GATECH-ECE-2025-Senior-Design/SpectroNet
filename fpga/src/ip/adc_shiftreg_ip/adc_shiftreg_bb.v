@@ -59,7 +59,7 @@ endmodule
 // Retrieval info: PRIVATE: SLOAD NUMERIC "0"
 // Retrieval info: PRIVATE: SSET NUMERIC "0"
 // Retrieval info: PRIVATE: SSET_ALL1 NUMERIC "1"
-// Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "1"
+// Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: SerialShiftInput NUMERIC "1"
 // Retrieval info: PRIVATE: SerialShiftOutput NUMERIC "0"
 // Retrieval info: PRIVATE: nBit NUMERIC "16"
@@ -80,5 +80,4 @@ endmodule
 // Retrieval info: GEN_FILE: TYPE_NORMAL adc_shiftreg.bsf FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL adc_shiftreg_inst.v FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL adc_shiftreg_bb.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL adc_shiftreg_syn.v TRUE
 // Retrieval info: LIB_FILE: lpm
