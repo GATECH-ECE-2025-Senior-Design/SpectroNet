@@ -19,3 +19,7 @@ fpga/quartus/unnamed/
 # Quartus generated files
 fpga/quartus/*.txt
 fpga/src/rtl/*.bak
+
+# Ignore all auto-generated files and folders with _train or _test
+*_train*
+*_test*
