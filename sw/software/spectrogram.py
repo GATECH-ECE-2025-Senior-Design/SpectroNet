@@ -50,7 +50,7 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
   return audio_data
 
 def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolution=128, \
-                       hop_length=32, target_dtype=np.int16, samples_per_dft=256):
+                       hop_length=32, target_dtype=np.int16, samples_per_dft=256, zero_pad=False):
   """
   Generates a square aspect-ratio spectrogram of the input waveform as defined by the function parameters.
 
@@ -101,9 +101,15 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
     bins_per_octave = 20 # if resolution = 100, fmax = 60 * 2^5 = 1920
 
     # librosa only accepts floats, so recast
+    power = 0
     audio_data = audio_data.astype(np.float32)
-    power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=resolution, \
-                               bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin))
+    if (zero_pad == False):
+      power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=resolution, \
+                                bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin))
+    else:
+      power = np.abs(librosa.cqt(audio_data, sr=sample_rate, n_bins=resolution, \
+                                bins_per_octave=bins_per_octave, hop_length=hop_length, fmin=fmin
+                                ))
     
     # calculate frequency bins
     octave_ratio = 2 ** (1 / bins_per_octave)
@@ -122,7 +128,13 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
 
     # librosa only accepts floats, so recast
     audio_data = audio_data.astype(np.float32)
-    power = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate, n_mels=n_mels, fmin=fmin, \
+    power = 0
+ 
+    if (zero_pad):
+      power = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate, n_mels=n_mels, fmin=fmin, \
+                                           fmax=fmax, hop_length=hop_length, n_fft=512, win_length=resolution)
+    else:
+      power = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate, n_mels=n_mels, fmin=fmin, \
                                            fmax=fmax, hop_length=hop_length, n_fft=samples_per_dft)
     
     # bin indices (linear)
@@ -134,9 +146,5 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
   else:
     print("Error: Invalid value for spectrogram_choice argument \'spec_type\'!")
     exit()
-  
-  # (re)cast to desired type
-  if target_dtype != power.dtype:
-    power = power.astype(target_dtype)
 
   return bins, time, power

@@ -32,6 +32,7 @@ parser.add_argument('--time', type=float, default=1, help="Define the time perio
 parser.add_argument('-v', '--verbose', action='store_true', default=False, help="Verbose output to console.")
 parser.add_argument('--noise_samples', type=int, default=1, help="Define number of noise samples to overlay on each digit.")
 parser.add_argument('--samples_per_dft', type=int, default=256, help="Number of samples used for each DFT.")
+parser.add_argument('--zero_padding', action='store_true', default=False, help="mel spectrogram zero padding size 512")
 args = parser.parse_args()
 
 # TODO: Maybe parameterize the number of speakers to generate spectrograms for? 
@@ -92,7 +93,7 @@ for subdir, dirs, files in os.walk(digits_folder):
         # generate spectrogram
         bins, time, power = spec.spectrogram_choice(audio_data, sample_rate=args.sr, spec_type=args.spec_type, \
                                                     resolution=args.resolution, hop_length=hop_length, \
-                                                    target_dtype=dtype, samples_per_dft=args.samples_per_dft)
+                                                    target_dtype=dtype, samples_per_dft=args.samples_per_dft, zero_pad=args.zero_padding)
         
         # apply windowing (for a square image)
         if not args.crop:
@@ -103,6 +104,25 @@ for subdir, dirs, files in os.walk(digits_folder):
 
         # save as dB power instead of absolute power
         power_dB = librosa.power_to_db(power, ref=np.max)
+
+        power_max = power_dB.max()
+        power_min = power_dB.min()
+        range = power_max - power_min
+        if (dtype == np.uint8):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 255)).astype('uint8')
+          power_dB = power_new
+        if (dtype == np.uint16):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 65535)).astype('uint16')
+          power_dB = power_new
+        if (dtype == np.int8):
+          # not sure if this is a good idea
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 255)).astype('int16')
+          power_new = power_new - 128
+          powpower_dBer = power_new.astype(np.int8)
+        if (dtype == np.int16):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 65535)).astype('int32')
+          power_new = power_new - 32768
+          power_dB = power_new.astype(np.int16)   
 
         # debug
         # plt.pcolormesh(time[:bins.shape[0]], bins, power_dB, shading='auto')
