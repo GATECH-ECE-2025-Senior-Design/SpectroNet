@@ -1,0 +1,27 @@
+Using CPU
+Starting live audio stream and visualization. Speak into your microphone!
+Prediction: 7 with probability 0.99
+Prediction: 1 with probability 0.99
+Prediction: 6 with probability 0.98
+Prediction: 7 with probability 0.98
+Prediction: 0 with probability 0.98
+Prediction: 5 with probability 0.99
+Prediction: 3 with probability 1.00
+Prediction: 3 with probability 1.00
+Prediction: 3 with probability 0.99
+Prediction: 3 with probability 0.99
+Prediction: 4 with probability 0.98
+Prediction: 4 with probability 0.99
+Prediction: 4 with probability 1.00
+Prediction: 4 with probability 1.00
+Prediction: 4 with probability 1.00
+Prediction: 4 with probability 0.99
+Prediction: 4 with probability 1.00
+Prediction: 5 with probability 1.00
+Prediction: 5 with probability 1.00
+Prediction: 5 with probability 1.00
+Prediction: 5 with probability 0.99
+Prediction: 5 with probability 0.99
+Prediction: 5 with probability 1.00
+Prediction: 5 with probability 0.99
+Prediction: 5 with probability 1.00

@@ -11,9 +11,11 @@ if [ ! -d "../datasets/digits_train" ] || [ ! -d "../datasets/digits_test" ]; th
     exit 1
 fi
 
-# 🚀 **Step 2: Augment Training Data (Only Applies to `digits_train`)**
+# 🚀 **Step 2: Augment Training Data**
 echo "🎛️ Running augment_digits_train.py..."
-python augment_digits_train.py
+python augment_digits_train.py --input_dir "../datasets/digits_train"
+echo "🎛️ Running augment_digits_train.py on test data..."
+python augment_digits_train.py --input_dir "../datasets/digits_test"
 
 # 🔥 **Step 3: Delete old spectrogram datasets (Ensure Fresh Start)**
 echo "🗑️ Removing old spectrogram datasets..."

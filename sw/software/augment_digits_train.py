@@ -5,13 +5,18 @@ import re
 import librosa
 import threading
 from scipy import signal
+import argparse
 
 # Number of new files per augmentation type
 N_NEW_FILES_PER_AUG_TYPE = 2
 
 # Hard-coded file paths (do not change)
 BASE_DIR = os.path.abspath("sw")  # Root directory
-DATASET_DIR = "/Users/padmamithra/Downloads/SpectroNet/sw/datasets/digits_train"
+parser = argparse.ArgumentParser(description="Augment .wav files with noise.")
+parser.add_argument('--input_dir', type=str, required=True, help="Directory containing .wav files to augment.")
+args = parser.parse_args()
+# DATASET_DIR = "/Users/padmamithra/Downloads/SpectroNet/sw/datasets/digits_train"
+DATASET_DIR = args.input_dir  # Use the passed directory
 NOISE_DIR = "/Users/padmamithra/Downloads/SpectroNet/sw/software/noise_augment/PCAFETER"
 
 # Define datasets_folder (added so it’s available if needed later)
