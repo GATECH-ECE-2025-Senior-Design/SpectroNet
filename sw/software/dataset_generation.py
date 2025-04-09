@@ -104,6 +104,25 @@ for subdir, dirs, files in os.walk(digits_folder):
         # save as dB power instead of absolute power
         power_dB = librosa.power_to_db(power, ref=np.max)
 
+        power_max = power_dB.max()
+        power_min = power_dB.min()
+        range = power_max - power_min
+        if (dtype == np.uint8):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 255)).astype('uint8')
+          power_dB = power_new
+        if (dtype == np.uint16):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 65535)).astype('uint16')
+          power_dB = power_new
+        if (dtype == np.int8):
+          # not sure if this is a good idea
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 255)).astype('int16')
+          power_new = power_new - 128
+          powpower_dBer = power_new.astype(np.int8)
+        if (dtype == np.int16):
+          power_new = ((power_dB - power_min) * (1/(power_max - power_min) * 65535)).astype('int32')
+          power_new = power_new - 32768
+          power_dB = power_new.astype(np.int16)   
+
         # debug
         # plt.pcolormesh(time[:bins.shape[0]], bins, power_dB, shading='auto')
         # plt.show()

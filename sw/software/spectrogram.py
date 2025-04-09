@@ -50,7 +50,7 @@ def read_wav(file_path, target_sample_rate=8000, target_dtype=np.int16, time_min
   return audio_data
 
 def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolution=128, \
-                       hop_length=32, target_dtype=np.int16, samples_per_dft=256):
+                       hop_length=32, target_dtype=np.int16, samples_per_dft=256, zero_pad=False):
   """
   Generates a square aspect-ratio spectrogram of the input waveform as defined by the function parameters.
 
@@ -134,28 +134,5 @@ def spectrogram_choice(audio_data, sample_rate=8000, spec_type="simple", resolut
   else:
     print("Error: Invalid value for spectrogram_choice argument \'spec_type\'!")
     exit()
-  
-  # better casting for datatypes:
-  # (re)cast to desired type
-  if target_dtype != power.dtype:
-    power_max = power.max()
-    power_min = power.min()
-    range = power_max - power_min
-    if (target_dtype == np.uint8):
-      power_new = ((power - power_min) * (1/(power_max - power_min) * 255)).astype('uint8')
-      power = power_new
-    if (target_dtype == np.uint16):
-      power_new = ((power - power_min) * (1/(power_max - power_min) * 65535)).astype('uint16')
-      power = power_new
-    if (target_dtype == np.int8):
-      # not sure if this is a good idea
-      power_new = ((power - power_min) * (1/(power_max - power_min) * 255)).astype('int16')
-      power_new = power_new - 128
-      power = power_new.astype(np.int8)
-    if (target_dtype == np.int16):
-      power_new = ((power - power_min) * (1/(power_max - power_min) * 65535)).astype('int32')
-      power_new = power_new - 32768
-      power = power_new.astype(np.int16)     
-
 
   return bins, time, power
