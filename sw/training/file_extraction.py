@@ -9,7 +9,7 @@ result = subprocess.run(["nvidia-smi"], capture_output=True, text=True)
 # Print the output
 print(result.stdout)
 
-"""
+
 # Function to extract ZIP file in chunks
 def extract_zip_in_chunks(zip_file, extract_folder, batch_size):
     if not os.path.exists(zip_file):
@@ -60,6 +60,3 @@ os.makedirs(extract_folder_test, exist_ok=True)
 
 # Extract the test ZIP file in chunks
 extract_zip_in_chunks(zip_file_test, extract_folder_test, BATCH_SIZE)
-"""
-
-
