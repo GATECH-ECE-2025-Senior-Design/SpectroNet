@@ -1,0 +1,67 @@
+2025-03-11 23:02:15,696 - INFO - 
+================== AUDIO INFERENCE RESULTS ==================
+2025-03-11 23:02:15,696 - INFO - 
+Processing Eight.wav...
+2025-03-11 23:02:17,241 - INFO - Saved spectrogram to Spectrograms/Eight.npy
+2025-03-11 23:02:17,241 - INFO - Extracting label from filename: Eight
+2025-03-11 23:02:17,251 - INFO - Expected Label: 8
+2025-03-11 23:02:17,252 - INFO - Edge TPU Predicted: 8, Time: 630.90 탎
+2025-03-11 23:02:17,253 - INFO - 
+Processing Five.wav...
+2025-03-11 23:02:17,257 - INFO - Saved spectrogram to Spectrograms/Five.npy
+2025-03-11 23:02:17,257 - INFO - Extracting label from filename: Five
+2025-03-11 23:02:17,264 - INFO - Expected Label: 5
+2025-03-11 23:02:17,264 - INFO - Edge TPU Predicted: 5, Time: 487.70 탎
+2025-03-11 23:02:17,265 - INFO - 
+Processing Four.wav...
+2025-03-11 23:02:17,269 - INFO - Saved spectrogram to Spectrograms/Four.npy
+2025-03-11 23:02:17,269 - INFO - Extracting label from filename: Four
+2025-03-11 23:02:17,276 - INFO - Expected Label: 4
+2025-03-11 23:02:17,276 - INFO - Edge TPU Predicted: 4, Time: 528.50 탎
+2025-03-11 23:02:17,276 - INFO - 
+Processing Nine.wav...
+2025-03-11 23:02:17,281 - INFO - Saved spectrogram to Spectrograms/Nine.npy
+2025-03-11 23:02:17,281 - INFO - Extracting label from filename: Nine
+2025-03-11 23:02:17,288 - INFO - Expected Label: 9
+2025-03-11 23:02:17,288 - INFO - Edge TPU Predicted: 9, Time: 559.00 탎
+2025-03-11 23:02:17,288 - INFO - 
+Processing NoisyOne.wav...
+2025-03-11 23:02:17,293 - INFO - Saved spectrogram to Spectrograms/NoisyOne.npy
+2025-03-11 23:02:17,294 - INFO - Extracting label from filename: NoisyOne
+2025-03-11 23:02:17,301 - INFO - Expected Label: None
+2025-03-11 23:02:17,301 - INFO - Edge TPU Predicted: 1, Time: 472.10 탎
+2025-03-11 23:02:17,301 - INFO - 
+Processing One.wav...
+2025-03-11 23:02:17,306 - INFO - Saved spectrogram to Spectrograms/One.npy
+2025-03-11 23:02:17,306 - INFO - Extracting label from filename: One
+2025-03-11 23:02:17,313 - INFO - Expected Label: 1
+2025-03-11 23:02:17,313 - INFO - Edge TPU Predicted: 1, Time: 548.60 탎
+2025-03-11 23:02:17,313 - INFO - 
+Processing Seven.wav...
+2025-03-11 23:02:17,318 - INFO - Saved spectrogram to Spectrograms/Seven.npy
+2025-03-11 23:02:17,318 - INFO - Extracting label from filename: Seven
+2025-03-11 23:02:17,326 - INFO - Expected Label: 7
+2025-03-11 23:02:17,326 - INFO - Edge TPU Predicted: 7, Time: 555.20 탎
+2025-03-11 23:02:17,326 - INFO - 
+Processing Six.wav...
+2025-03-11 23:02:17,330 - INFO - Saved spectrogram to Spectrograms/Six.npy
+2025-03-11 23:02:17,331 - INFO - Extracting label from filename: Six
+2025-03-11 23:02:17,337 - INFO - Expected Label: 6
+2025-03-11 23:02:17,338 - INFO - Edge TPU Predicted: 6, Time: 575.70 탎
+2025-03-11 23:02:17,338 - INFO - 
+Processing Three.wav...
+2025-03-11 23:02:17,342 - INFO - Saved spectrogram to Spectrograms/Three.npy
+2025-03-11 23:02:17,342 - INFO - Extracting label from filename: Three
+2025-03-11 23:02:17,350 - INFO - Expected Label: 3
+2025-03-11 23:02:17,350 - INFO - Edge TPU Predicted: 3, Time: 548.00 탎
+2025-03-11 23:02:17,350 - INFO - 
+Processing Two.wav...
+2025-03-11 23:02:17,354 - INFO - Saved spectrogram to Spectrograms/Two.npy
+2025-03-11 23:02:17,354 - INFO - Extracting label from filename: Two
+2025-03-11 23:02:17,360 - INFO - Expected Label: 2
+2025-03-11 23:02:17,360 - INFO - Edge TPU Predicted: 2, Time: 491.90 탎
+2025-03-11 23:02:17,361 - INFO - 
+================== PERFORMANCE SUMMARY ==================
+2025-03-11 23:02:17,361 - INFO - Total Files Processed: 10
+2025-03-11 23:02:17,361 - INFO - Average Edge TPU Time (Excluding 1st run): 529.63 탎
+2025-03-11 23:02:17,361 - INFO - =========================================================
