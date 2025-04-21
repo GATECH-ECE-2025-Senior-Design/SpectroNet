@@ -178,7 +178,7 @@ module face_top # (
   ///////////
   
   // just to avoid the logic from being optimized out
-  assign o_classify = mel_data_out[9:0];
+  assign o_classify = {2'b00, mel_data_out[30:23]}; // exponent bits 
   assign o_classify_valid = mel_data_valid;
 
 endmodule

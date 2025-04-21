@@ -32,7 +32,7 @@
 // ============================================================================
 
 //`define ENABLE_HSMC
-//`define ENABLE_HPS
+`define ENABLE_HPS
 
 module DE10_Standard_golden_top(
 
@@ -191,8 +191,8 @@ module DE10_Standard_golden_top(
       input  logic            HPS_SPIM_MISO,
       output logic            HPS_SPIM_MOSI,
       output logic            HPS_SPIM_SS,
-      input  logic            HPS_UART_RX,
-      output logic            HPS_UART_TX,
+      inout  logic            HPS_UART_RX, // declared inout for synthesis but use carefully
+      inout  logic            HPS_UART_TX, // declared inout for synthesis but use carefully
       input  logic            HPS_USB_CLKOUT,
       inout  logic  [ 7: 0]   HPS_USB_DATA,
       input  logic            HPS_USB_DIR,
@@ -237,20 +237,40 @@ module DE10_Standard_golden_top(
   logic             i2c_ack_err;  // open
   logic             i2c_cmd_valid;
 
-  //  FACE signals
-
+  //  FACE signals -- :(
   logic [9:0]       face_out;
   logic             face_out_valid;
 
+  // Pin borrowing -- credit to https://github.com/truhy/loanio_uart,
+  // (different pins for DE10-Standard than DE10-Nano)
+  logic [66:0] loanio_oe;     // Pin direction: 0 = input, 1 = output
+  logic [66:0] loanio_in;	    // Read port from pins: 1 = high, 0 = low
+  logic [66:0] loanio_out;    // Write port to pins: 1 = high, 0 = low
 
+  // UART signals
+  logic uart_rx, uart_tx;
+  
+  // HPS reset
+  logic hps_rst_n;
 
   ///////////
   // Logic //
   ///////////
 
+  // resets
+  assign sys_rst_n = rst_s2 && hps_rst_n;
   assign sys_rst = ~sys_rst_n;
-  assign sys_rst_n = rst_s2;
+  
+  // uart
+  assign uart_rx = loanio_in[49];
+  assign loanio_out[50] = uart_tx;
 
+  // HPS pins
+  assign loanio_oe[48:0] = 0;   // default unused pins to input
+  assign loanio_oe[49] = 0;     // UART RX is an input
+  assign loanio_oe[50] = 1;     // UART TX is an output
+  assign loanio_oe[66:51] = 0;  // default unused pins to input
+  
   // 2 flop sync the reset from an active low KEY[0]
   always_ff @(posedge CLOCK_50) begin
     rst_s2 <= rst_s1;
@@ -360,36 +380,59 @@ module DE10_Standard_golden_top(
     .segments(HEX0)
   );
 
-  // Display for other values
-  hex_disp  hex_disp_04_inst (
-    .hex_val(4'b0000),
-    .cs(CLOCK_50),
-    .free(adc_data_valid),
-    .resetn(sys_rst_n),
-    .segments(HEX4)
-  );
-
+  // Displaying mel energies to prevent it from being optimized out
   hex_disp  hex_disp_5_inst (
-    .hex_val(4'b0000),
+    .hex_val(face_out[7:4]),
     .cs(CLOCK_50),
-    .free(adc_data_valid),
+    .free(face_out_valid),
     .resetn(sys_rst_n),
     .segments(HEX5)
   );
   
-  // Display classification on 10 LEDs
-  always_ff @(posedge CLOCK_50) begin
-    if (sys_rst == 1) begin
-      LEDR <= 0;
-    end
-    else begin
-      LEDR <= face_out;
-      /*
-      if (face_out_valid == 1) begin
-        LEDR <= face_out;
-      end
-      */
-    end
-  end
+  hex_disp  hex_disp_4_inst (
+    .hex_val(face_out[3:0]),
+    .cs(CLOCK_50),
+    .free(face_out_valid),
+    .resetn(sys_rst_n),
+    .segments(HEX4)
+  );
+
+  // UART + FIFO for mel energy output
+  uart_debug uart_debug_inst (
+    .i_clk(i_clk),
+    .i_rst(sys_rst),
+    .i_data(face_out[7:0]), // mel energy exponents
+    .i_data_valid(face_out_valid),
+    .i_uart_rx(uart_rx), // unused
+    .o_uart_tx(uart_tx) // stream out mel energy exponents
+  );
+  
+  // for UART-USB bridge pin borrowing
+  hps u0 (
+      .clk_clk                          (CLOCK_50),                   //               clk.clk
+      .hps_0_h2f_loan_io_in             (loanio_in),                  // hps_0_h2f_loan_io.in
+      .hps_0_h2f_loan_io_out            (loanio_out),                 //                  .out
+      .hps_0_h2f_loan_io_oe             (loanio_oe),                  //                  .oe
+      .hps_0_h2f_reset_reset_n          (hps_rst_n),                    //   hps_0_h2f_reset.reset_n
+      .hps_io_hps_io_gpio_inst_LOANIO49 (HPS_UART_RX),                //            hps_io.hps_io_gpio_inst_LOANIO61
+      .hps_io_hps_io_gpio_inst_LOANIO50 (HPS_UART_TX),                //                  .hps_io_gpio_inst_LOANIO62
+      .memory_mem_a                     (HPS_DDR3_ADDR),              //            memory.mem_a
+      .memory_mem_ba                    (HPS_DDR3_BA),                //                  .mem_ba
+      .memory_mem_ck                    (HPS_DDR3_CK_P),              //                  .mem_ck
+      .memory_mem_ck_n                  (HPS_DDR3_CK_N),              //                  .mem_ck_n
+      .memory_mem_cke                   (HPS_DDR3_CKE),               //                  .mem_cke
+      .memory_mem_cs_n                  (HPS_DDR3_CS_N),              //                  .mem_cs_n
+      .memory_mem_ras_n                 (HPS_DDR3_RAS_N),             //                  .mem_ras_n
+      .memory_mem_cas_n                 (HPS_DDR3_CAS_N),             //                  .mem_cas_n
+      .memory_mem_we_n                  (HPS_DDR3_WE_N),              //                  .mem_we_n
+      .memory_mem_reset_n               (HPS_DDR3_RESET_N),           //                  .mem_reset_n
+      .memory_mem_dq                    (HPS_DDR3_DQ),                //                  .mem_dq
+      .memory_mem_dqs                   (HPS_DDR3_DQS_P),             //                  .mem_dqs
+      .memory_mem_dqs_n                 (HPS_DDR3_DQS_N),             //                  .mem_dqs_n
+      .memory_mem_odt                   (HPS_DDR3_ODT),               //                  .mem_odt
+      .memory_mem_dm                    (HPS_DDR3_DM),                //                  .mem_dm
+      .memory_oct_rzqin                 (HPS_DDR3_RZQ),               //                  .oct_rzqin
+      .reset_reset_n                    (hps_rst_n)                     //             reset.reset_n
+  );
 
 endmodule
