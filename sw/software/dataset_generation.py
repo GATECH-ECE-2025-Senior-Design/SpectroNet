@@ -116,7 +116,7 @@ def process_job(job: SpectroJob):
         np.save(job.out_path, power_dB)
         return True
     except Exception as e:
-        print(f"❌ Error processing {job.wav_path}: {e}")
+        print(f"Error processing {job.wav_path}: {e}")
         return False
 
 # ------------------------------------------------------------------------------
@@ -132,15 +132,15 @@ def batched_executor(jobs, batch_size=100, max_workers=30):
     num_batches = (total + batch_size - 1) // batch_size
     for idx in range(0, total, batch_size):
         batch = jobs[idx:idx+batch_size]
-        print(f"🚀 Processing batch {idx//batch_size+1}/{num_batches} ({len(batch)} files)...")
+        print(f"Processing batch {idx//batch_size+1}/{num_batches} ({len(batch)} files)...")
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             results = list(executor.map(process_job, batch))
         succeeded = sum(results)
-        print(f"✅ Batch completed: {succeeded}/{len(batch)} succeeded")
+        print(f"Batch completed: {succeeded}/{len(batch)} succeeded")
 
 # ------------------------------------------------------------------------------
 # 6) Run pipeline
 # ------------------------------------------------------------------------------
 if __name__ == "__main__":
     batched_executor(jobs, batch_size=100, max_workers=30)
-    print(f"✅ Done generating spectrograms for {len(all_wav_paths)} WAV files.")
+    print(f"Done generating spectrograms for {len(all_wav_paths)} WAV files.")
