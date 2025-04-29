@@ -7,7 +7,7 @@
 
 ## Table of Contents
 1. [How to run branch to generate dataset](#how-to-run-branch-to-generate-dataset)
-2. [What each file does inside the bash file](#usage)  
+2. [What each file does inside the bash file](#what-each-file-does-inside-the-bash-file)
 
 ## How to run branch to generate dataset
 Step-by-step instructions to get the project running locally.
