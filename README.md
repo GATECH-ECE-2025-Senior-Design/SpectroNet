@@ -6,7 +6,7 @@
 
 
 ## Table of Contents
-1. [How to run branch to generate dataset](#generation)  
+1. [How to run branch to generate dataset](#how-to-run-branch-to-generate-dataset)
 2. [What each file does inside the bash file](#usage)  
 
 ## How to run branch to generate dataset
@@ -25,7 +25,7 @@ Step-by-step instructions to get the project running locally.
 - Note: This will take a while to run
 - When done, you should have 2 zip files called images_train.zip and images_test.zip in SpectroNet/sw/training
 
-## What each file does inside ./generate_datasets.sh
+## What each file does inside the bash file
 
 1. **`data.py`**  
    * Gets the `.wav` files from the MNIST dataset on Kaggle and splits them into training and test datasets (70 – 30 split respectively)
