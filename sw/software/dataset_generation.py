@@ -48,7 +48,7 @@ args = parser.parse_args()
 # 2) Precompute constants & collect file list (unchanged)
 # ------------------------------------------------------------------------------
 if not os.path.exists(args.input_dir):
-    raise FileNotFoundError(f"❌ Error: Input directory '{args.input_dir}' does not exist!")
+    raise FileNotFoundError(f"Error: Input directory '{args.input_dir}' does not exist!")
 os.makedirs(args.output_dir, exist_ok=True)
 
 all_wav_paths = []
@@ -58,7 +58,7 @@ for root, _, files in os.walk(args.input_dir):
             all_wav_paths.append(os.path.join(root, f))
 
 if not all_wav_paths:
-    raise FileNotFoundError(f"❌ Error: No .wav files found in '{args.input_dir}' (including subfolders)!")
+    raise FileNotFoundError(f"Error: No .wav files found in '{args.input_dir}' (including subfolders)!")
 
 print(f"🔍 Found {len(all_wav_paths)} .wav files in {args.input_dir} (recursively).")
 print(f"📂 Spectrograms will be saved in {args.output_dir}")
