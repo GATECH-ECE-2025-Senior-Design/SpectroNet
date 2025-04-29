@@ -16,8 +16,7 @@ Step-by-step instructions to get the project running locally.
    ```bash
    git clone [https://github.com/your-org/your-repo.git](https://github.com/GATECH-ECE-2025-Senior-Design/SpectroNet.git)
 3. Login to kaggle (https://www.kaggle.com/)
-- If you do not have an account in kaggle, you must create one to access the audio MINST dataset
-* 
+- If you do not have an account in kaggle, you must create one so that data.py can properly access the audio MINST dataset 
 4. Go to SpectroNet/sw/software/ and run ls -l generate_datasets.sh
 - Should return that generate_datasets.sh exists
 - Make generate_datasets.sh readable with command: chmod +x sw/software/generate_datasets.sh
