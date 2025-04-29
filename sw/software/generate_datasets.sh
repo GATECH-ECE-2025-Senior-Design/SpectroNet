@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1: Run Data Preparation Script
-echo "📂 Running data.py to set up datasets..."
+echo "Running data.py to set up datasets..."
 python data.py
 
 # Check if the required dataset folders exist
@@ -17,7 +17,7 @@ echo "Running augment_digits_train.py on test data..."
 python augment_digits_train.py --input_dir "../datasets/digits_test"
 
 # Step 3: Delete old spectrogram datasets (Ensure a Fresh Start)**
-echo "🗑Removing old spectrogram datasets..."
+echo "Removing old spectrogram datasets..."
 for dataset in "images_train" "images_val" "images_test"; do
     if [ -d "../datasets/$dataset" ]; then
         rm -rf "../datasets/$dataset"
