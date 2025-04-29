@@ -105,8 +105,8 @@ def main():
     audio_mnist_path = kagglehub.dataset_download("sripaadsrinivasan/audio-mnist")
     audio_noise_path = kagglehub.dataset_download("minsithu/audio-noise-dataset")
 
-    print(f"✅ Audio MNIST dataset downloaded to: {audio_mnist_path}")
-    print(f"✅ Background Noise dataset downloaded to: {audio_noise_path}")
+    print(f"Audio MNIST dataset downloaded to: {audio_mnist_path}")
+    print(f"Background Noise dataset downloaded to: {audio_noise_path}")
 
     # ------------------------------------------------------------------------------
     # Define dataset storage paths
@@ -170,25 +170,25 @@ def main():
         with ThreadPoolExecutor(max_workers=30) as executor:
             executor.map(lambda f: copy_wav_to_subfolder(f, dest_folder), file_list)
 
-    print("📂 Copying training files in parallel...")
+    print("Copying training files in parallel...")
     parallel_copy(train_files, train_path)
-    print("📂 Copying test files in parallel...")
+    print("Copying test files in parallel...")
     parallel_copy(test_files, test_path)
 
     # ------------------------------------------------------------------------------
     # Parallel CPU-bound signal processing with batched multiprocessing.
     # ------------------------------------------------------------------------------
     batch_size = 100  # Adjust batch size as needed
-    print("⚙️ Processing training files in batches to compute mel spectrogram mean values...")
+    print("Processing training files in batches to compute mel spectrogram mean values...")
     mel_means = batched_process(train_files, batch_size=batch_size, max_workers=30)
-    print(f"✅ Processed {len(mel_means)} training files. Sample mel spectrogram mean values (first 10):")
+    print(f"Processed {len(mel_means)} training files. Sample mel spectrogram mean values (first 10):")
     print(mel_means[:10])
 
     # ------------------------------------------------------------------------------
     # Print dataset statistics
     # ------------------------------------------------------------------------------
-    print(f"✅ Training dataset contains {len(train_files)} files.")
-    print(f"✅ Test dataset contains {len(test_files)} files.")
+    print(f"Training dataset contains {len(train_files)} files.")
+    print(f"Test dataset contains {len(test_files)} files.")
 
     # ------------------------------------------------------------------------------
     # Copy Background Noise into datasets
@@ -197,9 +197,9 @@ def main():
     if not os.path.exists(noise_dir):
         os.makedirs(noise_dir)
         shutil.copytree(audio_noise_path, noise_dir, dirs_exist_ok=True)
-        print(f"✅ Background Noise moved to '{datasets_folder}'.")
+        print(f"Background Noise moved to '{datasets_folder}'.")
     else:
-        print("✅ Noise dataset already exists in 'datasets'!")
+        print("Noise dataset already exists in 'datasets'!")
 
 if __name__ == "__main__":
     main()
