@@ -16,20 +16,19 @@ Step-by-step instructions to get the project running locally.
    ```bash
    git clone [https://github.com/your-org/your-repo.git](https://github.com/GATECH-ECE-2025-Senior-Design/SpectroNet.git)
 3. Login to kaggle (https://www.kaggle.com/)
-* If you do not have an account in kaggle, you must create one to access the audio MINST dataset
+- If you do not have an account in kaggle, you must create one to access the audio MINST dataset
 * 
 4. Go to SpectroNet/sw/software/ and run ls -l generate_datasets.sh
-* Should return that generate_datasets.sh exists
-* Make generate_datasets.sh readable with command: chmod +x sw/software/generate_datasets.sh
+- Should return that generate_datasets.sh exists
+- Make generate_datasets.sh readable with command: chmod +x sw/software/generate_datasets.sh
 5. Run ./generate_datasets.sh
-* Note: This will take a while to run
-* When done, you should have 2 zip files called images_train.zip and images_test.zip in SpectroNet/sw/training
+- Note: This will take a while to run
+- When done, you should have 2 zip files called images_train.zip and images_test.zip in SpectroNet/sw/training
 
 ## What each file does inside ./generate_datasets.sh
-## What each file does inside `./generate_datasets.sh`
 
 1. **`data.py`**  
-   - Gets the `.wav` files from the MNIST dataset on Kaggle and splits them into training and test datasets (70 – 30 split respectively)
+   * Gets the `.wav` files from the MNIST dataset on Kaggle and splits them into training and test datasets (70 – 30 split respectively)
 
 2. **`augment_digits_train.py`**  
    Augments the `.wav` files with many different transformations. Each original `.wav` file is passed through the following augmentations (2 variants per type) in the `augment_pipeline`:
