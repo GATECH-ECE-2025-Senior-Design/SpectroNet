@@ -8,13 +8,12 @@
 ## Table of Contents
 1. [How to run branch to generate dataset](#how-to-run-branch-to-generate-dataset)
 2. [What each file does inside the bash file](#what-each-file-does-inside-the-bash-file)
+3. [Running the Training Notebooks on PACE ICE Jupyter](#running-the-training-notebooks-on-pace-ice-jupyter)
 
 ## How to run branch to generate dataset
 Step-by-step instructions to get the project running locally.
 1. Download Prerequisites: Can all be found in SpectroNet/sw/software/requirements.txt
-2. Clone the repo:  
-   ```bash
-   git clone [https://github.com/your-org/your-repo.git](https://github.com/GATECH-ECE-2025-Senior-Design/SpectroNet.git)
+2. Clone the repo 
 3. Login to kaggle (https://www.kaggle.com/)
    - If you do not have an account in kaggle, you must create one so that data.py can properly access the audio MINST dataset 
 4. Go to SpectroNet/sw/software/ and run ls -l generate_datasets.sh
@@ -98,3 +97,22 @@ Step-by-step instructions to get the project running locally.
 
 4. **Compression**  
    Finally, the script zips the newly created `images_train` and `images_test` folders into `images_train.zip` and `images_test.zip` in `SpectroNet/sw/training`.
+
+## Running the Training Notebooks on PACE ICE Jupyter
+> If you’re working on the PACE ICE cluster and want to launch the training pipelines from this repository, follow these steps:
+
+1. Clone this branch and `cd` into the training folder:
+   - cd SpectroNet/sw/training
+2. Create & activate a Python 3.10 environment (Conda or virtualenv) and install dependencies
+   - conda create -n spectronet_py10 python=3.10 -y
+   - conda activate spectronet_py10
+   - (pip install -r requirements_training.txt)
+3. Install the custom CUDA Jupyter kernel, so that your notebooks can see GPU acceleration:
+   - jupyter kernelspec install --user TF-2.10.1_CUDA-11.8_kernelspec.tar.gz
+4. Launch JupyterLab on PACE ICE and select the new kernel
+   - In JupyterLab pick the kernel named TF-2.10.1_CUDA-11.8
+5. Open and run one of the training notebooks:
+   - Full_training_pipeline_with_best_arch_aug_training.ipynb
+   - Full_training_pipeline_with_all_archs_aug_training__stats_to_excel_spreadsheet.ipynb
+   - Make sure the TF-2.10.1_CUDA-11.8 kernel is selected so you get GPU support.
+
