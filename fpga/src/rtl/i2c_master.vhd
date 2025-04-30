@@ -30,8 +30,8 @@ USE ieee.std_logic_unsigned.all;
 
 ENTITY i2c_master IS
   GENERIC(
-    input_clk : INTEGER := 400_000; --input clock speed from user logic in Hz
-    bus_clk   : INTEGER := 100_000);   --speed the i2c bus (scl) will run at in Hz
+    input_clk : INTEGER := 400_000;  --input clock speed from user logic in Hz
+    bus_clk   : INTEGER := 100_000);    --speed the i2c bus (scl) will run at in Hz
   PORT(
     clk       : IN     STD_LOGIC;                    --system clock
     reset_n   : IN     STD_LOGIC;                    --active low reset
@@ -82,7 +82,7 @@ BEGIN
         count := count + 1;              --continue clock generation timing
       END IF;
       CASE count IS
-        WHEN 0 TO divider*2-1 =>           --first 1/4 cycle of clocking
+        WHEN 0 TO divider*2-1 =>         --first 1/4 cycle of clocking
           scl_clk <= '0';
         WHEN divider*2 TO divider*3-1 => --third 1/4 cycle of clocking
           scl_clk <= 'Z';                --release scl
@@ -117,7 +117,7 @@ BEGIN
     ELSIF(RISING_EDGE(data_clk)) THEN
       CASE state IS
         WHEN ready =>                       --idle state
-          IF(ena_int = '1') THEN                --transaction requested
+          IF(ena_int = '1') THEN            --transaction requested
             busy <= '1';                    --flag busy
             addr_rw <= addr & rw;           --collect requested slave address and command
             data_tx <= data_wr;             --collect requested data to write
@@ -188,7 +188,7 @@ BEGIN
           ELSIF(addr_rw(7 downto 1) /= addr) THEN
             scl_req <= '0';                 --disable scl
             state <= stop;                  --different address requested; stop this one
-          ELSIF(ena_int = '1') THEN             --continue transaction
+          ELSIF(ena_int = '1') THEN         --continue transaction
             busy <= '0';                    --continue is accepted
             addr_rw <= addr & rw;           --collect requested slave address and command
             data_tx <= data_wr;             --collect requested data to write
@@ -205,7 +205,7 @@ BEGIN
             state <= stop;                  --go to stop bit
           END IF;
         WHEN mstr_ack =>                    --master acknowledge bit after a read
-          IF(ena_int = '1') THEN                --continue transaction
+          IF(ena_int = '1') THEN            --continue transaction
             busy <= '0';                    --continue is accepted and data received is available on bus
             addr_rw <= addr & rw;           --collect requested slave address and command
             data_tx <= data_wr;             --collect requested data to write
@@ -258,9 +258,9 @@ BEGIN
   --set sda output
   WITH state SELECT
     sda_ena_n <=
-              '0' WHEN start, --generate start condition
-              '1' WHEN restart, -- generate restart condition
-              '0' WHEN stop,   --generate stop condition
+              '0' WHEN start,           --generate start condition
+              '1' WHEN restart,         --generate restart condition
+              '0' WHEN stop,            --generate stop condition
               sda_int WHEN OTHERS;      --set to internal sda signal    
       
   --set scl and sda outputs

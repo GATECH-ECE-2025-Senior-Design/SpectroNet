@@ -1,5 +1,6 @@
 # Dataset folder
-src/datasets/
+sw/datasets/
+sw/software/__pycache__/
 
 # Quartus project files
 *.qws
@@ -12,10 +13,16 @@ fpga/quartus/output_files/
 fpga/quartus/.qsys_edit/
 fpga/quartus/devplatforms/
 fpga/quartus/greybox_tmp/
-fpga/quartus/pll_main/
-fpga/quartus/pll_main_sim/
-fpga/quartus/unnamed/
+fpga/quartus/simulation/
 
 # Quartus generated files
 fpga/quartus/*.txt
-fpga/src/rtl/*.bak
+# try to edit below to exclude all but fft_512.qsys
+fpga/src/ip/fft_512_ip/
+
+# These are for Quartus but feel free to change if they are too broad
+*.sopcinfo
+*.rpt
+*.bak
+*.bsf
+*.cmp
