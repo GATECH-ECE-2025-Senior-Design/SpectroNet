@@ -106,12 +106,12 @@ Step-by-step instructions to get the project running locally.
 2. Create & activate a Python 3.10 environment (Conda or virtualenv) and install dependencies
    - conda create -n spectronet_py10 python=3.10 -y
    - conda activate spectronet_py10
-   - (pip install -r requirements_training.txt)
+   - pip install -r requirements_training.txt
 3. Install the custom CUDA Jupyter kernel, so that your notebooks can see GPU acceleration:
    - jupyter kernelspec install --user TF-2.10.1_CUDA-11.8_kernelspec.tar.gz
 4. Launch JupyterLab on PACE ICE and select the new kernel
    - In JupyterLab pick the kernel named TF-2.10.1_CUDA-11.8
-5. Open and run one of the training notebooks:
+5. Upload the training notebooks to Jupyter Notebook, open those notebooks, and run either one:
    - Full_training_pipeline_with_best_arch_aug_training.ipynb
    - Full_training_pipeline_with_all_archs_aug_training__stats_to_excel_spreadsheet.ipynb
    - Make sure the TF-2.10.1_CUDA-11.8 kernel is selected so you get GPU support.
